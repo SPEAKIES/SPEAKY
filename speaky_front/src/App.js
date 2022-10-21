@@ -1,15 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import FreeBoard from "./pages/FreeBoard";
-import CssBaseline from '@mui/material/CssBaseline';
-
-
+import Button from "@mui/material/Button";
+import Test from "./components/Test";
 
 function App() {
   return (
-        <>
-        <CssBaseline />
-        <FreeBoard/>
-      </>
+    <div className="App">
+      <Test />
+      <Button variant="contained">Hello World</Button>
+    </div>
   );
 }
 
