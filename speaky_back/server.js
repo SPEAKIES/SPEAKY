@@ -4,6 +4,7 @@ const monogClient = require("mongoose");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const server = express();
+const passport = require("passport");
 const PORT = 4000;
 
 server.use(express.json());
