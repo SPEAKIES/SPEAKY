@@ -2,12 +2,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import Test from "./components/Test";
 import Navbar from "./components/navbar";
+import FreeBoard from "./pages/FreeBoard";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-    </div>
+    <>
+      <CssBaseline />
+      <FreeBoard />
+    </>
   );
 }
 
