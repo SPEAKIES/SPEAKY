@@ -15,9 +15,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import BoardCard from '../components/BoardCard';
 import ListSubheader  from '@mui/material/ListSubheader';
-
+import Fab from '@mui/material/Fab';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
+import WirteModal from '../components/WirteModal';
 
 const drawerWidth = '15%';
 
@@ -71,6 +72,7 @@ export default function FreeBoard() {
             </ListItem>
           ))}
         </List>
+        
       </Drawer>
       <Box
         component="main"
@@ -122,6 +124,9 @@ export default function FreeBoard() {
             </ListItem>
           ))}
         </List>
+        <Fab sx={{  position: 'absolute',bottom: 30,right: 30,}}>
+          <WirteModal/>
+        </Fab>
       </Drawer>
     </Box>
   );
