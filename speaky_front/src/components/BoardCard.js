@@ -8,13 +8,14 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import TextField from '@mui/material/TextField';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -51,7 +52,7 @@ export default function BoardCard(props) {
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+            사진
           </Avatar>
         }
         action={
@@ -59,8 +60,8 @@ export default function BoardCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="유저 이름"
+        subheader="1일"
       />
       <div onClick={handleExpandClick}>
         <CardMedia
@@ -69,12 +70,8 @@ export default function BoardCard(props) {
           image={props.img}
           alt="그림사진"
         />
-        <CardContent>
-          <Typography variant="body2" color="text.secondary" fontSize="20px">
-            This impressive paella is a perfect party dish and a fun meal to cook
-            together with your guests. Add 1 cup of frozen peas along with the mussels,
-            if you like.
-          </Typography>
+        <CardContent sx={{fontSize:'20px',width:'35vw'}} >
+          글 내용
         </CardContent>
       </div>
       <CardActions disableSpacing>
@@ -95,7 +92,16 @@ export default function BoardCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit >
         <CardContent style={{fontSize: '20px'}}>
-        댓글창
+        <div style={{display:'flex'}}>
+        <Avatar sx={{ bgcolor: red[500], marginRight:'10px'}} aria-label="recipe">
+            사진
+          </Avatar>
+          <TextField
+          id="outlined-textarea"
+          placeholder="댓글을 입력해주세요"
+          multiline
+        />
+        </div>
         </CardContent>
       </Collapse>
     </Card>

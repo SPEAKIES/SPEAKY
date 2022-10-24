@@ -15,11 +15,14 @@ import ListSubheader  from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
+import Header from '../components/Header';
 const drawerWidth = '15%';
 
 export default function FreeBoard() {
   const images = ['images/1번.jpg','images/2번.jpg','images/3번.jpg']
   return (
+    <>
+    <Header/>
     <Box sx={{ display: 'flex' }}>
       <Drawer
         sx={{
@@ -95,7 +98,7 @@ export default function FreeBoard() {
           4번
         </ListSubheader>
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['day', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -109,5 +112,6 @@ export default function FreeBoard() {
         <WirteModal/>
       </Drawer>
     </Box>
+    </>
   );
 }

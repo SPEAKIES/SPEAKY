@@ -4,14 +4,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
- 
+import { Routes,Route } from "react-router-dom";
+import React from 'react';
 import FreeBoard from "./pages/FreeBoard";
-import Header from './components/Navbar'
+import NotFound from "./components/NotFound";
+import Header from './components/Header'
 function App() {
   return (
     <>
-      <Header/>
-      <FreeBoard style={{paddingTop:'50px'}} />
+      <Routes>
+        <Route path="/" element={<Header/>}/>
+        <Route path="/board" element={<FreeBoard style={{paddingTop:'50px'}} />}/>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
