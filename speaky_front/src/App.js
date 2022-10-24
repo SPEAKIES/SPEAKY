@@ -6,14 +6,12 @@ import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
  
 import FreeBoard from "./pages/FreeBoard";
-import CssBaseline from "@mui/material/CssBaseline";
-
-
+import Header from './components/Navbar'
 function App() {
   return (
     <>
-      <CssBaseline />
-      <FreeBoard />
+      <Header/>
+      <FreeBoard style={{paddingTop:'50px'}} />
     </>
   );
 }

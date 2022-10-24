@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,7 +19,7 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import { blue } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-export default function PrimarySearchAppBar() {
+export default function Navbar() {
   const theme = createTheme({
     palette: {
       primary: {
@@ -86,11 +85,11 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={""}>Profile</MenuItem>
-      <MenuItem onClick={""}>My account</MenuItem>
+      <MenuItem >Profile</MenuItem>
+      <MenuItem >My account</MenuItem>
 
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
-      <MenuItem onClick={""}>Logout</MenuItem>
+      <MenuItem >Logout</MenuItem>
     </Menu>
   );
 
@@ -228,7 +227,7 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={theme}></ThemeProvider>
       <AppBar
-        position="static"
+        position="fixed"
         sx={{ bgcolor: blue[200], paddingTop: "0.3vw", paddingBottom: "0.3vw" }}
       >
         <Toolbar>
