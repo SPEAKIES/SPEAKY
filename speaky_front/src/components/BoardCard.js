@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function BoardCard() {
+export default function BoardCard(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -52,8 +52,8 @@ export default function BoardCard() {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
+        image={props.img}
+        alt="그림사진"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">

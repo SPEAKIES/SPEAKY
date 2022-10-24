@@ -18,10 +18,10 @@ import ListSubheader  from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
-
 const drawerWidth = '15%';
 
 export default function FreeBoard() {
+  const images = ['images/1번.jpg','images/2번.jpg','images/3번.jpg']
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -78,15 +78,10 @@ export default function FreeBoard() {
         sx={{display:'flex', flexDirection: 'column',alignItems: 'center',  flexGrow: 1, bgcolor: 'background.default', p: 3}}
       >
         <Toolbar />
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
-        <BoardCard/>
+        {images.map((image) => (
+          <BoardCard img={image}/>
+        ))}
+
       </Box>
       <Drawer
         sx={{
