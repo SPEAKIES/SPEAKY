@@ -7,6 +7,7 @@ import "primeicons/primeicons.css";                                //icons
 import { Routes,Route } from "react-router-dom";
 import React from 'react';
 import FreeBoard from "./pages/FreeBoard";
+import Study from "./pages/Study";
 import NotFound from "./components/NotFound";
 import Header from './components/Header'
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Header/>}/>
         <Route path="/board" element={<FreeBoard style={{paddingTop:'50px'}} />}/>
+        <Route path="/study" element={<Study style={{paddingTop:'50px'}} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
