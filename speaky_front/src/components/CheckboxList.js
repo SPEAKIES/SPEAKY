@@ -24,26 +24,26 @@ export default function CheckboxList() {
 
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+      {['1일','1주일', '한달', '1년'].map((value, index) => {
+        const labelId = `checkbox-list-label-${index}`;
 
         return (
-          <ListItem key={value} disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton
               role={undefined}
-              onClick={handleToggle(value)}
+              onClick={handleToggle(index)}
               dense
             >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={checked.indexOf(value) !== -1}
+                  checked={checked.indexOf(index) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={` ${value}`} />
             </ListItemButton>
           </ListItem>
         );

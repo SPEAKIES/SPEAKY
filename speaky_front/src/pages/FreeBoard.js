@@ -95,7 +95,7 @@ export default function FreeBoard() {
           4번
         </ListSubheader>
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['day', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
