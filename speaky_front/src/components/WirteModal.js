@@ -4,8 +4,9 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
-import InputContent from './InputContent';
+import { Editor } from 'primereact/editor';
 import styled from 'styled-components';
+import { Form } from 'react-bootstrap';
 const Title = styled.div`
   display: flex;
   width: 100%;
@@ -40,6 +41,7 @@ export default function WirteModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [text1, setText1] = React.useState('<div>Hello World!</div><div>PrimeReact <b>Editor</b> Rocks</div><div><br></div>');
   return (
     <div>
              
@@ -54,10 +56,10 @@ export default function WirteModal() {
           <Title >
             게시물 만들기
           </Title>
-          <div>
-            <InputContent/>
-            <Button sx={{width:'100%'}} variant="contained">Submit</Button>
-          </div>
+          <Form>
+          <Editor style={{ height: '250px', fontSize:"25px"}} value={text1} onTextChange={(e) => setText1(e.htmlValue)} />
+          <Button sx={{width:'100%'}} variant="contained">Submit</Button>
+          </Form>
         </Box>
       </Modal>
     </div>
