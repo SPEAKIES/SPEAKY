@@ -32,8 +32,8 @@ const Boxstyle = {
 };
 const Buttonstyle={
     position: 'absolute',
-    right:20,
-    bottom:20,
+    right:100,
+    bottom:100,
 }
 
 export default function WirteModal() {
