@@ -19,7 +19,7 @@ import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import { blue } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-export default function PrimarySearchAppBar() {
+export default function Navbar() {
   const theme = createTheme({
     palette: {
       primary: {
