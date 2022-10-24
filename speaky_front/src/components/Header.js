@@ -206,7 +206,7 @@ export default function Header() {
         </Typography>
       </MenuItem>
       </Link>
-      <Link to ='/study'>
+      <Link to ='/study' style={{textDecoration: 'none',color:'white'}} >
       <MenuItem>
         <Typography
           variant="h7"
@@ -304,7 +304,7 @@ export default function Header() {
           </Link>
 
           <Box sx={{ paddingRight: "1vw" }}></Box>
-
+          <Link to='/study' style={{textDecoration: 'none',color:'white'}}>
           <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
             <Typography
               variant="h6"
@@ -320,7 +320,7 @@ export default function Header() {
               Study
             </Typography>
           </MenuItem>
-
+          </Link>
           {/* 오른쪽 메뉴들 오른쪽에 고정(없으면 왼쪽에 붙는다) */}
           <Box sx={{ flexGrow: 1 }} />
 
