@@ -18,8 +18,9 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
 import { blue } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Header() {
   const theme = createTheme({
     palette: {
       primary: {
@@ -168,6 +169,7 @@ export default function Navbar() {
       open={isLeftMenuOpen}
       onClose={handleCloseNavMenu}
     >
+      <Link to="/" style={{textDecoration: 'none',color:'white'}}>
       <MenuItem>
         <Typography
           variant="h7"
@@ -184,7 +186,9 @@ export default function Navbar() {
           Home
         </Typography>
       </MenuItem>
+      </Link>
 
+      <Link to="/board" style={{textDecoration: 'none',color:'white'}}>
       <MenuItem>
         <Typography
           variant="h7"
@@ -201,7 +205,8 @@ export default function Navbar() {
           Board
         </Typography>
       </MenuItem>
-
+      </Link>
+      <Link to ='/study'>
       <MenuItem>
         <Typography
           variant="h7"
@@ -218,7 +223,9 @@ export default function Navbar() {
           Study
         </Typography>
       </MenuItem>
+      </Link>
     </Menu>
+    
   );
 
   // 반응형 안됐을 때 보여지는 코드들
@@ -258,8 +265,8 @@ export default function Navbar() {
           >
             Speaky
           </Typography>
-
-          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
+          <Link to='/' style={{textDecoration: 'none',color:'white'}}>
+          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px"  }}>
             <Typography
               variant="h6"
               noWrap
@@ -275,9 +282,10 @@ export default function Navbar() {
               Home
             </Typography>
           </MenuItem>
+          </Link>
 
           <Box sx={{ paddingRight: "1vw" }}></Box>
-
+          <Link to="/board" style={{textDecoration: 'none',color:'white'}}>
           <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
             <Typography
               variant="h6"
@@ -293,6 +301,7 @@ export default function Navbar() {
               Board
             </Typography>
           </MenuItem>
+          </Link>
 
           <Box sx={{ paddingRight: "1vw" }}></Box>
 
