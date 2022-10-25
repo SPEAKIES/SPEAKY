@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { useState, useRef } from 'react'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -28,12 +29,22 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BoardCard(props) {
-  const [expanded, setExpanded] = React.useState(false);
-  const [heartCheck,setHeartCheck] =React.useState(false);
-  const [heart,setHeart] = React.useState(0);
+  const comment = useRef(); //댓글 남기기 내용.
+
+  const commentCheck = (e) =>{
+    if(e.key ==='Enter'){
+    console.log(comment.current.value);
+    comment.current.value =''
+    }
+  }
+  
+  const [expanded, setExpanded] = useState(false);
+  const [heartCheck,setHeartCheck] =useState(false);
+  const [heart,setHeart] = useState(props.data.contentHeart);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  //하트 부분 클릭했을때 fetch로 하트 증가 시켜주고 나서 하트 갯수 data를 다시 받아야함.
   const heartClick = () =>{
     if(heartCheck){
       setHeart(heart-1);
@@ -53,7 +64,7 @@ export default function BoardCard(props) {
     <Card sx={CardStyle}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"src={props.data.userImage}>
             사진
           </Avatar>
         }
@@ -62,18 +73,18 @@ export default function BoardCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="유저 이름"
-        subheader="1일"
+        title={props.data.userName}
+        subheader={props.data.contentDate}
       />
       <div onClick={handleExpandClick}>
         <CardMedia
           component="img"
           height="194"
-          image={props.img}
+          image={props.data.image}
           alt="그림사진"
         />
         <CardContent sx={{fontSize:'20px',width:'35vw'}} >
-          글 내용
+          {props.data.cardContent}
         </CardContent>
       </div>
       <CardActions disableSpacing>
@@ -95,7 +106,7 @@ export default function BoardCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit >
         <CardContent style={{fontSize: '20px'}}>
         <div style={{display:'flex'}}>
-        <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe">
+        <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe" src={props.data.userImage}>
             사진
           </Avatar>
           <TextField
@@ -103,7 +114,18 @@ export default function BoardCard(props) {
           id="outlined-textarea"
           placeholder="댓글을 입력해주세요..."
           multiline
+          inputRef={comment}
+          onKeyPress={commentCheck}
         />
+        </div>
+        <div style={{display:'flex',backgroundColor:'#F2F3F5',borderRadius:20}}>
+          <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe">
+              사진
+            </Avatar>
+            <div>
+            <div>유저 이름</div>
+           <div>댓글 내용</div>
+            </div>
         </div>
         </CardContent>
       </Collapse>

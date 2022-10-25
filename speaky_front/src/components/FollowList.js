@@ -18,14 +18,13 @@ function notificationsLabel(count) {
   return `${count} notifications`;
 }
 
-export default function FollowList() {
+export default function FollowList(props) {
   return (
     <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      {[1, 2, 3, 4].map((value,idx) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
+      {props.data.map((value,idx) => {
         return (
           <ListItem
-            key={value}
+            key={idx}
             secondaryAction={
               <IconButton aria-label={notificationsLabel(100)}>
               <Badge badgeContent={100} color="secondary">
@@ -39,11 +38,11 @@ export default function FollowList() {
               <ListItemAvatar>
                 {/* 프로필 이미지 크기는 40x40 */}
                 <Avatar
-                  alt={`Avatar n°${value + 1}`}
-                  src={`/static/images/avatar/${value + 1}.jpg`}
+                  alt={'이미지'}
+                  src={value.userImage}
                 />
               </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${idx + 1}`} />
+              <ListItemText id={idx} primary={value.userName} />
             </ListItemButton>
           </ListItem>
         );
