@@ -10,6 +10,7 @@ import FreeBoard from "./pages/FreeBoard";
 import Study from "./pages/Study";
 import Community from "./pages/Community";
 import NotFound from "./components/NotFound";
+import Test from "./pages/Test";
 import Header from './components/Header'
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/board" element={<FreeBoard style={{paddingTop:'50px'}} />}/>
         <Route path="/study" element={<Study style={{paddingTop:'50px'}} />}/>
         <Route path="/community" element={<Community style={{paddingTop:'50px'}} />}/>
+        <Route path="/test" element={<Test style={{paddingTop:'50px'}} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
