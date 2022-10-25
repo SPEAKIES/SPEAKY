@@ -16,7 +16,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -44,11 +43,14 @@ export default function BoardCard(props) {
       setHeart(heart+1);
       setHeartCheck(true);
     }
-
   }
+  const CardStyle={
+    maxWidth: 680,
+    marginTop:'20px'
+}
 
   return (
-    <Card sx={{ maxWidth: 680 }}>
+    <Card sx={CardStyle}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -93,12 +95,13 @@ export default function BoardCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit >
         <CardContent style={{fontSize: '20px'}}>
         <div style={{display:'flex'}}>
-        <Avatar sx={{ bgcolor: red[500], marginRight:'10px'}} aria-label="recipe">
+        <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe">
             사진
           </Avatar>
           <TextField
+          sx={{width:'100%'}}
           id="outlined-textarea"
-          placeholder="댓글을 입력해주세요"
+          placeholder="댓글을 입력해주세요..."
           multiline
         />
         </div>

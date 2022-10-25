@@ -4,7 +4,7 @@ export default function Study() {
   return (
     <>
     <Header/>
-    <div>Study</div>
+    <div style={{height:500, marginTop:'79px'}}>Study</div>
     </>
   )
 }

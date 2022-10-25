@@ -15,11 +15,12 @@ import ListSubheader  from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
+
 import Header from '../components/Header';
 const drawerWidth = '15%';
 
 export default function FreeBoard() {
-  const images = ['images/1번.jpg','images/2번.jpg','images/3번.jpg']
+  const images = ['images/1번.jpg','images/2번.jpg','images/3번.jpg'];
   return (
     <>
     <Header/>
@@ -31,7 +32,7 @@ export default function FreeBoard() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            marginTop:9.5,
+            marginTop:9.6,
             boxSizing: 'border-box',
           },
         }}
@@ -79,7 +80,7 @@ export default function FreeBoard() {
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
-            marginTop:9.5,
+            marginTop:9.6,
             boxSizing: 'border-box',
           },
         }}

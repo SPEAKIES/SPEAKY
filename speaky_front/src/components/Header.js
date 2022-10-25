@@ -169,7 +169,7 @@ export default function Header() {
       open={isLeftMenuOpen}
       onClose={handleCloseNavMenu}
     >
-      <Link to="/" style={{textDecoration: 'none',color:'white'}}>
+      <Link to="/" style={{textDecoration: 'none',color:'black'}}>
       <MenuItem>
         <Typography
           variant="h7"
@@ -188,41 +188,59 @@ export default function Header() {
       </MenuItem>
       </Link>
 
-      <Link to="/board" style={{textDecoration: 'none',color:'white'}}>
-      <MenuItem>
-        <Typography
-          variant="h7"
-          noWrap
-          component="div"
-          sx={{
-            display: { xs: "block", sm: "block" },
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <AssignmentIcon sx={{ marginRight: "3vw" }} />
-          Board
-        </Typography>
-      </MenuItem>
+      <Link to="/board" style={{textDecoration: 'none',color:'black'}}>
+        <MenuItem>
+          <Typography
+            variant="h7"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "block", sm: "block" },
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <AssignmentIcon sx={{ marginRight: "3vw" }} />
+            Board
+          </Typography>
+        </MenuItem>
       </Link>
-      <Link to ='/study' style={{textDecoration: 'none',color:'white'}} >
-      <MenuItem>
-        <Typography
-          variant="h7"
-          noWrap
-          component="div"
-          sx={{
-            display: { xs: "block", sm: "block" },
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CastForEducationIcon sx={{ marginRight: "3vw" }} />
-          Study
-        </Typography>
-      </MenuItem>
+      <Link to ='/study' style={{textDecoration: 'none',color:'black'}} >
+        <MenuItem>
+          <Typography
+            variant="h7"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "block", sm: "block" },
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CastForEducationIcon sx={{ marginRight: "3vw" }} />
+            Study
+          </Typography>
+        </MenuItem>
+      </Link>
+      <Link to ='/community' style={{textDecoration: 'none',color:'black'}} >
+        <MenuItem>
+          <Typography
+            variant="h7"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "block", sm: "block" },
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <CastForEducationIcon sx={{ marginRight: "3vw" }} />
+            Community
+          </Typography>
+        </MenuItem>
       </Link>
     </Menu>
     
@@ -318,6 +336,23 @@ export default function Header() {
               }}
             >
               Study
+            </Typography>
+          </MenuItem>
+          </Link>
+          <Link to='/community' style={{textDecoration: 'none',color:'white'}}>
+          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              Community
             </Typography>
           </MenuItem>
           </Link>
