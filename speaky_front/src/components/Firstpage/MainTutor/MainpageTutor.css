@@ -1,0 +1,15 @@
+.card-img {
+    width: 13vw;
+    height: 17vw;
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+.tutorname{
+    margin-top: 1vw;
+    text-align: center;
+}
+
+.tutornation{
+    text-align: center;
+}

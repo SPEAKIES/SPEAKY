@@ -1,0 +1,47 @@
+.photo1 {
+    width: clamp(380px, 90%,  500px);
+    margin-left: 21vw;
+}
+
+
+.photo2 {
+    width: clamp(380px, 90%,  470px);
+    margin-left: 22vw;
+}
+
+
+.photo3 {
+    width: clamp(380px, 90%,  470px);
+    margin-left: 22vw;
+}
+
+.learnicon {
+    width: clamp(100px, 40%,  100px);
+    /* height: 3vw; */
+    margin-left: 5.5vw;
+    margin-top: 2vw;
+}
+
+.learn {
+    text-align: center;
+    margin-top: 1vw;
+}
+
+.learnwords {
+    text-align: center;
+    margin-top: 1vw;
+}
+
+.netflix {
+    width: 10vw;
+    height: 8vw;
+    margin-left: 9.5vw; 
+    margin-top: 1vw;
+}
+
+.icons {
+    width: 10vw;
+    height: 8vw;
+    margin-left: 4vw; 
+    margin-top: 1vw;
+}
