@@ -16,12 +16,14 @@ const Card = styled.div`
   margin-top: 4vw;
   padding-left: 3vw;
   cursor: grab;
+  justify-content: center;
 `;
 
 const CardTop = styled.div`
   /* border: 1px solid gray;
   background-color: #fff;
   padding: 1vw 0; */
+  /* background-color: pink; */
 `;
 
 export default function Tutor() {
