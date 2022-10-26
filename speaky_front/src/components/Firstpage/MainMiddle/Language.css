@@ -1,0 +1,41 @@
+.item {
+    min-height: 110px;
+    min-width: 290px;
+    padding: 60px;
+}
+
+.item:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.item:hover .item_word {
+    opacity: 1;
+    transform: translateY(2.5vw);
+    transition: 0.4s;
+}
+
+.item_word {
+    margin-top: -2vw;
+    text-align: center;
+    opacity: 0;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    pointer-events: none;
+    background-position: center;
+}
+
+.inner-carousel {
+    display: flex;
+   
+}
+
+.carousel2 {
+    cursor: grab;
+    overflow: hidden;
+}
