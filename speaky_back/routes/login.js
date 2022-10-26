@@ -14,10 +14,6 @@ router.post("/incid", async (req, res) => {
   res.send(JSON.stringify(result));
 });
 
-router.get("/logout", (req, res) => {
-  req.session.destory((err) => {
-    res.redirect("/login");
-  });
-});
+
 
 module.exports = router;
