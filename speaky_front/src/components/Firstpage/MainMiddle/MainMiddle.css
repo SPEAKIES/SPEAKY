@@ -22,14 +22,25 @@
     margin-top: 2vw;
 }
 
+.smalltitle {
+    font-size: 16px;
+}
+
+.boldtitle {
+    font-size: 24px;
+    font-weight: bold;
+}
 .learn {
     text-align: center;
     margin-top: 1vw;
+    font-size: 21px;
+    font-weight: bold;
 }
 
 .learnwords {
     text-align: center;
     margin-top: 1vw;
+    font-size: 16px;
 }
 
 .netflix {
