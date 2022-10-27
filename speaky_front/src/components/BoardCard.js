@@ -16,7 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
-
+import Comment from './Comment';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -43,6 +43,7 @@ export default function BoardCard(props) {
   const [heart,setHeart] = useState(props.data.contentHeart);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    //댓글 데이터베이스 가지고 와야함.
   };
   //하트 부분 클릭했을때 fetch로 하트 증가 시켜주고 나서 하트 갯수 data를 다시 받아야함.
   const heartClick = () =>{
@@ -118,15 +119,7 @@ export default function BoardCard(props) {
           onKeyPress={commentCheck}
         />
         </div>
-        <div style={{display:'flex',backgroundColor:'#F2F3F5',borderRadius:20}}>
-          <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe">
-              사진
-            </Avatar>
-            <div>
-            <div>유저 이름</div>
-           <div>댓글 내용</div>
-            </div>
-        </div>
+        <Comment/>
         </CardContent>
       </Collapse>
     </Card>

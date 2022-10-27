@@ -56,7 +56,7 @@ export default function FreeBoard() {
     userImage:'경로',},
 
   ]
-
+ const checkListdata =['1일','1주일', '한달', '1년']
 
   return (
     <>
@@ -81,7 +81,7 @@ export default function FreeBoard() {
         <ListSubheader component="div" id="nested-list-subheader">
           날짜
         </ListSubheader>
-        <CheckboxList/>
+        <CheckboxList data={checkListdata}/>
         <Divider />
         
       </Drawer>
