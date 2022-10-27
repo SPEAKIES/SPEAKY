@@ -134,11 +134,9 @@ export default function Middle() {
           alt="어플이미지"
         />
         <Word1>
-          <p>전문가가 설계한 코스</p>
+          <div className="smalltitle">전문가가 설계한 코스</div>
           <br />
-          <h3>
-            <strong>나에게 맞는 속도로 학습합니다.</strong>
-          </h3>
+          <div className="boldtitle">나에게 맞는 속도로 학습합니다.</div>
           <br />
           언제든 원하는 시간에 언어 전문가들이 설계한 간단한 레슨으로 더 많이
           <br />
@@ -154,11 +152,9 @@ export default function Middle() {
           alt="화상통화이미지"
         />
         <Word2>
-          <p>라이브 레슨</p>
+          <div className="smalltitle">라이브 레슨</div>
           <br />
-          <h3>
-            <strong>실제 사람과 함께 학습합니다.</strong>
-          </h3>
+          <div className="boldtitle">실제 사람과 함께 학습합니다.</div>
           <br />
           친절한 전문 개인 교사가 실시간으로 진행하는 1:1 레슨을 수강하며
           <br />
@@ -189,11 +185,9 @@ export default function Middle() {
           alt="커뮤니티이미지"
         />
         <Word1>
-          <p>교류가 활발한 커뮤니티</p>
+          <div className="smalltitle">교류가 활발한 커뮤니티</div>
           <br />
-          <h3>
-            <strong>함께 학습합니다.</strong>
-          </h3>
+          <div className="boldtitle">함께 학습합니다.</div>
           <br />
           발음 및 문법 학습 팁을 공유하고, 연습한 내용을 교정 받고, 가능할 줄
           몰랐던
@@ -212,11 +206,11 @@ export default function Middle() {
             src="https://cdn-icons-png.flaticon.com/512/1000/1000333.png"
             alt=""
           />
-          <h4 className="learn">Speak</h4>
-          <p className="learnwords">
+          <div className="learn">Speak</div>
+          <div className="learnwords">
             Speak with native speakers on any topic you want (not just about the
             weather). Make friends in different parts of the Earth!
-          </p>
+          </div>
         </Learn>
         <Learn>
           <img
@@ -224,11 +218,11 @@ export default function Middle() {
             src="https://cdn-icons-png.flaticon.com/512/2436/2436882.png"
             alt=""
           />
-          <h4 className="learn">Read</h4>
-          <p className="learnwords">
+          <div className="learn">Read</div>
+          <div className="learnwords">
             Speak with native speakers on any topic you want (not just about the
             weather). Make friends in different parts of the Earth!
-          </p>
+          </div>
         </Learn>
         <Learn>
           <img
@@ -236,11 +230,11 @@ export default function Middle() {
             src="https://cdn-icons-png.flaticon.com/512/2436/2436818.png"
             alt=""
           />
-          <h4 className="learn">Write</h4>
-          <p className="learnwords">
+          <div className="learn">Write</div>
+          <div className="learnwords">
             Speak with native speakers on any topic you want (not just about the
             weather). Make friends in different parts of the Earth!
-          </p>
+          </div>
         </Learn>
         <Learn>
           <img
@@ -248,11 +242,11 @@ export default function Middle() {
             src="https://cdn-icons-png.flaticon.com/512/3050/3050484.png"
             alt=""
           />
-          <h4 className="learn">Understand</h4>
-          <p className="learnwords">
+          <div className="learn">Understand</div>
+          <div className="learnwords">
             Speak with native speakers on any topic you want (not just about the
             weather). Make friends in different parts of the Earth!
-          </p>
+          </div>
         </Learn>
       </Box4>
 

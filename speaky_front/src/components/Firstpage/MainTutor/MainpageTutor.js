@@ -72,8 +72,8 @@ export default function Tutor() {
           <Card>
             <CardTop>
               <img className="card-img" src={data.Img} alt="" />
-              <h3 className="tutorname">{data.name}</h3>
-              <h5 className="tutornation">{data.nation}</h5>
+              <div className="tutorname">{data.name}</div>
+              <div className="tutornation">{data.nation}</div>
             </CardTop>
           </Card>
         ))}
