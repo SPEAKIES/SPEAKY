@@ -8,6 +8,7 @@ import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import CommunityList from '../components/CommunityList';
 const drawerWidth = '15%';
+
 export default function Community() {
   const FollowListData= [
     {userName:'강한솔',
@@ -18,8 +19,8 @@ export default function Community() {
     userImage:'경로',},
     {userName:'천해성',
     userImage:'경로',},
-
   ]
+  const checkListdata =['한국어','영어', '중국어', '일본어']
   return (
     <>
     <Header/>
@@ -43,7 +44,7 @@ export default function Community() {
         <ListSubheader component="div" id="nested-list-subheader">
           날짜
         </ListSubheader>
-        <CheckboxList/>
+        <CheckboxList data ={checkListdata}/>
         <Divider />
         
       </Drawer>

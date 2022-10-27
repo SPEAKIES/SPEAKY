@@ -6,7 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 
-export default function CheckboxList() {
+export default function CheckboxList(props) {
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = (value) => () => {
@@ -24,7 +24,7 @@ export default function CheckboxList() {
 
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {['1일','1주일', '한달', '1년'].map((value, index) => {
+      {props.data.map((value, index) => {
         const labelId = `checkbox-list-label-${index}`;
 
         return (
