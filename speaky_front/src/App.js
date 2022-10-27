@@ -10,9 +10,10 @@ import FreeBoard from "./pages/FreeBoard";
 import Study from "./pages/Study";
 import Community from "./pages/Community";
 import NotFound from "./components/NotFound";
-import Test from "./pages/Test";
 import Header from "./components/Header";
 import FirstPage from "./pages/FirstPage";
+import Profile from "./pages/Profile";
+import ChatPage from "./pages/ChatPage";
 function App() {
   return (
     <>
@@ -21,17 +22,18 @@ function App() {
         <Route path="/main" element={<FirstPage />} />
         <Route
           path="/board"
-          element={<FreeBoard style={{ paddingTop: "50px" }} />}
+          element={<FreeBoard/>}
         />
         <Route
           path="/study"
-          element={<Study style={{ paddingTop: "50px" }} />}
+          element={<Study/>}
         />
         <Route
           path="/community"
-          element={<Community style={{ paddingTop: "50px" }} />}
+          element={<Community/>}
         />
-        <Route path="/test" element={<Test style={{ paddingTop: "50px" }} />} />
+        <Route path="/chat" element={<ChatPage/>} />
+        <Route path="/profile" element={<Profile/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
