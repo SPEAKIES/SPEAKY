@@ -76,7 +76,7 @@ export function SignupForm(props) {
               width: "40px",
               height: "40px",
               color: "black",
-              marginRight: "2vw",
+              marginRight: "50px",
             }}
           ></Box>
         </a>

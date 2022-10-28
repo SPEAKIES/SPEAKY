@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { LoginPage } from "../components/Loginpage";
+import { AccountBox } from "../components/Loginpage";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -11,10 +11,10 @@ const AppContainer = styled.div`
   margin-top: 10vw;
 `;
 
-export default function Login2() {
+export default function Login() {
   return (
     <AppContainer>
-      <LoginPage />
+      <AccountBox />
     </AppContainer>
   );
 }

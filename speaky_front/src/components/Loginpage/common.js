@@ -9,9 +9,8 @@ export const BoxContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin-top: 10px;
-  justify-content: left;
 `;
 
 export const FormContainer = styled.form`
@@ -31,6 +30,7 @@ export const MutedLink = styled.a`
 
 export const OtherLogin = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 export const SmallText = styled.p`

@@ -14,14 +14,14 @@ import Header from "./components/Header";
 import FirstPage from "./pages/FirstPage";
 import Profile from "./pages/Profile";
 import ChatPage from "./pages/ChatPage";
-import Login from "./components/Login";
+import Login from "./components/Login.js";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Header />} />
         <Route path="/main" element={<FirstPage />} />
-        <Route paht="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/board" element={<FreeBoard />} />
         <Route path="/study" element={<Study />} />
         <Route path="/community" element={<Community />} />

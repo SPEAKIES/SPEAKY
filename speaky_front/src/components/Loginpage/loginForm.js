@@ -119,7 +119,7 @@ export function LoginForm(props) {
               width: "40px",
               height: "40px",
               color: "black",
-              marginRight: "2vw",
+              marginRight: "50px",
             }}
           ></Box>
         </Link>
@@ -145,9 +145,7 @@ export function LoginForm(props) {
 
       <SmallText>
         Don't have an account?
-        <BoldLink href="#" onClick={switchToSignup}>
-          Sign up
-        </BoldLink>
+        <BoldLink onClick={switchToSignup}>Sign up</BoldLink>
       </SmallText>
       <Marginer direction="vertical" margin="1.6em" />
     </BoxContainer>
