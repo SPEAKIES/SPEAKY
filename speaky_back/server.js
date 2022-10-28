@@ -32,6 +32,19 @@ server.use((err, req, res, next) => {
   res.send(err.message);
 });
 
+const mypageRouter = require("./routes/mypage");
+server.use("/mypage", mypageRouter.router);
+
+const loginRouter = require("./routes/login");
+server.use("/login", loginRouter);
+
+server.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(err.statusCode || 500);
+  res.end(err.message);
+});
+
+
 server.listen(PORT, (req, res) => {
   console.log(`${PORT}로 연결 완료`);
 });
