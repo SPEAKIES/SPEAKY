@@ -29,10 +29,11 @@ const mongoDB = {
     const user = await _user;
     const db = user.db("project").collection("user");
     const result = await db.findOne({ id });
+    console.log(id, pw);
     const passwordresult = verfiyPassword(pw, result.salt, result.pw);
     // 해시함수 맞추기
     if (passwordresult) {
-      return "로그인 완료";
+      return { result: true, id: result.id, email: result.email };
     } else {
       return "로그인 실패";
     }
@@ -89,7 +90,7 @@ const mongoDB = {
   Getmypage: async (data) => {
     const user = await _user;
     const db = user.db("project").collection("user");
-    const duplicated = await db.findOne({ id: data.id }); //session.id
+    const duplicated = await db.findOne({ id: "aaa" }); //session.id
     return duplicated;
   },
 };
