@@ -145,7 +145,9 @@ export function LoginForm(props) {
 
       <SmallText>
         Don't have an account?
-        <BoldLink onClick={switchToSignup}>Sign up</BoldLink>
+        <BoldLink href="#" onClick={switchToSignup}>
+          Sign up
+        </BoldLink>
       </SmallText>
       <Marginer direction="vertical" margin="1.6em" />
     </BoxContainer>
