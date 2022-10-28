@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoDB = require("../controllers/mongocontrol").mongoDB;
 
 //로그인
-router.post("/setid:", async (req, res) => {
+router.post("/setid", async (req, res) => {
   const result = await mongoDB.SetId(req.body.id, req.body.pw);
   res.send(JSON.stringify(result));
 });
