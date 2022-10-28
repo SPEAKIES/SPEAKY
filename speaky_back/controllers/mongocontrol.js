@@ -1,4 +1,4 @@
-const mongoClient = require("../mongoConnect");
+const mongoClient = require("../mongo");
 const _user = mongoClient.connect();
 const crypto = require("crypto");
 
