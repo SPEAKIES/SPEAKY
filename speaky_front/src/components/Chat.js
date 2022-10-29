@@ -10,8 +10,12 @@ import {
 } from 'mdb-react-ui-kit';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
+import { useLocation } from 'react-router';
 
 export default function Chat() {
+  const location = useLocation();
+  console.log(location.state);
+
   const test = (e) => {
     if (e.key === 'Enter') {
       //메시지 입력하면 들어가는거 구현하면됨.
@@ -39,10 +43,8 @@ export default function Chat() {
                     sx={{ bgcolor: red[500], margin: '10px' }}
                     aria-label="recipe"
                     src={'유저이미지경로'}
-                  >
-                    사진
-                  </Avatar>
-                  <div style={{ width: 100 }}>유저이름</div>
+                  />
+                  <div style={{ width: 100 }}>상대방이름</div>
                 </div>
                 <div
                   className="p-3 ms-3"
@@ -52,11 +54,7 @@ export default function Chat() {
                     width: '50%',
                   }}
                 >
-                  <p className="middle mb-0">
-                    Hello and thank you for visiting MDBootstrap. Please
-                    clickaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa the video
-                    below.
-                  </p>
+                  <p className="middle mb-0">상대방유저메시지</p>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   오전 12:30
@@ -75,26 +73,20 @@ export default function Chat() {
                     width: '50%',
                   }}
                 >
-                  <p className="middle mb-0">
-                    Thank you, I really like your
-                    product.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                  </p>
+                  <p className="middle mb-0">본인메시지</p>
                 </div>
                 <div>
                   <Avatar
                     sx={{ bgcolor: red[500], margin: '10px' }}
                     aria-label="recipe"
                     src={'유저이미지경로'}
-                  >
-                    사진
-                  </Avatar>
-                  <div>유저이름</div>
+                  />
+                  <div>본인이름</div>
                 </div>
               </div>
             </MDBCardBody>
             <MDBTextArea
               className="form-outline"
-              label="Type your message"
               id="textAreaExample"
               rows={4}
               onKeyPress={test}

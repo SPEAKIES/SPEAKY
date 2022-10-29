@@ -13,10 +13,12 @@ export default function CommunityList() {
   ];
 
   return (
-    <div style={{ width: '100%', marginTop: '79px' }}>
-      {userListdata.map((value, index) => (
-        <Userlist key={index} data={value} />
-      ))}
-    </div>
+    <>
+      <div style={{ width: '100%' }}>
+        {userListdata.map((value, index) => (
+          <Userlist key={index} data={value} />
+        ))}
+      </div>
+    </>
   );
 }

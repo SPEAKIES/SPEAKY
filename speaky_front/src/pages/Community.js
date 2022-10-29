@@ -20,6 +20,7 @@ export default function Community() {
   return (
     <>
       <Header />
+      <div style={{ height: '74px' }}></div>
       <Box sx={{ display: 'flex' }}>
         <Drawer
           sx={{
