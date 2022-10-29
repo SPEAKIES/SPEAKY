@@ -1,24 +1,24 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import ChildCareIcon from "@mui/icons-material/ChildCare";
-import HomeIcon from "@mui/icons-material/Home";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import CastForEducationIcon from "@mui/icons-material/CastForEducation";
-import { blue } from "@mui/material/colors";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Badge from '@mui/material/Badge';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import HomeIcon from '@mui/icons-material/Home';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import { blue } from '@mui/material/colors';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const theme = createTheme({
@@ -27,7 +27,7 @@ export default function Header() {
         main: blue[300],
       },
       secondary: {
-        main: "#f44336",
+        main: '#f44336',
       },
     },
   });
@@ -69,45 +69,45 @@ export default function Header() {
   };
 
   // 반응형 오른쪽 햄버거바 -> Profile 열기,닫기
-  const menuId = "primary-search-account-menu";
+  const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem >Profile</MenuItem>
-      <MenuItem >My account</MenuItem>
+      <MenuItem>Profile</MenuItem>
+      <MenuItem>My account</MenuItem>
 
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
-      <MenuItem >Logout</MenuItem>
+      <MenuItem>Logout</MenuItem>
     </Menu>
   );
 
   // 반응형 오른쪽 햄버거바
-  const mobileMenuId = "primary-search-account-menu-mobile";
+  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -118,7 +118,7 @@ export default function Header() {
           {/* 메세지 수 */}
           <Badge badgeContent={0} color="error"></Badge>
         </IconButton>
-        <MailIcon sx={{ marginRight: "4vw" }} />
+        <MailIcon sx={{ marginRight: '4vw' }} />
         Messages
       </MenuItem>
 
@@ -132,7 +132,7 @@ export default function Header() {
           {/* 알람 수 */}
           <Badge badgeContent={0} color="error"></Badge>
         </IconButton>
-        <NotificationsIcon sx={{ marginRight: "4vw" }} />
+        <NotificationsIcon sx={{ marginRight: '4vw' }} />
         Notifications
       </MenuItem>
 
@@ -145,105 +145,104 @@ export default function Header() {
           aria-haspopup="true"
           color="inherit"
         ></IconButton>
-        <AccountCircle sx={{ marginLeft: "2.5vw", marginRight: "4vw" }} />
+        <AccountCircle sx={{ marginLeft: '2.5vw', marginRight: '4vw' }} />
         Profile
       </MenuItem>
     </Menu>
   );
 
   //   왼쪽 메인 메뉴들 나오는 햄버거 바 (반응형)
-  const LeftMobileMenuId = "primary-search-left-account-menu-mobile";
+  const LeftMobileMenuId = 'primary-search-left-account-menu-mobile';
   const renderLeftMobileMenu = (
     <Menu
       anchorEl={anchorElNav}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={LeftMobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isLeftMenuOpen}
       onClose={handleCloseNavMenu}
     >
-      <Link to="/" style={{textDecoration: 'none',color:'black'}}>
-      <MenuItem>
-        <Typography
-          variant="h7"
-          noWrap
-          component="div"
-          sx={{
-            display: { xs: "block", sm: "block" },
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <HomeIcon sx={{ marginRight: "3vw" }} />
-          Home
-        </Typography>
-      </MenuItem>
-      </Link>
-
-      <Link to="/board" style={{textDecoration: 'none',color:'black'}}>
+      <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
         <MenuItem>
           <Typography
             variant="h7"
             noWrap
             component="div"
             sx={{
-              display: { xs: "block", sm: "block" },
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
+              display: { xs: 'block', sm: 'block' },
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <AssignmentIcon sx={{ marginRight: "3vw" }} />
+            <HomeIcon sx={{ marginRight: '3vw' }} />
+            Home
+          </Typography>
+        </MenuItem>
+      </Link>
+
+      <Link to="/board" style={{ textDecoration: 'none', color: 'black' }}>
+        <MenuItem>
+          <Typography
+            variant="h7"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: 'block', sm: 'block' },
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <AssignmentIcon sx={{ marginRight: '3vw' }} />
             Board
           </Typography>
         </MenuItem>
       </Link>
-      <Link to ='/study' style={{textDecoration: 'none',color:'black'}} >
+      <Link to="/study" style={{ textDecoration: 'none', color: 'black' }}>
         <MenuItem>
           <Typography
             variant="h7"
             noWrap
             component="div"
             sx={{
-              display: { xs: "block", sm: "block" },
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
+              display: { xs: 'block', sm: 'block' },
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <CastForEducationIcon sx={{ marginRight: "3vw" }} />
+            <CastForEducationIcon sx={{ marginRight: '3vw' }} />
             Study
           </Typography>
         </MenuItem>
       </Link>
-      <Link to ='/community' style={{textDecoration: 'none',color:'black'}} >
+      <Link to="/community" style={{ textDecoration: 'none', color: 'black' }}>
         <MenuItem>
           <Typography
             variant="h7"
             noWrap
             component="div"
             sx={{
-              display: { xs: "block", sm: "block" },
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
+              display: { xs: 'block', sm: 'block' },
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            <CastForEducationIcon sx={{ marginRight: "3vw" }} />
+            <CastForEducationIcon sx={{ marginRight: '3vw' }} />
             Community
           </Typography>
         </MenuItem>
       </Link>
     </Menu>
-    
   );
 
   // 반응형 안됐을 때 보여지는 코드들
@@ -253,7 +252,7 @@ export default function Header() {
       <ThemeProvider theme={theme}></ThemeProvider>
       <AppBar
         position="fixed"
-        sx={{ bgcolor: blue[200], paddingTop: "0.3vw", paddingBottom: "0.3vw" }}
+        sx={{ bgcolor: blue[200], paddingTop: '0.3vw', paddingBottom: '0.3vw' }}
       >
         <Toolbar>
           {/* 왼쪽 햄버거바 */}
@@ -263,104 +262,107 @@ export default function Header() {
             color="inherit"
             aria-label="open drawer"
             aria-controls={LeftMobileMenuId}
-            sx={{ display: { xs: "flex", md: "none" } }}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
             onClick={handleOpenNavMenu}
           >
             <MenuIcon />
           </IconButton>
 
           {/* 로고 */}
-          <Box sx={{ paddingRight: "4vw" }}></Box>
-          <ChildCareIcon sx={{ display: { md: "flex" }, mr: 2 }} />
+          <Box sx={{ paddingRight: '4vw' }}></Box>
+          <ChildCareIcon sx={{ display: { md: 'flex' }, mr: 2 }} />
           <Typography
             variant="h5"
             noWrap
             component="div"
             sx={{
-              display: { sm: "block" },
-              paddingRight: "5vw",
+              display: { sm: 'block' },
+              paddingRight: '5vw',
             }}
           >
             Speaky
           </Typography>
-          <Link to='/' style={{textDecoration: 'none',color:'white'}}>
-          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px"  }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "40px",
-              }}
-            >
-              Home
-            </Typography>
-          </MenuItem>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '40px',
+                }}
+              >
+                Home
+              </Typography>
+            </MenuItem>
           </Link>
 
-          <Box sx={{ paddingRight: "1vw" }}></Box>
-          <Link to="/board" style={{textDecoration: 'none',color:'white'}}>
-          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Board
-            </Typography>
-          </MenuItem>
+          <Box sx={{ paddingRight: '1vw' }}></Box>
+          <Link to="/board" style={{ textDecoration: 'none', color: 'white' }}>
+            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Board
+              </Typography>
+            </MenuItem>
           </Link>
 
-          <Box sx={{ paddingRight: "1vw" }}></Box>
-          <Link to='/study' style={{textDecoration: 'none',color:'white'}}>
-          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Study
-            </Typography>
-          </MenuItem>
+          <Box sx={{ paddingRight: '1vw' }}></Box>
+          <Link to="/study" style={{ textDecoration: 'none', color: 'white' }}>
+            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Study
+              </Typography>
+            </MenuItem>
           </Link>
-          <Link to='/community' style={{textDecoration: 'none',color:'white'}}>
-          <MenuItem sx={{ transition: "0.3s", borderRadius: "40px" }}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                display: { xs: "none", sm: "block" },
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              Community
-            </Typography>
-          </MenuItem>
+          <Link
+            to="/community"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Community
+              </Typography>
+            </MenuItem>
           </Link>
           {/* 오른쪽 메뉴들 오른쪽에 고정(없으면 왼쪽에 붙는다) */}
           <Box sx={{ flexGrow: 1 }} />
 
           {/* 메세지 아이콘 */}
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
@@ -397,7 +399,7 @@ export default function Header() {
           </Box>
 
           {/* 오른쪽 햄버거바 */}
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"

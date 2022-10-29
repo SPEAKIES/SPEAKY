@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef } from 'react'
+import { useState, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -31,43 +31,45 @@ const ExpandMore = styled((props) => {
 export default function BoardCard(props) {
   const comment = useRef(); //댓글 남기기 내용.
 
-  const commentCheck = (e) =>{
-    if(e.key ==='Enter'){
-    console.log(comment.current.value);
-    comment.current.value =''
+  const commentCheck = (e) => {
+    if (e.key === 'Enter') {
+      console.log(comment.current.value);
+      comment.current.value = '';
     }
-  }
-  
+  };
+
   const [expanded, setExpanded] = useState(false);
-  const [heartCheck,setHeartCheck] =useState(false);
-  const [heart,setHeart] = useState(props.data.contentHeart);
+  const [heartCheck, setHeartCheck] = useState(false);
+  const [heart, setHeart] = useState(props.data.contentHeart);
   const handleExpandClick = () => {
     setExpanded(!expanded);
     //댓글 데이터베이스 가지고 와야함.
   };
   //하트 부분 클릭했을때 fetch로 하트 증가 시켜주고 나서 하트 갯수 data를 다시 받아야함.
-  const heartClick = () =>{
-    if(heartCheck){
-      setHeart(heart-1);
+  const heartClick = () => {
+    if (heartCheck) {
+      setHeart(heart - 1);
       setHeartCheck(false);
-    }
-    else{
-      setHeart(heart+1);
+    } else {
+      setHeart(heart + 1);
       setHeartCheck(true);
     }
-  }
-  const CardStyle={
+  };
+  const CardStyle = {
     maxWidth: 680,
-    marginTop:'20px'
-}
+    marginTop: '20px',
+    width: 500,
+  };
 
   return (
     <Card sx={CardStyle}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"src={props.data.userImage}>
-            사진
-          </Avatar>
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+            src={props.data.userImage}
+          />
         }
         action={
           <IconButton aria-label="settings">
@@ -80,17 +82,17 @@ export default function BoardCard(props) {
       <div onClick={handleExpandClick}>
         <CardMedia
           component="img"
-          height="194"
+          height="300"
           image={props.data.image}
           alt="그림사진"
         />
-        <CardContent sx={{fontSize:'20px',width:'35vw'}} >
+        <CardContent sx={{ fontSize: '20px' }}>
           {props.data.cardContent}
         </CardContent>
       </div>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={heartClick}>
-          {heartCheck ? <FavoriteIcon/> :<FavoriteBorderIcon/>}
+          {heartCheck ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           <div>{heart}</div>
         </IconButton>
         <IconButton aria-label="share">
@@ -104,22 +106,26 @@ export default function BoardCard(props) {
           <ExpandMoreIcon />
         </ExpandMore>
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit >
-        <CardContent style={{fontSize: '20px'}}>
-        <div style={{display:'flex'}}>
-        <Avatar sx={{ bgcolor: red[500], margin:'10px'}} aria-label="recipe" src={props.data.userImage}>
-            사진
-          </Avatar>
-          <TextField
-          sx={{width:'100%'}}
-          id="outlined-textarea"
-          placeholder="댓글을 입력해주세요..."
-          multiline
-          inputRef={comment}
-          onKeyPress={commentCheck}
-        />
-        </div>
-        <Comment/>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent style={{ fontSize: '20px' }}>
+          <div style={{ display: 'flex' }}>
+            <Avatar
+              sx={{ bgcolor: red[500], margin: '10px' }}
+              aria-label="recipe"
+              src={props.data.userImage}
+            >
+              사진
+            </Avatar>
+            <TextField
+              sx={{ width: '100%' }}
+              id="outlined-textarea"
+              placeholder="댓글을 입력해주세요..."
+              multiline
+              inputRef={comment}
+              onKeyPress={commentCheck}
+            />
+          </div>
+          <Comment />
         </CardContent>
       </Collapse>
     </Card>

@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { AccountBox } from "../components/Loginpage";
+import React from 'react';
+import styled from 'styled-components';
+import { AccountBox } from '../components/Loginpage';
 
 const AppContainer = styled.div`
   width: 100%;
