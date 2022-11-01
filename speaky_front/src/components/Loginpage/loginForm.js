@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from 'react';
 
 import {
   BoxContainer,
@@ -10,24 +10,24 @@ import {
   SubmitButton,
   BoldLink,
   OtherLogin,
-} from "./common";
-import kakao from "../Loginpage/APIimage/kakao.png";
-import google from "../Loginpage/APIimage/google.png";
-import { Marginer } from "../marginer";
-import { AccountContext } from "./accountContext";
-import { Box } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../store/modules/user";
+} from './common';
+import kakao from '../Loginpage/APIimage/kakao.png';
+import google from '../Loginpage/APIimage/google.png';
+import { Marginer } from '../marginer';
+import { AccountContext } from './accountContext';
+import { Box } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../store/modules/user';
 
-const KAKAO_CLIENT_ID = "fd32ba2050199e532fe49d5c35a2c0d7";
-const KAKAO_REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+const KAKAO_CLIENT_ID = 'fd32ba2050199e532fe49d5c35a2c0d7';
+const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 export function LoginForm(props) {
   const [loginCondition, setLoginCondition] = useState({
     condition: false,
-    msg: "회원 정보를 정확하게 입력하세요!",
+    msg: '회원 정보를 정확하게 입력하세요!',
   });
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -42,17 +42,17 @@ export function LoginForm(props) {
 
     const loginInfo = {
       id: userIdInput.current.value,
-      password: userPasswordInput.current.value,
+      pw: userPasswordInput.current.value,
     };
 
     if (
-      userIdInput.current.value !== "" &&
-      userPasswordInput.current.value !== ""
+      userIdInput.current.value !== '' &&
+      userPasswordInput.current.value !== ''
     ) {
-      const response = await fetch("http://localhost:4000/login/setid ", {
-        method: "POST",
+      const response = await fetch('http://localhost:4000/login/setid ', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginInfo),
       });
@@ -62,7 +62,7 @@ export function LoginForm(props) {
         console.log(result);
         if (result.result) {
           dispatch(login(result));
-          navigate("/main");
+          navigate('/main');
         }
 
         setLoginCondition({
@@ -72,7 +72,7 @@ export function LoginForm(props) {
 
         setOpenDialog(true);
       } else {
-        throw new Error("로그인 실패");
+        throw new Error('로그인 실패');
       }
     } else {
     }
@@ -114,12 +114,12 @@ export function LoginForm(props) {
             component="div"
             sx={{
               backgroundImage: `url(${kakao})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              width: "40px",
-              height: "40px",
-              color: "black",
-              marginRight: "50px",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              width: '40px',
+              height: '40px',
+              color: 'black',
+              marginRight: '50px',
             }}
           ></Box>
         </Link>
@@ -128,11 +128,11 @@ export function LoginForm(props) {
             component="div"
             sx={{
               backgroundImage: `url(${google})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              width: "40px",
-              height: "40px",
-              color: "black",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              width: '40px',
+              height: '40px',
+              color: 'black',
             }}
           ></Box>
         </a>
