@@ -1,8 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import ListSubheader from '@mui/material/ListSubheader';
+import FollowList from '../components/FollowList';
 import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   MDBCol,
   MDBContainer,
@@ -13,9 +18,10 @@ import {
   MDBCardImage,
   MDBTypography,
 } from 'mdb-react-ui-kit';
+const drawerWidth = '15%';
 export default function Profile() {
   const navigate = useNavigate();
-
+  const FollowListData = useSelector((state) => state.community.FollowListData);
   const chatClick = () => {
     navigate('/chat', {
       state: {
@@ -110,6 +116,27 @@ export default function Profile() {
           </MDBRow>
         </MDBContainer>
       </section>
+      <Drawer
+        sx={{
+          display: { xs: 'none', sm: 'none', md: 'block' },
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            marginTop: 9.6,
+            boxSizing: 'border-box',
+          },
+        }}
+        variant="permanent"
+        anchor="right"
+      >
+        <Divider />
+        <ListSubheader component="div" id="nested-list-subheader">
+          친구창
+        </ListSubheader>
+        <FollowList data={FollowListData} />
+        <Divider />
+      </Drawer>
     </>
   );
 }

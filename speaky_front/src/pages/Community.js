@@ -7,16 +7,13 @@ import ListSubheader from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import CommunityList from '../components/CommunityList';
+import { useSelector } from 'react-redux';
 const drawerWidth = '15%';
 
 export default function Community() {
-  const FollowListData = [
-    { userName: '강한솔', userImage: '경로' },
-    { userName: '모승환', userImage: '경로' },
-    { userName: '이민정', userImage: '경로' },
-    { userName: '천해성', userImage: '경로' },
-  ];
-  const checkListdata = ['한국어', '영어', '중국어', '일본어'];
+  const FollowListData = useSelector((state) => state.community.FollowListData);
+  const checkListdata = useSelector((state) => state.community.checkListdata);
+
   return (
     <>
       <Header />

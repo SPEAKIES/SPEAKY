@@ -9,12 +9,14 @@ import Checkbox from '@mui/material/Checkbox';
 export default function CheckboxList(props) {
   const [checked, setChecked] = React.useState([0]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const handleToggle = (index, value) => () => {
+    const currentIndex = checked.indexOf(index);
+    console.log(value);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.splice(currentIndex, 1);
+      newChecked.push(index);
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -31,7 +33,7 @@ export default function CheckboxList(props) {
           <ListItem key={index} disablePadding>
             <ListItemButton
               role={undefined}
-              onClick={handleToggle(index)}
+              onClick={handleToggle(index, value)}
               dense
             >
               <ListItemIcon>
