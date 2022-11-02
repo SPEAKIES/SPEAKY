@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<p>전체친구</p>
+<a href="/friend">모든언어</a>
+<a href="/friend/language/english">영어</a>
+<a href="/friend/language/spanish">스페인어</a>
+<a href="/friend/language/french">프랑스어</a>
+<a href="/friend/language/japanese">일본어</a>
+<div style="display: flex; flex-direction: row;">
+  <%for(let i = 0; i < selectedUsers.length; i++){%>
+    <div style="width: 500px; height:50px; border: 1px solid black;">
+      <p><%=selectedUsers[i].nickname%></p>
+    </div>
+    <%}%>
+  </div>
+</body>
+</html>

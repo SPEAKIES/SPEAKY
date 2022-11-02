@@ -5,7 +5,6 @@ const multer = require("multer");
 const server = express();
 const passport = require("passport");
 LocalStrategy = require('passport-local').Strategy;
-// const PORT = 4000;
 
 server.set("view engine", "ejs");
 server.use("/public", express.static("public"));
@@ -32,11 +31,8 @@ server.use((err, req, res, next) => {
   res.send(err.message);
 });
 
-const mypageRouter = require("./routes/mypage");
-server.use("/mypage", mypageRouter.router);
-
-const loginRouter = require("./routes/login");
-server.use("/login", loginRouter);
+const friendRouter = require("./routes/friend");
+server.use("/friend", friendRouter);
 
 server.use((err, req, res, next) => {
   console.log(err.stack);
