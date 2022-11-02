@@ -5,7 +5,7 @@ const multer = require("multer");
 const server = express();
 const passport = require("passport");
 LocalStrategy = require('passport-local').Strategy;
-const PORT = 4000;
+// const PORT = 4000;
 
 server.set("view engine", "ejs");
 server.use("/public", express.static("public"));
@@ -45,6 +45,6 @@ server.use((err, req, res, next) => {
 });
 
 
-server.listen(PORT, (req, res) => {
-  console.log(`${PORT}로 연결 완료`);
+server.listen(process.env.PORT, (req, res) => {
+  console.log(`${process.env.PORT}로 연결 완료`);
 });
