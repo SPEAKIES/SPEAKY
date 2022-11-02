@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../Header.js';
 import './Study.css';
+import { useSelector } from 'react-redux';
 const formData = new FormData();
 
 const Topbox = styled.div`
@@ -218,6 +219,8 @@ export default function Mypage() {
   const email = useRef();
   const pw = useRef();
   const text = useRef();
+  const state = useSelector((state) => state.user);
+  console.log(state);
 
   const [lookimg, setLookimg] = useState('');
   const [lookid, setLookid] = useState('');
@@ -226,44 +229,61 @@ export default function Mypage() {
   const [lookemail, setLookEmail] = useState('');
   const [lookpw, setLookpw] = useState('');
   const [looktext, setLookText] = useState('');
+  const [update, setUpdate] = useState(false);
 
   async function imgHandler(e) {
     formData.append('img', e.target.files[0]);
   }
 
-  async function saveHandler(id, pw, email, nickname, nation, text) {
-    const resImg = await fetch('http://localhost:4000/mypage/setimg', {
-      method: 'POST',
-      headers: {},
-      body: formData,
-    });
+  async function saveHandler() {
+    if (
+      id.current?.value &&
+      nickname.current?.value &&
+      text.current?.value &&
+      email.current?.value &&
+      nation.current?.value
+    ) {
+      const resImg = await fetch('http://localhost:4000/mypage/setimg', {
+        method: 'POST',
+        headers: {},
+        body: formData,
+      });
 
-    const imgName = await resImg.json();
+      const imgName = await resImg.json();
 
-    const res = await fetch('http://localhost:4000/mypage/setdata', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id,
-        pw,
-        email,
-        nickname,
-        text,
-        nation,
-        img: imgName,
-      }),
-    });
+      console.log(imgName);
 
-    const result = await res.json();
-    if (result === '내 정보 수정 완료') {
-      alert('수정 완료');
-    } else {
-      alert('통신 오류');
+      const res = await fetch('http://localhost:4000/mypage/setdata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: id.current.value,
+          email: email.current.value,
+          nickname: nickname.current.value,
+          text: text.current.value,
+          nation: nation.current.value,
+          img: imgName,
+        }),
+      });
+
+      const result = await res.json();
+      console.log(result);
+      if (result) {
+        alert('수정 완료');
+      } else {
+        alert('통신 오류');
+      }
     }
   }
 
   useEffect(() => {
-    fetch('http://localhost:4000/mypage', {})
+    fetch('http://localhost:4000/mypage', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userEmail: state.userEmail }),
+    })
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -276,10 +296,9 @@ export default function Mypage() {
         setLookText(res.text);
         nickname.current.value = res.nickname;
         nation.current.value = res.nation;
-        pw.current.value = res.pw;
         text.current.value = res.text;
       });
-  }, []);
+  }, [state]);
 
   return (
     <>
@@ -288,7 +307,6 @@ export default function Mypage() {
         <Profilebox>
           <Profilepic>
             <Input type="file" ref={img} onChange={imgHandler} />
-            {lookimg}
           </Profilepic>
           <Profilename>
             <Name>이름 : {looknickname} </Name>
@@ -306,62 +324,22 @@ export default function Mypage() {
       <MainProfile>
         <Modify>
           <Word>아이디</Word>
-          <EmailInput value={lookid} />
-          <Savebtn
-            onClick={() => {
-              saveHandler(id.current.value);
-            }}
-          >
-            저장
-          </Savebtn>
+          <EmailInput value={lookid} ref={id} />
         </Modify>
 
         <Modify>
           <Word>이메일</Word>
-          <EmailInput value={lookemail} />
-          <Savebtn
-            onClick={() => {
-              saveHandler(email.current.value);
-            }}
-          >
-            저장
-          </Savebtn>
+          <EmailInput value={lookemail} ref={email} />
         </Modify>
 
         <Modify>
           <Word>이름</Word>
           <Inputbox placeholder="Name" ref={nickname} />
-          <Savebtn
-            onClick={() => {
-              saveHandler(nickname.current.value);
-            }}
-          >
-            저장
-          </Savebtn>
         </Modify>
 
         <Modify>
           <Word>거주 국가</Word>
           <NationInput placeholder="Nation" ref={nation} />
-          <Savebtn
-            onClick={() => {
-              saveHandler(nation.current.value);
-            }}
-          >
-            저장
-          </Savebtn>
-        </Modify>
-
-        <Modify>
-          <Word>비밀번호 변경</Word>
-          <PwInput placeholder="Password" type="password" ref={pw} />
-          <Savebtn
-            onClick={() => {
-              saveHandler(pw.current.value);
-            }}
-          >
-            저장
-          </Savebtn>
         </Modify>
 
         <Modify>
@@ -369,7 +347,8 @@ export default function Mypage() {
           <NationInput placeholder="Introduce" ref={text} />
           <Savebtn
             onClick={() => {
-              saveHandler(text.current.value);
+              saveHandler();
+              setUpdate(true);
             }}
           >
             저장

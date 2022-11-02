@@ -64,20 +64,17 @@ const mongoDB = {
   SetData: async (data) => {
     const user = await _user;
     const db = user.db('project').collection('user');
-    const passwordresult = createHashedPassword(data.pw);
     const duplicated = await db.findOne({ id: data.id }); //session.id
     if (duplicated) {
       const result = await db.updateOne(
         { id: data.id }, //session.id front쪽에서 redux처리를 통해서 해당 data에 user.id값이 들어오기 떄문에 로직 사용 가능
         {
           $set: {
-            pw: passwordresult.hashedPassword,
             email: data.email,
             nickname: data.nickname,
-            language: data.langugae,
+            nation: data.nation,
             text: data.text,
             img: data.img,
-            salt: passwordresult.salt,
           },
         }
       );
@@ -88,7 +85,7 @@ const mongoDB = {
   Getmypage: async (data) => {
     const user = await _user;
     const db = user.db('project').collection('user');
-    const duplicated = await db.findOne({ id: data.id });
+    const duplicated = await db.findOne({ email: data.userEmail });
     return duplicated;
   },
 };
