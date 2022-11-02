@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../Header.js';
 import './Study.css';
 import { useSelector } from 'react-redux';
+import { redirect } from 'react-router-dom';
 const formData = new FormData();
 
 const Topbox = styled.div`
@@ -217,7 +218,6 @@ export default function Mypage() {
   const nickname = useRef();
   const nation = useRef();
   const email = useRef();
-  const pw = useRef();
   const text = useRef();
   const state = useSelector((state) => state.user);
   console.log(state);
@@ -227,12 +227,12 @@ export default function Mypage() {
   const [looknickname, setLookNickName] = useState('');
   const [looknation, setLookNation] = useState('');
   const [lookemail, setLookEmail] = useState('');
-  const [lookpw, setLookpw] = useState('');
   const [looktext, setLookText] = useState('');
-  const [update, setUpdate] = useState(false);
+  const [imgOk, setImgOk] = useState(false);
 
   async function imgHandler(e) {
     formData.append('img', e.target.files[0]);
+    setImgOk(true);
   }
 
   async function saveHandler() {
@@ -241,7 +241,8 @@ export default function Mypage() {
       nickname.current?.value &&
       text.current?.value &&
       email.current?.value &&
-      nation.current?.value
+      nation.current?.value &&
+      imgOk
     ) {
       const resImg = await fetch('http://localhost:4000/mypage/setimg', {
         method: 'POST',
@@ -288,15 +289,11 @@ export default function Mypage() {
       .then((res) => {
         console.log(res);
         setLookid(res.id);
-        setLookpw(res.pw);
         setLookEmail(res.email);
         setLookNickName(res.nickname);
         setLookNation(res.nation);
         setLookimg(res.img);
         setLookText(res.text);
-        nickname.current.value = res.nickname;
-        nation.current.value = res.nation;
-        text.current.value = res.text;
       });
   }, [state]);
 
@@ -324,12 +321,12 @@ export default function Mypage() {
       <MainProfile>
         <Modify>
           <Word>아이디</Word>
-          <EmailInput value={lookid} ref={id} />
+          <EmailInput defaultValue={lookid} ref={id} />
         </Modify>
 
         <Modify>
           <Word>이메일</Word>
-          <EmailInput value={lookemail} ref={email} />
+          <EmailInput defaultValue={lookemail} ref={email} />
         </Modify>
 
         <Modify>
@@ -348,7 +345,6 @@ export default function Mypage() {
           <Savebtn
             onClick={() => {
               saveHandler();
-              setUpdate(true);
             }}
           >
             저장

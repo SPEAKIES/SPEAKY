@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "@emotion/styled";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { TutorData } from "../MainTutor/MainpageTutorData.js";
-import "../MainTutor/MainpageTutor.css";
+import React from 'react';
+import styled from '@emotion/styled';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { TutorData } from '../MainTutor/MainpageTutorData.js';
+import '../MainTutor/MainpageTutor.css';
 
-const Word = styled.p`
+const Word = styled.div`
   text-align: center;
   margin-top: 5vw;
 `;
@@ -69,7 +69,7 @@ export default function Tutor() {
       </Word>
       <Slider {...settings}>
         {TutorData.map((data) => (
-          <Card>
+          <Card key={data}>
             <CardTop>
               <img className="card-img" src={data.Img} alt="" />
               <div className="tutorname">{data.name}</div>

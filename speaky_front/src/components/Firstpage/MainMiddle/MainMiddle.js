@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
-import React, { useEffect } from "react";
-import AOS from "aos";
-import Tutor from "../MainTutor/MainpageTutor.js";
-import "aos/dist/aos.css";
-import "./MainMiddle.css";
-import { Button } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import styled from '@emotion/styled';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import Tutor from '../MainTutor/MainpageTutor.js';
+import 'aos/dist/aos.css';
+import './MainMiddle.css';
+import { Button } from '@mui/material';
+import { blue } from '@mui/material/colors';
 
 const Word = styled.div`
   font-size: clamp(30px, 20px, 20px);
@@ -29,7 +29,7 @@ const Box1 = styled.div`
   }
 `;
 
-const Word1 = styled.p`
+const Word1 = styled.div`
   text-align: left;
   margin-top: 6vw;
   margin-left: 4vw;
@@ -50,7 +50,7 @@ const Box2 = styled.div`
   }
 `;
 
-const Word2 = styled.p`
+const Word2 = styled.div`
   text-align: left;
   margin-top: 4vw;
   margin-left: 5vw;
@@ -89,7 +89,7 @@ const Box4 = styled.div`
   }
 `;
 
-const Word3 = styled.p`
+const Word3 = styled.div`
   text-align: center;
   margin-top: 5vw;
   margin-bottom: 2vw;
@@ -164,10 +164,10 @@ export default function Middle() {
           <Button
             variant="outlined"
             sx={{
-              marginTop: "2vw",
+              marginTop: '2vw',
               bgcolor: blue[50],
-              transition: "0.5s",
-              "&:hover": {
+              transition: '0.5s',
+              '&:hover': {
                 color: blue[600],
                 backgroundColor: blue[100],
               },
@@ -195,7 +195,7 @@ export default function Middle() {
           보세요.
         </Word1>
       </Box3>
-      {/* *********************************************************************************** */}
+
       <Word3>
         <h4>What can we Learn?</h4>
       </Word3>
