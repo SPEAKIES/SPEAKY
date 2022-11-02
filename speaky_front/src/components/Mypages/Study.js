@@ -7,7 +7,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Avatar from 'react-avatar-edit';
 import { Button } from 'react-bootstrap';
 import img from './img.webp';
 
