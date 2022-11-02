@@ -41,6 +41,7 @@ router.post('/setdata', upload.single('img'), async (req, res) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   console.log(req.file);
   const data = {
+    id: req.body.id,
     pw: req.body.pw,
     email: req.body.email,
     nickname: req.body.nickname,
@@ -49,7 +50,7 @@ router.post('/setdata', upload.single('img'), async (req, res) => {
     text: req.body.text,
   };
   const result = await mongoClient.SetData(data);
-  res.send('성공');
+  res.send(data);
 });
 
 module.exports = { router, multer };
