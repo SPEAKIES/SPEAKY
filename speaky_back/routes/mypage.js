@@ -6,7 +6,7 @@ const multer = require('multer');
 const fs = require('fs');
 const mongoClient = require('../controllers/mongocontrol').mongoDB;
 
-const dir = '../../speaky_front/public/images';
+const dir = './images';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, dir);
@@ -22,9 +22,10 @@ const limits = {
 
 const upload = multer({ storage, limits });
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
+  console.log(req.body);
   const data = {
-    id: req.body.id,
+    userEmail: req.body.userEmail,
   };
   const result = await mongoClient.Getmypage(data);
   res.send(JSON.stringify(result));
@@ -38,14 +39,12 @@ router.post('/setimg', upload.single('img'), async (req, res) => {
 
 // 마이페이지 데이터 가져오기
 router.post('/setdata', upload.single('img'), async (req, res) => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-  console.log(req.file);
+  console.log(req.body);
   const data = {
     id: req.body.id,
-    pw: req.body.pw,
     email: req.body.email,
     nickname: req.body.nickname,
-    langugae: req.body.language,
+    nation: req.body.nation,
     img: req.body.img,
     text: req.body.text,
   };
