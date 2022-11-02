@@ -18,7 +18,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const theme = createTheme({
@@ -34,7 +34,7 @@ export default function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const naviagte = useNavigate();
   const isLeftMenuOpen = Boolean(anchorElNav);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -86,7 +86,13 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem>Profile</MenuItem>
+      <MenuItem
+        onClick={() => {
+          naviagte('/mypage');
+        }}
+      >
+        Profile
+      </MenuItem>
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
       <MenuItem>Logout</MenuItem>
     </Menu>

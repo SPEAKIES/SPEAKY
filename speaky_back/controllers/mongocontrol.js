@@ -88,7 +88,7 @@ const mongoDB = {
   Getmypage: async (data) => {
     const user = await _user;
     const db = user.db('project').collection('user');
-    const duplicated = await db.findOne({ id: data.id }); //session.id
+    const duplicated = await db.findOne({ id: data.id });
     return duplicated;
   },
 };

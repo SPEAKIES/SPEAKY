@@ -16,8 +16,12 @@ import Profile from './pages/Profile';
 import ChatPage from './pages/ChatPage';
 import Login from './components/Login.js';
 import '../src/App.css';
-
+import Mypage from './components/Mypages/Mypage';
+import { useSelector } from 'react-redux';
+// import Mypage from './components/Mypages/Mypage';
 function App() {
+  const isLogin = useSelector((state) => state.user.isLogin);
+
   return (
     <>
       <Routes>
@@ -28,6 +32,7 @@ function App() {
         <Route path="/community" element={<Community />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

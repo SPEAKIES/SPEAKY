@@ -62,14 +62,13 @@ export function LoginForm(props) {
         console.log(result);
         if (result.result) {
           dispatch(login(result));
-          navigate('/main');
+          navigate('/');
         }
 
         setLoginCondition({
           condition: result.result,
           msg: result.msg,
         });
-
         setOpenDialog(true);
       } else {
         throw new Error('로그인 실패');
