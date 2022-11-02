@@ -87,8 +87,6 @@ export default function Header() {
       onClose={handleMenuClose}
     >
       <MenuItem>Profile</MenuItem>
-      <MenuItem>My account</MenuItem>
-
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
       <MenuItem>Logout</MenuItem>
     </Menu>
