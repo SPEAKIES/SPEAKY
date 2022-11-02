@@ -10,7 +10,6 @@ import FreeBoard from './pages/FreeBoard';
 import Study from './pages/Study';
 import Community from './pages/Community';
 import NotFound from './components/NotFound';
-import Header from './components/Header';
 import FirstPage from './pages/FirstPage';
 import Profile from './pages/Profile';
 import ChatPage from './pages/ChatPage';
@@ -18,7 +17,6 @@ import Login from './components/Login.js';
 import '../src/App.css';
 import Mypage from './components/Mypages/Mypage';
 import { useSelector } from 'react-redux';
-// import Mypage from './components/Mypages/Mypage';
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
 

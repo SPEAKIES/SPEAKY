@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -6,7 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
-
+import { useDispatch } from 'react-redux';
+import { NewContent } from '../store/modules/freeBoard';
 const Title = styled.div`
   display: flex;
   width: 100%;
@@ -42,10 +43,20 @@ const Buttonstyle = {
 };
 
 export default function WirteModal(props) {
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const data = {
+    userId: 'F',
+    image: 'images/2번.jpg',
+    userName: '김철수',
+    contentDate: '20일',
+    contentHeart: 4,
+    userImage: '경로',
+    cardContent: '5번 글 내용입니다.',
+  };
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const content = useRef();
   const [image, setImage] = useState({
     image_file: '',
     preview_URL: '',
@@ -89,6 +100,7 @@ export default function WirteModal(props) {
       const formData = new FormData();
       formData.append('file', image.image_file);
       console.log(formData);
+      console.log(content.current.value);
       //   await axios.post('/api/image/upload', formData);
       alert('서버에 등록이 완료되었습니다!');
       setImage({
@@ -99,6 +111,9 @@ export default function WirteModal(props) {
       setCheckImg('none');
     } else {
       alert('사진없이 등록하는부분구현!');
+      dispatch(NewContent(data));
+      console.log(content.current.value);
+      handleClose();
     }
   };
 
@@ -116,7 +131,7 @@ export default function WirteModal(props) {
         <Box sx={Boxstyle}>
           <Title>게시물 만들기</Title>
 
-          <Content></Content>
+          <Content ref={content}></Content>
           <input
             type="file"
             accept="image/*"

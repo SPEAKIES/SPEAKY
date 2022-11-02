@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,7 +8,8 @@ import ListSubheader from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { init } from '../store/modules/freeBoard';
 import Header from '../components/Header';
 const drawerWidth = '15%';
 
@@ -16,6 +17,11 @@ export default function FreeBoard() {
   const CardData = useSelector((state) => state.freeBoard.CardData);
   const FollowListData = useSelector((state) => state.freeBoard.FollowListData);
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    //fetch get방식으로 데이터 가져오기
+    // dispatch(init()); //이런식으로 redux 정보 dispatch 해서 처음에 get 요청 보내서 받은 데이터를 store에 저장
+  }, [dispatch]);
 
   return (
     <>

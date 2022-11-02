@@ -1,6 +1,7 @@
 const initState = {
   CardData: [
     {
+      userId: 'A',
       image: 'images/1번.jpg',
       userName: '강한솔',
       userImage: '경로',
@@ -10,6 +11,7 @@ const initState = {
     },
 
     {
+      userId: 'B',
       image: 'images/2번.jpg',
       userName: '모승환',
       userImage: '경로',
@@ -19,6 +21,7 @@ const initState = {
     },
 
     {
+      userId: 'C',
       image: 'images/3번.jpg',
       userName: '이민정',
       userImage: '경로',
@@ -28,6 +31,7 @@ const initState = {
     },
 
     {
+      userId: 'D',
       image: 'images/3번.jpg',
       userName: '천해성',
       contentDate: '20일',
@@ -37,41 +41,30 @@ const initState = {
     },
   ],
   FollowListData: [
-    { userName: '강한솔', userImage: '경로' },
-    { userName: '모승환', userImage: '경로' },
-    { userName: '이민정', userImage: '경로' },
-    { userName: '천해성', userImage: '경로' },
+    { userId: 'A', userName: '강한솔', userImage: '경로' },
+    { userId: 'B', userName: '모승환', userImage: '경로' },
+    { userId: 'C', userName: '이민정', userImage: '경로' },
+    { userId: 'D', userName: '천해성', userImage: '경로' },
   ],
   checkListdata: ['1일', '1주일', '한달', '1년'],
 };
 
 // 액션 타입(문자열)
 const INIT = 'freeBoard/INIT';
-const CHECK = 'freeBoard/CHECK';
-const NEXT = 'freeBoard/NEXT';
-const RESET = 'freeBoard/RESET';
+const NEWCONTENT = 'freeBoard/NEWCONTENT';
 
 // 액션 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달 필요
-export function check(result) {
-  return {
-    type: CHECK,
-    payload: { result },
-  };
-}
-export function next() {
-  return {
-    type: NEXT,
-  };
-}
-export function reset() {
-  return {
-    type: RESET,
-  };
-}
+
 export function init(data) {
   return {
     type: INIT,
+    payload: data,
+  };
+}
+export function NewContent(data) {
+  return {
+    type: NEWCONTENT,
     payload: data,
   };
 }
@@ -80,27 +73,17 @@ export function init(data) {
 // 리듀서
 export default function freeBoard(state = initState, action) {
   switch (action.type) {
-    case CHECK:
-      return {
-        ...state,
-        mbtiResult: state.mbtiResult + action.payload.result,
-      };
-    case NEXT:
-      return {
-        ...state,
-        page: state.page + 1,
-      };
-    case RESET:
-      return {
-        ...state,
-        page: 0,
-        mbtiResult: '',
-      };
     case INIT:
       return {
         ...state,
-        survey: action.payload.survey,
-        explanation: action.payload.explanation,
+        CardData: action.payload.Carddata,
+        FollowListData: action.payload.FollowListData,
+        checkListdata: action.payload.checkListdata,
+      };
+    case NEWCONTENT:
+      return {
+        ...state,
+        CardData: [action.payload, ...state.CardData],
       };
 
     default:
