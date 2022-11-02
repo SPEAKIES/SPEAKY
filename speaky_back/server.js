@@ -22,8 +22,17 @@ require('dotenv').config();
 
 // ROUTER
 const router = require('./routes/index');
+const freeBoardRouter = require('./routes/freeBoard');
+const replyRouter = require('./routes/reply');
 
+// INDEX
 server.use('/', router);
+
+// FreeBoard
+server.use('/freeBoard', freeBoardRouter);
+
+// Reply
+server.use('/reply', replyRouter);
 
 // ERROR 처리
 server.use((err, req, res, next) => {
