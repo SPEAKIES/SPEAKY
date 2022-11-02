@@ -20,7 +20,6 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Header />} />
         <Route path="/" element={<FirstPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/board" element={<FreeBoard />} />
