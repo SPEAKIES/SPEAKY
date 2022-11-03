@@ -220,7 +220,6 @@ export default function Mypage() {
   const email = useRef();
   const text = useRef();
   const state = useSelector((state) => state.user);
-  console.log(state);
 
   const [lookimg, setLookimg] = useState('');
   const [lookid, setLookid] = useState('');
@@ -252,7 +251,6 @@ export default function Mypage() {
 
       const imgName = await resImg.json();
 
-      console.log(imgName);
 
       const res = await fetch('http://localhost:4000/mypage/setdata', {
         method: 'POST',
@@ -268,7 +266,6 @@ export default function Mypage() {
       });
 
       const result = await res.json();
-      console.log(result);
       if (result) {
         alert('수정 완료');
       } else {
