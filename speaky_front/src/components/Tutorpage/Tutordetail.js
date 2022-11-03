@@ -28,6 +28,7 @@ const TutorProfile = styled.div`
   height: 120px;
   display: flex;
   margin-bottom: 1vw;
+  margin-top: 6vw;
 `;
 
 const ProfilePic = styled.div`
