@@ -16,16 +16,16 @@ import Stack from '@mui/material/Stack';
 const TutorProfile = styled.div`
   width: 100%;
   height: 120px;
-  background-color: orange;
   display: flex;
   margin-bottom: 1vw;
+  margin-top: 6vw;
 `;
 
 const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  background-color: skyblue;
-  margin: 0 auto;
+  margin-left: 5vw;
+  display: flex;
 `;
 
 const Self = styled.div``;
@@ -33,10 +33,12 @@ const Self = styled.div``;
 const TutorName = styled.h4`
   margin-left: 1vw;
   margin-top: 1vw;
+  margin-bottom: 1vw;
 `;
 
 const FlagImg = styled.img`
   width: 1.6vw;
+  margin-right: 0.8vw;
 `;
 
 const TutorNation = styled.h5`
@@ -150,7 +152,7 @@ export default function Tutordetail() {
           </Self>
         </TutorProfile>
         <Video loop>
-          <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
+          <source src={TutorVideo} type="video/webm" sx={{ height: '300px' }} />
         </Video>
         <SelfIntro>
           <Name>Guillaume Patry</Name>
