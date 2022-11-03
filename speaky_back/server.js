@@ -22,8 +22,12 @@ require('dotenv').config();
 
 // ROUTER
 const router = require('./routes/index');
+const mypageRouter = require("./routes/mypage");
+const freeBoardRouter = require('./routes/freeBoard');
+const replyRouter = require('./routes/reply');
+const loginRouter = require("./routes/login");
 
-server.use('/', router);
+
 
 // ERROR 처리
 server.use((err, req, res, next) => {
@@ -32,11 +36,11 @@ server.use((err, req, res, next) => {
   res.send(err.message);
 });
 
-const mypageRouter = require("./routes/mypage");
+server.use('/', router);
 server.use("/mypage", mypageRouter.router);
-
-const loginRouter = require("./routes/login");
 server.use("/login", loginRouter);
+server.use('/freeBoard', freeBoardRouter);
+server.use('/reply', replyRouter);
 
 server.use((err, req, res, next) => {
   console.log(err.stack);
