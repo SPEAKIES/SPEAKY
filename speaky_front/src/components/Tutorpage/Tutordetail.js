@@ -146,7 +146,6 @@ export default function Tutordetail() {
     fetch('http://localhost:4000/tutor/getreserve')
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setReserve(res);
       });
   }, []);
