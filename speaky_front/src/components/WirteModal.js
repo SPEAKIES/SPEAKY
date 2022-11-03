@@ -46,7 +46,6 @@ export default function WirteModal(props) {
   const dispatch = useDispatch();
   const data = {
     userId: 'F',
-    image: 'images/2번.jpg',
     userName: '김철수',
     contentDate: '20일',
     contentHeart: 4,
@@ -99,9 +98,19 @@ export default function WirteModal(props) {
     if (image.image_file) {
       const formData = new FormData();
       formData.append('file', image.image_file);
-      console.log(formData);
-      console.log(content.current.value);
-      //   await axios.post('/api/image/upload', formData);
+      // const resImg = await fetch('http://localhost:4000/mypage/글이미지', {
+      //   method: 'POST',
+      //   headers: {},
+      //   body: formData,
+      // });
+      // const res = await fetch('http://localhost:4000/mypage/글내용', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     content: content.current.value,
+      //     imgSrc: image.preview_URL,
+      //   }),
+      // });
       alert('서버에 등록이 완료되었습니다!');
       setImage({
         image_file: '',
@@ -111,8 +120,15 @@ export default function WirteModal(props) {
       setCheckImg('none');
     } else {
       alert('사진없이 등록하는부분구현!');
+      // const res = await fetch('http://localhost:4000/mypage/글내용', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     content: content.current.value,
+      //     imgSrc: image.preview_URL,
+      //   }),
+      // });
       dispatch(NewContent(data));
-      console.log(content.current.value);
       handleClose();
     }
   };
