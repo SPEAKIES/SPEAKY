@@ -10,15 +10,8 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
+import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-// const Middle = styled.div`
-//   height: 1000px;
-//   width: 50vw;
-//   background-color: pink;
-//   margin: 0 auto;
-//   margin-top: 40px;
-// `;
 
 const TutorProfile = styled.div`
   width: 100%;
@@ -33,6 +26,21 @@ const ProfilePic = styled.div`
   height: 120px;
   background-color: skyblue;
   margin: 0 auto;
+`;
+
+const Self = styled.div``;
+
+const TutorName = styled.h4`
+  margin-left: 1vw;
+  margin-top: 1vw;
+`;
+
+const FlagImg = styled.img`
+  width: 1.6vw;
+`;
+
+const TutorNation = styled.h5`
+  margin-left: 1.5vw;
 `;
 
 const SelfIntro = styled.div`
@@ -120,21 +128,33 @@ export default function Tutordetail() {
         sx={{
           width: '1200px',
           margin: '0 auto',
-          marginTop: '100px',
+          marginTop: '30px',
         }}
       >
         <TutorProfile>
-          <ProfilePic
-            component="img"
-            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
-            alt="Tutor1"
-          ></ProfilePic>
+          <ProfilePic>
+            <Stack direction="row" spacing={2}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
+                sx={{ width: '120px', height: '120px' }}
+              />
+            </Stack>
+          </ProfilePic>
+          <Self>
+            <TutorName>Guillaume Patry</TutorName>
+            <TutorNation>
+              <FlagImg src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
+              Canada
+            </TutorNation>
+          </Self>
         </TutorProfile>
         <Video loop>
           <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
         </Video>
         <SelfIntro>
-          <Name>Jamie</Name>
+          <Name>Guillaume Patry</Name>
+
           <br />
           <br />
           <Intro>
@@ -190,15 +210,6 @@ export default function Tutordetail() {
           <Button>예약</Button>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
-              {/* <MobileDateTimePicker
-                label="For mobile"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              /> */}
-
               <DateTimePicker
                 label="Reserve"
                 renderInput={(params) => (
@@ -222,8 +233,8 @@ export default function Tutordetail() {
           <List>
             <ListWord> 예약 목록 </ListWord>
             <Person>
-              {console.log(value.$d)}
-              {console.log(value)}
+              {/* {console.log(value.$d)}
+              {console.log(value)} */}
               <div>{`${value.$y}년 ${value.$M + 1}월 ${value.$D}일, ${
                 value.$H
               }시 ${value.$m}분`}</div>
