@@ -141,7 +141,7 @@ export default function Tutordetail() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: state.id,
+        id: state,
         year: value.$y,
         month: value.$M,
         day: value.$D,
@@ -266,8 +266,9 @@ export default function Tutordetail() {
           {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
 
           {reserve.map((el) => {
+            console.log(el);
             return (
-              <Person key={el}>
+              <Person>
                 <div>
                   {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
                     el.date.day
@@ -289,15 +290,6 @@ export default function Tutordetail() {
           </Button>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
-              {/* <MobileDateTimePicker
-                label="For mobile"
-                value={value}
-                onChange={(newValue) => {
-                  setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              /> */}
-
               <DateTimePicker
                 label="Reserve"
                 renderInput={(params) => (
@@ -321,10 +313,11 @@ export default function Tutordetail() {
           <List>
             <ListWord> 예약 하기 </ListWord>
             {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
+            {console.log(state)}
             {!isNaN(value.$D) ? (
-              state.id !== undefined ? (
+              state !== undefined ? (
                 <Person>
-                  <div>{`${state.id} : ${value.$y}년 ${value.$M + 1}월 ${
+                  <div>{`${state} : ${value.$y}년 ${value.$M + 1}월 ${
                     value.$D
                   }일, ${value.$H}시 ${value.$m}분`}</div>
                 </Person>

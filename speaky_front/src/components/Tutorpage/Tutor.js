@@ -16,6 +16,7 @@ import {
   Button,
   CardMedia,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Box = styled.div`
   width: 390px;
@@ -166,14 +167,15 @@ export default function Tutor() {
               </CardActionArea>
 
               <CardActions>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{ marginLeft: '150px' }}
-                  href="/tutor/profile"
-                >
-                  프로필
-                </Button>
+                <Link to="/tutor/profile">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    sx={{ marginLeft: '150px' }}
+                  >
+                    프로필
+                  </Button>
+                </Link>
                 <Icon onClick={() => handleHeart(i, heart[i])}>
                   {heart[i] ? (
                     <FavoriteIcon
