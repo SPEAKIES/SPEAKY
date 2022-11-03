@@ -336,8 +336,8 @@ export default function Mypage() {
       </Topbox>
 
       <Select>
-        <Profile href="#">학생 프로필</Profile>
-        <Account href="#">계정 설정</Account>
+        <Profile href="/mypage/study">학생 프로필</Profile>
+        <Account href="/mypage">계정 설정</Account>
       </Select>
 
       <MainProfile>
