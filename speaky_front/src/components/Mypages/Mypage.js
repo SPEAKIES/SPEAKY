@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import Header from '../Header.js';
 import './Study.css';
 import { useSelector } from 'react-redux';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import { redirect } from 'react-router-dom';
 const formData = new FormData();
 
 const Topbox = styled.div`
-  width: 100%;
-  min-height: 200px;
-  background-color: beige;
+  width: 80%;
+  min-height: 250px;
   display: flex;
-  margin-top: 50px;
+  margin: 0 auto;
+  margin-top: 5vw;
   overflow: hidden;
+  border-bottom: 1px solid #c8c8c8;
 `;
 
 const Profilebox = styled.div`
   min-width: 500px;
   min-height: 200px;
-  background-color: pink;
   margin: 0 auto;
   display: flex;
 
@@ -27,20 +29,21 @@ const Profilebox = styled.div`
   }
 `;
 
-const Profilepic = styled.div`
-  min-width: 200px;
-  min-height: 200px;
-  background-color: skyblue;
-`;
-
 const Input = styled.input`
-  padding-bottom: 130px;
-  /* margin-top: 40px; */
+  margin-top: 10.2vw;
+  width: 5vw;
+  margin-left: 3.7vw;
+  margin-right: 5vw;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
 `;
 
 const Profilename = styled.div`
   min-width: 200px;
   min-height: 200px;
+  margin-left: 3vw;
+  margin-top: 3vw;
   /* background-color: blue; */
 `;
 
@@ -251,7 +254,6 @@ export default function Mypage() {
 
       const imgName = await resImg.json();
 
-
       const res = await fetch('http://localhost:4000/mypage/setdata', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -299,13 +301,35 @@ export default function Mypage() {
       <Header />
       <Topbox>
         <Profilebox>
-          <Profilepic>
-            <Input type="file" ref={img} onChange={imgHandler} />
-            <img src={lookimg} />
-          </Profilepic>
+          <Avatar
+            alt="Remy Sharp"
+            src={lookimg}
+            sx={{
+              width: '150px',
+              height: '150px',
+              marginLeft: '2vw',
+              marginTop: '2vw',
+            }}
+          />
+          <Input type="file" ref={img} onChange={imgHandler} />
+          <Button
+            variant="contained"
+            sx={{
+              textAlign: 'center',
+              height: '2.2vw',
+              position: 'absolute',
+              marginLeft: '3vw',
+              marginTop: '10vw',
+              padding: '10px 10px',
+              borderRadius: '20px',
+            }}
+          >
+            프로필 바꾸기
+          </Button>{' '}
+          {lookimg}
           <Profilename>
             <Name>이름 : {looknickname} </Name>
-            <Nation>국가 : {looknation} </Nation>
+            <Nation>국가 : {looknickname} </Nation>
             <Introduction>자기소개 : {looktext} </Introduction>
           </Profilename>
         </Profilebox>
