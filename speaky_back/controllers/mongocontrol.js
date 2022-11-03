@@ -25,7 +25,6 @@ const mongoDB = {
     const user = await _user;
     const db = user.db('project').collection('user');
     const result = await db.findOne({ id });
-    console.log(id, pw);
     const passwordresult = verfiyPassword(pw, result.salt, result.pw);
     // 해시함수 맞추기
     if (passwordresult) {
@@ -87,6 +86,41 @@ const mongoDB = {
     const db = user.db('project').collection('user');
     const duplicated = await db.findOne({ email: data.userEmail });
     return duplicated;
+  },
+
+  // 예약 페이지
+  SetReservation: async (data) => {
+    const user = await _user;
+    const db = user.db('project').collection('reserve');
+    const duplicated = await db.findOne({ time: data.value });
+    if (duplicated) {
+      return '이미 예약된 시간입니다.';
+    } else {
+      const result = await db.insertOne({
+        id: data.id,
+        date: {
+          year: data.year,
+          month: data.month,
+          day: data.day,
+          hour: data.hour,
+          minute: data.minute,
+        },
+        time: data.value,
+      });
+
+      if (result.acknowledged) {
+        return '예약이 완료 되었습니다';
+      } else {
+        return new Error('서버 이상');
+      }
+    }
+  },
+  GetReservation: async () => {
+    const user = await _user;
+    const db = user.db('project').collection('reserve');
+    const reserveCursor = db.find({});
+    const reserveData = await reserveCursor.toArray();
+    return reserveData;
   },
 };
 

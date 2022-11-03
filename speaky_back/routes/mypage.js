@@ -21,6 +21,11 @@ const limits = {
 };
 
 const upload = multer({ storage, limits });
+router.get('/'),
+  async (req, res) => {
+    console.log(req);
+    res.send(JSON.stringify(res.img));
+  };
 
 router.post('/', async (req, res) => {
   console.log(req.body);
@@ -45,7 +50,7 @@ router.post('/setdata', upload.single('img'), async (req, res) => {
     email: req.body.email,
     nickname: req.body.nickname,
     nation: req.body.nation,
-    img: req.body.img,
+    img: `http://localhost:4000/images/${req.body.img}`,
     text: req.body.text,
   };
   const result = await mongoClient.SetData(data);
