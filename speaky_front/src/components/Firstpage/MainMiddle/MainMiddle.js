@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import './MainMiddle.css';
 import { Button } from '@mui/material';
 import { blue } from '@mui/material/colors';
+import Footer from '../../Footer/footer';
 
 const Word = styled.div`
   font-size: clamp(30px, 20px, 20px);
@@ -284,6 +285,7 @@ export default function Middle() {
           alt="paypal"
         />
       </Contribute>
+      <Footer />
     </>
   );
 }
