@@ -210,7 +210,7 @@ export default function Header() {
           </Typography>
         </MenuItem>
       </Link>
-      <Link to="/study" style={{ textDecoration: 'none', color: 'black' }}>
+      <Link to="/tutor" style={{ textDecoration: 'none', color: 'black' }}>
         <MenuItem>
           <Typography
             variant="h7"
@@ -325,7 +325,7 @@ export default function Header() {
           </Link>
 
           <Box sx={{ paddingRight: '1vw' }}></Box>
-          <Link to="/study" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="/tutor" style={{ textDecoration: 'none', color: 'white' }}>
             <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
               <Typography
                 variant="h6"
