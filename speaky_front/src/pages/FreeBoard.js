@@ -19,6 +19,18 @@ export default function FreeBoard() {
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
   const dispatch = useDispatch();
   useEffect(() => {
+    // async function fetchData() {
+    //   const freeBoardData = await fetch('http://localhost:3000/freeBoard');
+    //   if (freeBoardData.status === 200) {
+    //     const data = await freeBoardData.json();
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   } else {
+    //     throw new Error('통신 이상');
+    //   }
+    // }
+    // fetchData();
     //fetch get방식으로 데이터 가져오기
     // dispatch(init()); //이런식으로 redux 정보 dispatch 해서 처음에 get 요청 보내서 받은 데이터를 store에 저장
   }, [dispatch]);
