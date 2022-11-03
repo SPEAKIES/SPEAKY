@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -11,13 +11,16 @@ import {
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
 import { useLocation } from 'react-router';
+import TextField from '@mui/material/TextField';
 
 export default function Chat() {
   const location = useLocation();
+  const messageContent = useRef();
   console.log(location.state);
 
   const test = (e) => {
     if (e.key === 'Enter') {
+      console.log(messageContent.current.value);
       //메시지 입력하면 들어가는거 구현하면됨.
     }
   };
@@ -85,10 +88,11 @@ export default function Chat() {
                 </div>
               </div>
             </MDBCardBody>
-            <MDBTextArea
-              className="form-outline"
-              id="textAreaExample"
-              rows={4}
+            <TextField
+              sx={{ width: '100%' }}
+              placeholder="댓글을 입력해주세요..."
+              multiline
+              inputRef={messageContent}
               onKeyPress={test}
             />
           </MDBCard>
