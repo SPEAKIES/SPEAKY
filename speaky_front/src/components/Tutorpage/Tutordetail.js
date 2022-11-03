@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header.js';
 import styled from 'styled-components';
 import { Box } from '@mui/material';
@@ -10,39 +10,31 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import Avatar from '@mui/material/Avatar';
+import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import Stack from '@mui/material/Stack';
+import { useSelector } from 'react-redux';
+
+// const Middle = styled.div`
+//   height: 1000px;
+//   width: 50vw;
+//   background-color: pink;
+//   margin: 0 auto;
+//   margin-top: 40px;
+// `;
 
 const TutorProfile = styled.div`
   width: 100%;
   height: 120px;
+  background-color: orange;
   display: flex;
   margin-bottom: 1vw;
-  margin-top: 6vw;
 `;
 
 const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  margin-left: 5vw;
-  display: flex;
-`;
-
-const Self = styled.div``;
-
-const TutorName = styled.h4`
-  margin-left: 1vw;
-  margin-top: 1vw;
-  margin-bottom: 1vw;
-`;
-
-const FlagImg = styled.img`
-  width: 1.6vw;
-  margin-right: 0.8vw;
-`;
-
-const TutorNation = styled.h5`
-  margin-left: 1.5vw;
+  background-color: skyblue;
+  margin: 0 auto;
 `;
 
 const SelfIntro = styled.div`
@@ -123,6 +115,42 @@ const Person = styled.div`
 
 export default function Tutordetail() {
   const [value, setValue] = React.useState(dayjs('2022-011-03T00:00:00.000Z'));
+  const [reserve, setReserve] = useState([]);
+
+  const state = useSelector((state) => state.user.id);
+
+  async function reserveHandler() {
+    const res = await fetch('http://localhost:4000/tutor/reserve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: state.id,
+        year: value.$y,
+        month: value.$M,
+        day: value.$D,
+        hour: value.$H,
+        minute: value.$m,
+        value,
+      }),
+    });
+    if (res.status === 200) {
+      const result = await res.json();
+      alert(result.result);
+    } else {
+      new Error('서버 이상');
+    }
+  }
+  useEffect(() => {
+    fetch('http://localhost:4000/tutor/getreserve')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setReserve(res);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -130,33 +158,21 @@ export default function Tutordetail() {
         sx={{
           width: '1200px',
           margin: '0 auto',
-          marginTop: '30px',
+          marginTop: '100px',
         }}
       >
         <TutorProfile>
-          <ProfilePic>
-            <Stack direction="row" spacing={2}>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
-                sx={{ width: '120px', height: '120px' }}
-              />
-            </Stack>
-          </ProfilePic>
-          <Self>
-            <TutorName>Guillaume Patry</TutorName>
-            <TutorNation>
-              <FlagImg src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-              Canada
-            </TutorNation>
-          </Self>
+          <ProfilePic
+            component="img"
+            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
+            alt="Tutor1"
+          ></ProfilePic>
         </TutorProfile>
         <Video loop>
-          <source src={TutorVideo} type="video/webm" sx={{ height: '300px' }} />
+          <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
         </Video>
         <SelfIntro>
-          <Name>Guillaume Patry</Name>
-
+          <Name>Jamie</Name>
           <br />
           <br />
           <Intro>
@@ -208,10 +224,43 @@ export default function Tutordetail() {
           </LastContent>
         </About>
         <SelfIntro />
+        <List>
+          <ListWord> 예약 목록 </ListWord>
+          {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
+
+          {reserve.map((el) => {
+            return (
+              <Person>
+                <div>
+                  {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
+                    el.date.day
+                  }일,
+                ${el.date.hour}시 ${el.date.minute}분`}
+                </div>
+              </Person>
+            );
+          })}
+        </List>
         <Reserve>
-          <Button>예약</Button>
+          <Button
+            type="button"
+            onClick={() => {
+              reserveHandler();
+            }}
+          >
+            예약
+          </Button>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
+              {/* <MobileDateTimePicker
+                label="For mobile"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              /> */}
+
               <DateTimePicker
                 label="Reserve"
                 renderInput={(params) => (
@@ -233,14 +282,21 @@ export default function Tutordetail() {
           </LocalizationProvider>
 
           <List>
-            <ListWord> 예약 목록 </ListWord>
-            <Person>
-              {/* {console.log(value.$d)}
-              {console.log(value)} */}
-              <div>{`${value.$y}년 ${value.$M + 1}월 ${value.$D}일, ${
-                value.$H
-              }시 ${value.$m}분`}</div>
-            </Person>
+            <ListWord> 예약 하기 </ListWord>
+            {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
+            {!isNaN(value.$D) ? (
+              state.id !== undefined ? (
+                <Person>
+                  <div>{`${state.id} : ${value.$y}년 ${value.$M + 1}월 ${
+                    value.$D
+                  }일, ${value.$H}시 ${value.$m}분`}</div>
+                </Person>
+              ) : (
+                ''
+              )
+            ) : (
+              ''
+            )}
           </List>
         </Reserve>
       </Box>
