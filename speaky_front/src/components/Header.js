@@ -13,6 +13,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
+import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
@@ -241,7 +242,7 @@ export default function Header() {
               justifyContent: 'center',
             }}
           >
-            <CastForEducationIcon sx={{ marginRight: '3vw' }} />
+            <PeopleIcon sx={{ marginRight: '3vw' }} />
             Community
           </Typography>
         </MenuItem>
