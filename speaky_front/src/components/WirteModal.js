@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NewContent } from '../store/modules/freeBoard';
 const Title = styled.div`
   display: flex;
@@ -43,6 +43,7 @@ const Buttonstyle = {
 };
 
 export default function WirteModal(props) {
+  const state = useSelector((state)=>state.user);
   const dispatch = useDispatch();
   const data = {
     userId: 'F',
@@ -98,20 +99,28 @@ export default function WirteModal(props) {
     if (image.image_file) {
       const formData = new FormData();
       formData.append('file', image.image_file);
-      // const resImg = await fetch('http://localhost:4000/mypage/글이미지', {
-      //   method: 'POST',
-      //   headers: {},
-      //   body: formData,
-      // });
-      // const res = await fetch('http://localhost:4000/mypage/글내용', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     content: content.current.value,
-      //     imgSrc: image.preview_URL,
-      //   }),
-      // });
-      alert('서버에 등록이 완료되었습니다!');
+      const resImg = await fetch('http://localhost:4000/freeBoard/image', {
+        method: 'POST',
+        headers: {},
+        body: formData,
+      });
+      const imageName = await resImg.json();
+      const res = await fetch('http://localhost:4000/freeBoard/write', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: content.current.value,
+          imgSrc: imageName,
+          userName: state.id,
+        }),
+      });
+      const resResult = await res.json();
+      console.log('!!!!!');
+      console.log(resResult);
+
+      if(resResult === 'POST 등록 성공'){
+        alert('서버에 등록이 완료되었습니다!');
+      }
       setImage({
         image_file: '',
         preview_URL: '',

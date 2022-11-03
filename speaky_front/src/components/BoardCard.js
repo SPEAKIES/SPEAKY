@@ -79,17 +79,19 @@ export default function BoardCard(props) {
   };
   const deleteClick = async () => {
     const requestOptions = {
-      method: 'POST',
+      method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: '글인덱스 번호랑 유저아이디써서 보내야함' }),
+      body: JSON.stringify({ data: '인덱스'}),
     };
+    console.log('!!!!!!!!!!!!');
+    // console.log(requestOptions);
     const response = await fetch(
-      `http://localhost:3000/freeBoard/delete/${'해당글 인덱스'}`,
+      `http://localhost:4000/freeBoard/delete/인덱스`,
       requestOptions,
     );
     const data = await response.json();
     if (data) {
-      console.log(data);
+      console.log(`data : ${data}`);
     } else {
       throw new Error('통신 이상');
     }
@@ -119,10 +121,11 @@ export default function BoardCard(props) {
         subheader={props.data.contentDate}
       />
       <div onClick={handleExpandClick}>
+        {console.log(props)}
         <CardMedia
           component="img"
           height="300"
-          image={props.data.image}
+          image={`http://localhost:4000/images/${props.data.image}`}
           alt="그림사진"
         />
         <CardContent sx={{ fontSize: '20px' }}>
