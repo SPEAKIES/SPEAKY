@@ -10,7 +10,7 @@ const PORT = 4000;
 server.set('view engine', 'ejs');
 server.use('/public', express.static('public'));
 server.set('views', 'views'); // 공식화
-server.use('/uploads', express.static('uploads'));
+server.use('/images', express.static('images'));
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
