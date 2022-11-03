@@ -119,8 +119,8 @@ export default function Tutor() {
       </Select>
       <Main>
         {TutorsData.map((data, i) => (
-          <Box>
-            <Card key={data}>
+          <Box key={(data, i)}>
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"

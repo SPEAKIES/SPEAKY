@@ -267,7 +267,7 @@ export default function Tutordetail() {
 
           {reserve.map((el) => {
             return (
-              <Person>
+              <Person key={el}>
                 <div>
                   {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
                     el.date.day
