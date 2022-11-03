@@ -19,7 +19,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { logout } from '../store/modules/user';
 import { useDispatch } from 'react-redux';
 
@@ -38,7 +38,8 @@ export default function Header() {
   });
   function logoutUser() {
     dispatch(logout());
-    navigate('/');
+    navigate('/login');
+    alert('로그아웃 되었습니다.');
   }
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
