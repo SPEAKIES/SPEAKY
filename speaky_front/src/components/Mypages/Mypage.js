@@ -5,7 +5,8 @@ import './Study.css';
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { redirect } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
+
 const formData = new FormData();
 
 const Topbox = styled.div`
@@ -333,10 +334,8 @@ export default function Mypage() {
           </Profilename>
         </Profilebox>
       </Topbox>
-
       <Select>
-        <Profile href="/mypage/study">학생 프로필</Profile>
-        <Account href="/mypage">계정 설정</Account>
+        <Account>계정 설정</Account>
       </Select>
 
       <MainProfile>
