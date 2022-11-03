@@ -30,10 +30,7 @@ router.get('/', async (req, res) => {
   const client = await mongoClient.connect();
   const cursor = client.db('speaky').collection('freeBoard');
   const POST = await cursor.find({}).toArray();
-  const postLen = POST.length;
-  res.render('freeBoard_list', {
-    POST, postLen
-  });
+  res.send(JSON.stringify(POST));
 });
 
 // 글 쓰기 모드로 이동
