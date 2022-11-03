@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,27 +13,37 @@ import { init } from '../store/modules/freeBoard';
 import Header from '../components/Header';
 const drawerWidth = '15%';
 
+
 export default function FreeBoard() {
+  const state = useSelector((state)=>state.user);
+  const [FBData, setFBData] = useState([]);
   const CardData = useSelector((state) => state.freeBoard.CardData);
   const FollowListData = useSelector((state) => state.freeBoard.FollowListData);
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
   const dispatch = useDispatch();
+  const [update, setUpdate] = useState(false);
+  const updateHandler = (data)=>{
+    setUpdate(data);
+  }
+
+
   useEffect(() => {
-    // async function fetchData() {
-    //   const freeBoardData = await fetch('http://localhost:3000/freeBoard');
-    //   if (freeBoardData.status === 200) {
-    //     const data = await freeBoardData.json();
-    //     if (data) {
-    //       console.log(data);
-    //     }
-    //   } else {
-    //     throw new Error('통신 이상');
-    //   }
-    // }
-    // fetchData();
+    async function fetchData() {
+      const freeBoardData = await fetch('http://localhost:4000/freeBoard');
+      if (freeBoardData.status === 200) {
+        const result = await freeBoardData.json();
+        setFBData(result);
+        if (result) {
+          console.log(result);
+        }
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    fetchData();
     //fetch get방식으로 데이터 가져오기
     // dispatch(init()); //이런식으로 redux 정보 dispatch 해서 처음에 get 요청 보내서 받은 데이터를 store에 저장
-  }, [dispatch]);
+  }, [dispatch, setUpdate]);
 
   return (
     <>
@@ -73,8 +83,8 @@ export default function FreeBoard() {
           }}
         >
           <Toolbar />
-          {CardData.map((value, index) => (
-            <BoardCard key={index} data={value} />
+          {FBData.map((value, index) => (
+            <BoardCard key={index} data={value} update={updateHandler}/>
           ))}
         </Box>
 
