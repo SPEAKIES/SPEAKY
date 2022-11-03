@@ -22,7 +22,6 @@ require('dotenv').config();
 
 // ROUTER
 const router = require('./routes/index');
-
 server.use('/', router);
 
 // ERROR 처리
@@ -32,11 +31,19 @@ server.use((err, req, res, next) => {
   res.send(err.message);
 });
 
-const mypageRouter = require("./routes/mypage");
-server.use("/mypage", mypageRouter.router);
+// CHAT
+const chatRouter = require("./routes/chat");
+server.use("/chat", chatRouter);
 
+// REGISTER
+const registerRouter = require("./routes/register");
+server.use("/register", registerRouter);
+
+// LOGIN
 const loginRouter = require("./routes/login");
 server.use("/login", loginRouter);
+
+
 
 server.use((err, req, res, next) => {
   console.log(err.stack);
@@ -45,6 +52,6 @@ server.use((err, req, res, next) => {
 });
 
 
-server.listen(PORT, (req, res) => {
-  console.log(`${PORT}로 연결 완료`);
+server.listen(process.env.PORT, (req, res) => {
+  console.log(`${process.env.PORT}로 연결 완료`);
 });
