@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { TutorsData } from './TutorsData.js';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Footer from '../Footer/footer';
 
 import {
   Card,
@@ -196,6 +197,7 @@ export default function Tutor() {
           </Box>
         ))}
       </Main>
+      <Footer />
     </>
   );
 }

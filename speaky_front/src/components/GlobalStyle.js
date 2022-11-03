@@ -4,7 +4,6 @@ const GlobalStyle = createGlobalStyle`
 
 body {
         font-family: 'Source Sans Pro', sans-serif;
-        height: 300vw;
         overflow-x: hidden;
 
 }
