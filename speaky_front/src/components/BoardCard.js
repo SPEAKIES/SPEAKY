@@ -83,7 +83,7 @@ export default function BoardCard(props) {
         <CardMedia
           component="img"
           height="300"
-          image={props.data.image}
+          image={`http://localhost:4000/images/${props.data.image}`}
           alt="그림사진"
         />
         <CardContent sx={{ fontSize: '20px' }}>
