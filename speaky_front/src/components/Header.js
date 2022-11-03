@@ -20,8 +20,8 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link, redirect, useNavigate } from 'react-router-dom';
-import { logout } from '../store/modules/user';
-import { useDispatch } from 'react-redux';
+import users, { logout } from '../store/modules/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -48,6 +48,8 @@ export default function Header() {
   const isLeftMenuOpen = Boolean(anchorElNav);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   // (반응형) 왼쪽 햄버거바 열고 닫기
   const handleOpenNavMenu = (event) => {
@@ -104,7 +106,9 @@ export default function Header() {
         Profile
       </MenuItem>
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
-      <MenuItem onClick={() => logoutUser()}>Logout</MenuItem>
+      <MenuItem onClick={() => logoutUser()}>
+        {isLogin ? 'Logout' : 'Login'}
+      </MenuItem>
     </Menu>
   );
 

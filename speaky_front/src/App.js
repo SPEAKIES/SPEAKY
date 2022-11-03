@@ -36,7 +36,7 @@ function App() {
         <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
         <Route path="/mypage/study" element={<MypageStudy />}></Route>
         <Route path="/tutor" element={<Tutor />}></Route>
-        <Route path="/tutor/profile" element={<Tutordetail />}></Route>
+        <Route path="/tutor/profile" element={<Tutordetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
