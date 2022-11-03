@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Navbar from '../Mainpage/Navbar.js';
+import Header from '../Header.js';
 import './Study.css';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,21 +8,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from 'react-bootstrap';
+import Avatar from '@mui/material/Avatar';
 import img from './img.webp';
 
 const Topbox = styled.div`
-  width: 100%;
-  min-height: 200px;
-  background-color: beige;
+  width: 80%;
+  min-height: 250px;
   display: flex;
+  margin: 0 auto;
   margin-top: 50px;
   overflow: hidden;
+  border-bottom: 1px solid #c8c8c8;
 `;
 
 const Profilebox = styled.div`
   min-width: 500px;
   min-height: 200px;
-  background-color: pink;
   margin: 0 auto;
   display: flex;
 
@@ -31,21 +32,11 @@ const Profilebox = styled.div`
   }
 `;
 
-const Profilepic = styled.div`
-  min-width: 200px;
-  min-height: 200px;
-  background-color: skyblue;
-`;
-
-const Input = styled.input`
-  padding-bottom: 130px;
-  float: inline-start;
-`;
-
 const Profilename = styled.div`
   min-width: 200px;
   min-height: 200px;
-  /* background-color: blue; */
+  margin-left: 4vw;
+  margin-top: 3vw;
 `;
 
 const Name = styled.h5`
@@ -97,8 +88,6 @@ const Select = styled.div`
   margin-top: 5vw;
 `;
 
-//***********************************************************************************8 */
-
 const MainProfile = styled.div`
   width: 900px;
   height: 400px;
@@ -142,24 +131,31 @@ export default function Study() {
   useEffect(() => {});
   return (
     <>
-      <Navbar />
+      <Header />
       <Topbox>
         <Profilebox>
-          <Profilepic>
-            <Input type="file" />
-          </Profilepic>
+          <Avatar
+            alt="Remy Sharp"
+            src=""
+            sx={{
+              width: '150px',
+              height: '150px',
+              marginLeft: '2vw',
+              marginTop: '4vw',
+            }}
+          />
 
           <Profilename>
-            <Name>이름 :</Name>
-            <Nation>국가 :</Nation>
+            <Name>이름 : </Name>
+            <Nation>국가 : </Nation>
             <Introduction>자기소개 : </Introduction>
           </Profilename>
         </Profilebox>
       </Topbox>
 
       <Select>
-        <Profile href="#">학생 프로필</Profile>
-        <Account href="#">계정 설정</Account>
+        <Profile href="/mypage/study">학생 프로필</Profile>
+        <Account href="/mypage">계정 설정</Account>
       </Select>
 
       <MainProfile>
