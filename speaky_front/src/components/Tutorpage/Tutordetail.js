@@ -10,8 +10,9 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 
 // const Middle = styled.div`
@@ -25,7 +26,6 @@ import { useSelector } from 'react-redux';
 const TutorProfile = styled.div`
   width: 100%;
   height: 120px;
-  background-color: orange;
   display: flex;
   margin-bottom: 1vw;
 `;
@@ -33,8 +33,22 @@ const TutorProfile = styled.div`
 const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  background-color: skyblue;
   margin: 0 auto;
+`;
+
+const Self = styled.div``;
+
+const TutorName = styled.h4`
+  margin-left: 1vw;
+  margin-top: 1vw;
+`;
+
+const FlagImg = styled.img`
+  width: 1.6vw;
+`;
+
+const TutorNation = styled.h5`
+  margin-left: 1.5vw;
 `;
 
 const SelfIntro = styled.div`
@@ -81,7 +95,7 @@ const LastContent = styled.h6`
   margin-bottom: 2vw;
 `;
 
-const Button = styled.div`
+const ReserveBtn = styled.div`
   width: 90%;
   text-align: center;
   background-color: orange;
@@ -157,15 +171,38 @@ export default function Tutordetail() {
         sx={{
           width: '1200px',
           margin: '0 auto',
-          marginTop: '100px',
+          marginTop: '30px',
         }}
       >
         <TutorProfile>
-          <ProfilePic
-            component="img"
-            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
-            alt="Tutor1"
-          ></ProfilePic>
+          <ProfilePic>
+            <Stack direction="row" spacing={2}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
+                sx={{ width: '120px', height: '120px' }}
+              />
+            </Stack>
+          </ProfilePic>
+          <Self>
+            <TutorName>Guillaume Patry</TutorName>
+            <TutorNation>
+              <FlagImg src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
+              Canada
+            </TutorNation>
+          </Self>
+          <Button
+            variant="contained"
+            disableElevation
+            sx={{
+              height: '3vw',
+              marginLeft: '18vw',
+              marginTop: '1.5vw',
+              width: '20vw',
+            }}
+          >
+            수업 듣기
+          </Button>
         </TutorProfile>
         <Video loop>
           <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
