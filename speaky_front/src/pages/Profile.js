@@ -7,7 +7,8 @@ import FollowList from '../components/FollowList';
 import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import {
   MDBCol,
   MDBContainer,
@@ -18,19 +19,54 @@ import {
   MDBCardImage,
   MDBTypography,
 } from 'mdb-react-ui-kit';
+import { useEffect } from 'react';
+import { profileInit } from '../store/modules/community';
 const drawerWidth = '15%';
 export default function Profile() {
   const navigate = useNavigate();
   const FollowListData = useSelector((state) => state.community.FollowListData);
+  const profiledata = useSelector((state) => state.community.profiledata);
+  const location = useLocation();
+  console.log(location.state.data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // async function fetchData() {
+    //   const freeBoardData = await fetch('http://localhost:3000/freeBoard', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       userId: location.state.data,
+    //     }),
+    //   });
+    //   if (freeBoardData.status === 200) {
+    //     const data = await freeBoardData.json();
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   } else {
+    //     throw new Error('통신 이상');
+    //   }
+    // }
+    // fetchData();
+    const test = {
+      userName: '보거스',
+      userIntroduce: '안녕하세요 저는 ㅁㄴㅇㅁㄴㅇ입니다',
+      userEmail: 'asd@naver.com',
+      userPhone: '010-000-0000',
+      userLanguage: '한국어',
+      userGender: '남',
+      userImage: '이미지 경로',
+    };
+    dispatch(profileInit(test));
+  }, [dispatch]);
+
   const chatClick = () => {
     navigate('/chat', {
       state: {
-        data: '프로필에서 채팅',
+        data: '상대방 유저 아이디',
       },
     });
   };
-  const location = useLocation();
-  console.log(location.state);
   return (
     <>
       <Header />
@@ -57,7 +93,7 @@ export default function Profile() {
                       fluid
                     />
                     <MDBTypography tag="h4" color="black">
-                      사용자 이름
+                      {profiledata.userName}
                     </MDBTypography>
                   </MDBCol>
                   <MDBCol md="8">
@@ -67,7 +103,7 @@ export default function Profile() {
                       <MDBRow className="pt-1">
                         <MDBCol size="12" className="mb-3">
                           <MDBTypography tag="h5">
-                            안녕하세요 저는 ooo 입니다
+                            {profiledata.userIntroduce}
                           </MDBTypography>
                         </MDBCol>
                       </MDBRow>
@@ -78,13 +114,13 @@ export default function Profile() {
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">Email</MDBTypography>
                           <MDBCardText className="text-muted">
-                            info@example.com
+                            {profiledata.userEmail}
                           </MDBCardText>
                         </MDBCol>
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">Phone</MDBTypography>
                           <MDBCardText className="text-muted">
-                            010-000-0000
+                            {profiledata.userPhone}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>
@@ -92,12 +128,14 @@ export default function Profile() {
                       <MDBRow className="pt-1">
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">성별</MDBTypography>
-                          <MDBCardText className="text-muted">남</MDBCardText>
+                          <MDBCardText className="text-muted">
+                            {profiledata.userGender}
+                          </MDBCardText>
                         </MDBCol>
                         <MDBCol size="6" className="mb-3">
                           <MDBTypography tag="h6">선호하는 언어</MDBTypography>
                           <MDBCardText className="text-muted">
-                            한국어
+                            {profiledata.userLanguage}
                           </MDBCardText>
                         </MDBCol>
                       </MDBRow>

@@ -12,14 +12,14 @@ export default function Userlist(props) {
   const profileClick = () => {
     navigate('/profile', {
       state: {
-        data: '커뮤니티에서 프로필',
+        data: props.data.userId,
       },
     });
   };
   const chatClick = () => {
     navigate('/chat', {
       state: {
-        data: '커뮤니티에서 채팅',
+        data: props.data.userId,
       },
     });
   };
