@@ -223,6 +223,7 @@ export default function Mypage() {
   const email = useRef();
   const text = useRef();
   const state = useSelector((state) => state.user);
+  console.log(state);
 
   const [lookimg, setLookimg] = useState('');
   const [lookid, setLookid] = useState('');
@@ -268,6 +269,7 @@ export default function Mypage() {
       });
 
       const result = await res.json();
+      console.log(result);
       if (result) {
         alert('수정 완료');
       } else {
@@ -325,8 +327,7 @@ export default function Mypage() {
             }}
           >
             프로필 바꾸기
-          </Button>{' '}
-          {lookimg}
+          </Button>
           <Profilename>
             <Name>이름 : {looknickname} </Name>
             <Nation>국가 : {looknation} </Nation>

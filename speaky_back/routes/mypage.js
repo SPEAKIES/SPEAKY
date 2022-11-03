@@ -23,12 +23,10 @@ const limits = {
 const upload = multer({ storage, limits });
 router.get('/'),
   async (req, res) => {
-    console.log(req);
     res.send(JSON.stringify(res.img));
   };
 
 router.post('/', async (req, res) => {
-  console.log(req.body);
   const data = {
     userEmail: req.body.userEmail,
   };
@@ -44,7 +42,6 @@ router.post('/setimg', upload.single('img'), async (req, res) => {
 
 // 마이페이지 데이터 가져오기
 router.post('/setdata', upload.single('img'), async (req, res) => {
-  console.log(req.body);
   const data = {
     id: req.body.id,
     email: req.body.email,
