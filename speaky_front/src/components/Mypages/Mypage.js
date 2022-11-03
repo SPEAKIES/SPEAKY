@@ -266,7 +266,6 @@ export default function Mypage() {
       });
 
       const result = await res.json();
-      console.log(result);
       if (result) {
         alert('수정 완료');
       } else {
