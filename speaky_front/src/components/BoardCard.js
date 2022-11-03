@@ -13,7 +13,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
@@ -73,7 +73,7 @@ export default function BoardCard(props) {
         }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            <HighlightOffIcon />
           </IconButton>
         }
         title={props.data.userName}

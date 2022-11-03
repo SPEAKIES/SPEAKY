@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -7,13 +7,17 @@ import ListSubheader from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import CommunityList from '../components/CommunityList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const drawerWidth = '15%';
 
 export default function Community() {
   const FollowListData = useSelector((state) => state.community.FollowListData);
   const checkListdata = useSelector((state) => state.community.checkListdata);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    //fetch get방식으로 데이터 가져오기.
+    // dispatch('fetch로 가져온 데이터를 init 액션해서 데이터 store에 상태 저장.')
+  });
   return (
     <>
       <Header />
