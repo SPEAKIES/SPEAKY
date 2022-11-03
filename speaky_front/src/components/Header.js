@@ -20,8 +20,12 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../store/modules/user';
+import { useDispatch } from 'react-redux';
 
 export default function Header() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = createTheme({
     palette: {
       primary: {
@@ -32,6 +36,10 @@ export default function Header() {
       },
     },
   });
+  function logoutUser() {
+    dispatch(logout());
+    navigate('/');
+  }
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -95,7 +103,7 @@ export default function Header() {
         Profile
       </MenuItem>
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
-      <MenuItem>Logout</MenuItem>
+      <MenuItem onClick={() => logoutUser()}>Logout</MenuItem>
     </Menu>
   );
 

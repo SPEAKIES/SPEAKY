@@ -327,11 +327,10 @@ export default function Mypage() {
             }}
           >
             프로필 바꾸기
-          </Button>{' '}
-          {lookimg}
+          </Button>
           <Profilename>
             <Name>이름 : {looknickname} </Name>
-            <Nation>국가 : {looknickname} </Nation>
+            <Nation>국가 : {looknation} </Nation>
             <Introduction>자기소개 : {looktext} </Introduction>
           </Profilename>
         </Profilebox>
