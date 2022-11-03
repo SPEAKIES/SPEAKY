@@ -3,24 +3,22 @@ import styled from 'styled-components';
 import Header from '../Header.js';
 import './Study.css';
 import { useSelector } from 'react-redux';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import { redirect } from 'react-router-dom';
 const formData = new FormData();
 
 const Topbox = styled.div`
-  width: 80%;
-  min-height: 250px;
+  width: 100%;
+  min-height: 200px;
+  background-color: beige;
   display: flex;
-  margin: 0 auto;
-  margin-top: 5vw;
+  margin-top: 50px;
   overflow: hidden;
-  border-bottom: 1px solid #c8c8c8;
 `;
 
 const Profilebox = styled.div`
   min-width: 500px;
   min-height: 200px;
+  background-color: pink;
   margin: 0 auto;
   display: flex;
 
@@ -29,22 +27,21 @@ const Profilebox = styled.div`
   }
 `;
 
+const Profilepic = styled.div`
+  min-width: 200px;
+  min-height: 200px;
+  background-color: skyblue;
+`;
+
 const Input = styled.input`
-  margin-top: 10.2vw;
-  width: 5vw;
-  margin-left: 3.7vw;
-  margin-right: 5vw;
-  position: absolute;
+  padding-bottom: 130px;
   /* margin-top: 40px; */
-  z-index: 2;
-  opacity: 0;
 `;
 
 const Profilename = styled.div`
   min-width: 200px;
   min-height: 200px;
-  margin-left: 3vw;
-  margin-top: 2vw;
+  /* background-color: blue; */
 `;
 
 const Name = styled.h5`
@@ -52,6 +49,8 @@ const Name = styled.h5`
 `;
 
 const Nation = styled.h5``;
+
+const Age = styled.h5``;
 
 const Introduction = styled.h5``;
 
@@ -90,6 +89,8 @@ const Select = styled.div`
   text-align: center;
   margin-top: 5vw;
 `;
+
+//***********************************************************************************8 */
 
 const MainProfile = styled.div`
   width: 900px;
@@ -301,32 +302,10 @@ export default function Mypage() {
       <Header />
       <Topbox>
         <Profilebox>
-          <Avatar
-            alt="Remy Sharp"
-            src={lookimg}
-            sx={{
-              width: '150px',
-              height: '150px',
-              marginLeft: '2vw',
-              marginTop: '1vw',
-            }}
-          />
-          <Input type="file" ref={img} onChange={imgHandler} />
-          <Button
-            variant="contained"
-            sx={{
-              textAlign: 'center',
-              height: '2.2vw',
-              position: 'absolute',
-              marginLeft: '3vw',
-              marginTop: '10vw',
-              padding: '10px 10px',
-              borderRadius: '20px',
-            }}
-          >
-            프로필 바꾸기
-          </Button>{' '}
-          {lookimg}
+          <Profilepic>
+            <Input type="file" ref={img} onChange={imgHandler} />
+            <img src={lookimg} />
+          </Profilepic>
           <Profilename>
             <Name>이름 : {looknickname} </Name>
             <Nation>국가 : {looknickname} </Nation>
@@ -336,8 +315,8 @@ export default function Mypage() {
       </Topbox>
 
       <Select>
-        <Profile href="/mypage/study">학생 프로필</Profile>
-        <Account href="/mypage">계정 설정</Account>
+        <Profile href="#">학생 프로필</Profile>
+        <Account href="#">계정 설정</Account>
       </Select>
 
       <MainProfile>
