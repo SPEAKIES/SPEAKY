@@ -16,12 +16,16 @@ const drawerWidth = '15%';
 
 export default function FreeBoard() {
   const state = useSelector((state)=>state.user);
-  console.log(state);
   const [FBData, setFBData] = useState([]);
   const CardData = useSelector((state) => state.freeBoard.CardData);
   const FollowListData = useSelector((state) => state.freeBoard.FollowListData);
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
   const dispatch = useDispatch();
+  const [update, setUpdate] = useState(false);
+  const updateHandler = (data)=>{
+    setUpdate(data);
+  }
+
 
   useEffect(() => {
     async function fetchData() {
@@ -30,7 +34,6 @@ export default function FreeBoard() {
         const result = await freeBoardData.json();
         setFBData(result);
         if (result) {
-          console.log('!!!!!!!!!');
           console.log(result);
         }
       } else {
@@ -40,7 +43,7 @@ export default function FreeBoard() {
     fetchData();
     //fetch get방식으로 데이터 가져오기
     // dispatch(init()); //이런식으로 redux 정보 dispatch 해서 처음에 get 요청 보내서 받은 데이터를 store에 저장
-  }, [dispatch]);
+  }, [dispatch, setUpdate]);
 
   return (
     <>
@@ -81,7 +84,7 @@ export default function FreeBoard() {
         >
           <Toolbar />
           {FBData.map((value, index) => (
-            <BoardCard key={index} data={value} />
+            <BoardCard key={index} data={value} update={updateHandler}/>
           ))}
         </Box>
 

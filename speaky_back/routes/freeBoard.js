@@ -109,7 +109,7 @@ router.delete('/delete/:_id', async (req, res) => {
   // 예외처리
   const result = await cursor.deleteOne({ _id: parseInt(req.params._id) });
   if (result.acknowledged) {
-    res.send('삭제완료');
+    res.send(JSON.stringify('삭제완료'));
   }
 });
 
