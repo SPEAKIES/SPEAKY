@@ -305,7 +305,7 @@ export default function Mypage() {
           </Profilepic>
           <Profilename>
             <Name>이름 : {looknickname} </Name>
-            <Nation>국가 : {looknickname} </Nation>
+            <Nation>국가 : {looknation} </Nation>
             <Introduction>자기소개 : {looktext} </Introduction>
           </Profilename>
         </Profilebox>
