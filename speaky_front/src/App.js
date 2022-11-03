@@ -33,8 +33,8 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
-        <Route path="/tutor" element={<Tutor />}></Route>
-        <Route path="/tutor/profile" element={<Tutordetail />}></Route>
+        {/* <Route path="/tutor" element={<Tutor />}></Route> */}
+        <Route path="/tutor/profile" element={<Tutordetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

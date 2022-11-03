@@ -19,6 +19,8 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
+import logout from '../store/modules/user';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const theme = createTheme({
@@ -325,7 +327,10 @@ export default function Header() {
           </Link>
 
           <Box sx={{ paddingRight: '1vw' }}></Box>
-          <Link to="/study" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link
+            to="/tutor/profile"
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
             <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
               <Typography
                 variant="h6"

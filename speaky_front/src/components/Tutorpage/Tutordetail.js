@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header.js';
 import styled from 'styled-components';
 import { Box } from '@mui/material';
@@ -12,6 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import Stack from '@mui/material/Stack';
+import { useSelector } from 'react-redux';
+
 // const Middle = styled.div`
 //   height: 1000px;
 //   width: 50vw;
@@ -113,6 +115,42 @@ const Person = styled.div`
 
 export default function Tutordetail() {
   const [value, setValue] = React.useState(dayjs('2022-011-03T00:00:00.000Z'));
+  const [reserve, setReserve] = useState([]);
+
+  const state = useSelector((state) => state.user.id);
+
+  async function reserveHandler() {
+    const res = await fetch('http://localhost:4000/tutor/reserve', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: state.id,
+        year: value.$y,
+        month: value.$M,
+        day: value.$D,
+        hour: value.$H,
+        minute: value.$m,
+        value,
+      }),
+    });
+    if (res.status === 200) {
+      const result = await res.json();
+      alert(result.result);
+    } else {
+      new Error('서버 이상');
+    }
+  }
+  useEffect(() => {
+    fetch('http://localhost:4000/tutor/getreserve')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setReserve(res);
+      });
+  }, []);
+
   return (
     <>
       <Header />
@@ -186,8 +224,32 @@ export default function Tutordetail() {
           </LastContent>
         </About>
         <SelfIntro />
+        <List>
+          <ListWord> 예약 목록 </ListWord>
+          {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
+
+          {reserve.map((el) => {
+            return (
+              <Person>
+                <div>
+                  {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
+                    el.date.day
+                  }일,
+                ${el.date.hour}시 ${el.date.minute}분`}
+                </div>
+              </Person>
+            );
+          })}
+        </List>
         <Reserve>
-          <Button>예약</Button>
+          <Button
+            type="button"
+            onClick={() => {
+              reserveHandler();
+            }}
+          >
+            예약
+          </Button>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
               {/* <MobileDateTimePicker
@@ -220,14 +282,21 @@ export default function Tutordetail() {
           </LocalizationProvider>
 
           <List>
-            <ListWord> 예약 목록 </ListWord>
-            <Person>
-              {console.log(value.$d)}
-              {console.log(value)}
-              <div>{`${value.$y}년 ${value.$M + 1}월 ${value.$D}일, ${
-                value.$H
-              }시 ${value.$m}분`}</div>
-            </Person>
+            <ListWord> 예약 하기 </ListWord>
+            {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
+            {!isNaN(value.$D) ? (
+              state.id !== undefined ? (
+                <Person>
+                  <div>{`${state.id} : ${value.$y}년 ${value.$M + 1}월 ${
+                    value.$D
+                  }일, ${value.$H}시 ${value.$m}분`}</div>
+                </Person>
+              ) : (
+                ''
+              )
+            ) : (
+              ''
+            )}
           </List>
         </Reserve>
       </Box>

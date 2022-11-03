@@ -304,6 +304,7 @@ export default function Mypage() {
         <Profilebox>
           <Profilepic>
             <Input type="file" ref={img} onChange={imgHandler} />
+            <img src={lookimg} />
           </Profilepic>
           <Profilename>
             <Name>이름 : {looknickname} </Name>

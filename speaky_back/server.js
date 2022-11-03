@@ -1,14 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const multer = require("multer");
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const multer = require('multer');
 const server = express();
-const passport = require("passport");
+const passport = require('passport');
 LocalStrategy = require('passport-local').Strategy;
 const PORT = 4000;
 
-server.set("view engine", "ejs");
-server.use("/public", express.static("public"));
+server.set('view engine', 'ejs');
+server.use('/public', express.static('public'));
 server.set('views', 'views'); // 공식화
 server.use('/uploads', express.static('uploads'));
 
@@ -32,18 +32,20 @@ server.use((err, req, res, next) => {
   res.send(err.message);
 });
 
-const mypageRouter = require("./routes/mypage");
-server.use("/mypage", mypageRouter.router);
+const mypageRouter = require('./routes/mypage');
+server.use('/mypage', mypageRouter.router);
 
-const loginRouter = require("./routes/login");
-server.use("/login", loginRouter);
+const loginRouter = require('./routes/login');
+server.use('/login', loginRouter);
+
+const tutorRouter = require('./routes/tutor');
+server.use('/tutor', tutorRouter);
 
 server.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(err.statusCode || 500);
   res.end(err.message);
 });
-
 
 server.listen(PORT, (req, res) => {
   console.log(`${PORT}로 연결 완료`);
