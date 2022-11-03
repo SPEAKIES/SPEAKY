@@ -17,6 +17,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -31,9 +32,16 @@ const ExpandMore = styled((props) => {
 export default function BoardCard(props) {
   const comment = useRef(); //댓글 남기기 내용.
 
-  const commentCheck = (e) => {
+  const commentCheck = async (e) => {
     if (e.key === 'Enter') {
-      console.log(comment.current.value);
+      const res = await fetch('http://localhost:4000/댓글남기기', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          comment: comment.current.value,
+          contentIndex: props.data.contentIndex,
+        }),
+      });
       comment.current.value = '';
     }
   };
@@ -43,16 +51,47 @@ export default function BoardCard(props) {
   const [heart, setHeart] = useState(props.data.contentHeart);
   const handleExpandClick = () => {
     setExpanded(!expanded);
-    //댓글 데이터베이스 가지고 와야함.
   };
   //하트 부분 클릭했을때 fetch로 하트 증가 시켜주고 나서 하트 갯수 data를 다시 받아야함.
-  const heartClick = () => {
+  const heartClick = async () => {
     if (heartCheck) {
+      const res = await fetch('http://localhost:4000/글하트체크부분', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          heartCheck: heartCheck,
+          contentIndex: props.data.contentIndex,
+        }),
+      });
       setHeart(heart - 1);
       setHeartCheck(false);
     } else {
+      const res = await fetch('http://localhost:4000/글하트체크부분', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          heartCheck: heartCheck,
+        }),
+      });
       setHeart(heart + 1);
       setHeartCheck(true);
+    }
+  };
+  const deleteClick = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: '글인덱스 번호랑 유저아이디써서 보내야함' }),
+    };
+    const response = await fetch(
+      `http://localhost:3000/freeBoard/delete/${'해당글 인덱스'}`,
+      requestOptions,
+    );
+    const data = await response.json();
+    if (data) {
+      console.log(data);
+    } else {
+      throw new Error('통신 이상');
     }
   };
   const CardStyle = {
@@ -72,7 +111,7 @@ export default function BoardCard(props) {
           />
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={deleteClick}>
             <HighlightOffIcon />
           </IconButton>
         }
@@ -125,7 +164,7 @@ export default function BoardCard(props) {
               onKeyPress={commentCheck}
             />
           </div>
-          <Comment />
+          <Comment index={props.data.contentIndex} />
         </CardContent>
       </Collapse>
     </Card>

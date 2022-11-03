@@ -1,6 +1,7 @@
 const initState = {
   CardData: [
     {
+      contentIndex: 1,
       userId: 'A',
       image: 'images/1번.jpg',
       userName: '강한솔',
@@ -11,6 +12,7 @@ const initState = {
     },
 
     {
+      contentIndex: 2,
       userId: 'B',
       image: 'images/2번.jpg',
       userName: '모승환',
@@ -21,6 +23,7 @@ const initState = {
     },
 
     {
+      contentIndex: 3,
       userId: 'C',
       image: 'images/3번.jpg',
       userName: '이민정',
@@ -31,6 +34,7 @@ const initState = {
     },
 
     {
+      contentIndex: 4,
       userId: 'D',
       image: 'images/3번.jpg',
       userName: '천해성',
@@ -47,16 +51,48 @@ const initState = {
     { userId: 'D', userName: '천해성', userImage: '경로' },
   ],
   checkListdata: ['1일', '1주일', '한달', '1년'],
+  contentComment: [
+    {
+      contentIndex: 1,
+      userName: '모승환',
+      userImage: '유저이미지',
+      userComment: '흐음...',
+    },
+    {
+      contentIndex: 1,
+      userName: '김철수',
+      userImage: '유저이미지',
+      userComment: '개노맛..',
+    },
+    {
+      contentIndex: 2,
+      userName: '보거스',
+      userImage: '유저이미지',
+      userComment: '이 음식 너무 맛있어요..',
+    },
+    {
+      contentIndex: 4,
+      userName: '짜미',
+      userImage: '유저이미지',
+      userComment: '음식 너무 싫엉...',
+    },
+  ],
 };
 
 // 액션 타입(문자열)
 const INIT = 'freeBoard/INIT';
 const NEWCONTENT = 'freeBoard/NEWCONTENT';
-
+const COMMENTINIT = 'freeBoard/COMMENTINIT';
 // 액션 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달 필요
 
 export function init(data) {
+  return {
+    type: INIT,
+    payload: data,
+  };
+}
+export function commentInit(data) {
   return {
     type: INIT,
     payload: data,
@@ -85,7 +121,11 @@ export default function freeBoard(state = initState, action) {
         ...state,
         CardData: [action.payload, ...state.CardData],
       };
-
+    case COMMENTINIT:
+      return {
+        ...state,
+        contentComment: [action.payload, ...state.contentComment],
+      };
     default:
       return state;
   }

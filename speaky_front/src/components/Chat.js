@@ -6,7 +6,6 @@ import {
   MDBCard,
   MDBCardHeader,
   MDBCardBody,
-  MDBTextArea,
 } from 'mdb-react-ui-kit';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
