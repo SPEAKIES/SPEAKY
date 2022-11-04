@@ -65,7 +65,9 @@ export default function Tutor() {
   return (
     <>
       <Word>
-        <h4>Meet Our Tutors</h4>
+        <h4>
+          <strong>Our Top Tutors</strong>
+        </h4>
       </Word>
       <Slider {...settings}>
         {TutorData.map((data) => (
