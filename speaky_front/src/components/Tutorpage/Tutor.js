@@ -111,8 +111,8 @@ export default function Tutor() {
     like[i] = !like[i];
     setHeart(like);
   };
-  const chatClick = (e) => {
-    navigate('/chat');
+  const chatClick = () => {
+    navigate('/chat', TutorsData.Img);
   };
   return (
     <>
