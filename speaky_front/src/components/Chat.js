@@ -24,33 +24,45 @@ export default function Chat() {
     userMessageDate: '오전 12:35',
   };
   const chatdata = useSelector((state) => state.community.chatdata);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const messageContent = useRef();
-  console.log(location.state);
+  console.log(location);
   useEffect(() => {
-        // async function fetchData() {
-    //   const freeBoardData = await fetch('http://localhost:3000/채팅창 내용 데이터', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       userId: location.state.data,
-    //     }),
-    //   });
-    //   if (freeBoardData.status === 200) {
-    //     const data = await freeBoardData.json();
-    //     if (data) {
-    //       console.log(data);
-    //     }
-    //   } else {
-    //     throw new Error('통신 이상');
-    //   }
-    // }
-    // fetchData();
+    async function fetchData() {
+      const freeBoardData = await fetch(
+        'http://localhost:4000/chat 내용 데이터',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: location.state.data,
+          }),
+        },
+      );
+      if (freeBoardData.status === 200) {
+        const data = await freeBoardData.json();
+        if (data) {
+          console.log(data);
+        }
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    fetchData();
     //선택한 친구와의 대화창 데이터
-  },[dispatch]);
-  const test = (e) => {
+  }, [dispatch]);
+
+  const sendMessage = async (e) => {
     if (e.key === 'Enter') {
+      await fetch('http://localhost:4000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: messageContent.current.value,
+        }),
+      });
       console.log(messageContent.current.value);
       dispatch(messageInit(testdata));
       //메시지 입력하면 들어가는거 구현하면됨.
@@ -138,7 +150,7 @@ export default function Chat() {
               placeholder="메시지를 입력해주세요..."
               multiline
               inputRef={messageContent}
-              onKeyPress={test}
+              onKeyPress={sendMessage}
             />
           </MDBCard>
         </MDBCol>
