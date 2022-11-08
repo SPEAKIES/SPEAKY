@@ -122,10 +122,13 @@ const mongoDB = {
     const reserveData = await reserveCursor.toArray();
     return reserveData;
   },
+
+  //메세지 id 받아오는 로직 구현 x
   Setmessage: async () => {
     const user = await _user;
     const db = user.db('project').collection('message');
-    const userId = await db.findOne({ id });
+    const dbuser = user.db('project').collection('user');
+    const userId = await dbuser.findOne({ id });
     if (userId) {
       const result = await db.insertOne({
         id,
