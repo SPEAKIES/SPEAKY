@@ -10,11 +10,8 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
 
@@ -47,42 +44,15 @@ export default function BoardCard(props) {
   };
 
   const [expanded, setExpanded] = useState(false);
-  const [heartCheck, setHeartCheck] = useState(false);
-  const [heart, setHeart] = useState(props.data.contentHeart);
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
-  //하트 부분 클릭했을때 fetch로 하트 증가 시켜주고 나서 하트 갯수 data를 다시 받아야함.
-  const heartClick = async () => {
-    if (heartCheck) {
-      const res = await fetch('http://localhost:4000/글하트체크부분', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          heartCheck: heartCheck,
-          contentIndex: props.data.contentIndex,
-        }),
-      });
-      setHeart(heart - 1);
-      setHeartCheck(false);
-    } else {
-      const res = await fetch('http://localhost:4000/글하트체크부분', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          heartCheck: heartCheck,
-        }),
-      });
-      setHeart(heart + 1);
-      setHeartCheck(true);
-    }
   };
   const deleteClick = async (_id) => {
     console.log(_id);
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: _id}),
+      body: JSON.stringify({ data: _id }),
     };
     const response = await fetch(
       `http://localhost:4000/freeBoard/delete/${_id}`,
@@ -113,14 +83,17 @@ export default function BoardCard(props) {
           />
         }
         action={
-          <IconButton aria-label="settings" onClick={()=>deleteClick(props.data._id)}>
+          <IconButton
+            aria-label="settings"
+            onClick={() => deleteClick(props.data._id)}
+          >
             <HighlightOffIcon />
           </IconButton>
         }
         title={props.data.userName}
         subheader={props.data.contentDate}
       />
-      <div onClick={handleExpandClick}>        
+      <div onClick={handleExpandClick}>
         <CardMedia
           component="img"
           height="300"
@@ -132,13 +105,6 @@ export default function BoardCard(props) {
         </CardContent>
       </div>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={heartClick}>
-          {heartCheck ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          <div>{heart}</div>
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
