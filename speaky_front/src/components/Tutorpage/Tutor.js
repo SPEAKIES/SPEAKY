@@ -50,7 +50,7 @@ const Select = styled.div`
   margin-top: 7vw;
 `;
 
-const Find = styled.a`
+const Find = styled.div`
   margin-right: 50px;
   text-decoration: none;
   font-size: 20px;
@@ -60,7 +60,6 @@ const Find = styled.a`
   background-color: skyblue;
   padding: 5px 20px;
   border-radius: 10px;
-  cursor: pointer;
 `;
 
 const My = styled.a`
@@ -115,8 +114,7 @@ export default function Tutor() {
     <>
       <Header />
       <Select>
-        <Find>튜터 찾기</Find>
-        <My>My class</My>
+        <Find>튜터 목록</Find>
       </Select>
       <Main>
         {TutorsData.map((data, i) => (
@@ -171,11 +169,21 @@ export default function Tutor() {
                   <Button
                     variant="outlined"
                     size="small"
-                    sx={{ marginLeft: '150px' }}
+                    sx={{ marginLeft: '100px' }}
                   >
                     프로필
                   </Button>
                 </Link>
+                <Link to="/chat">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{ marginLeft: '20px' }}
+                  >
+                    채팅
+                  </Button>
+                </Link>
+
                 <Icon onClick={() => handleHeart(i, heart[i])}>
                   {heart[i] ? (
                     <FavoriteIcon
