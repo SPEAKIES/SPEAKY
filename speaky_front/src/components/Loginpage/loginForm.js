@@ -107,7 +107,7 @@ export function LoginForm(props) {
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1em" />
       <OtherLogin>
-        <Link href={KAKAO_AUTH_URL}>
+        <a href={KAKAO_AUTH_URL}>
           <Box
             component="div"
             sx={{
@@ -120,7 +120,7 @@ export function LoginForm(props) {
               marginRight: '50px',
             }}
           ></Box>
-        </Link>
+        </a>
         <a>
           <Box
             component="div"

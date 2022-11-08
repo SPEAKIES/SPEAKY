@@ -66,37 +66,6 @@ export function SignupForm(props) {
         <Input type="password" placeholder="Password" ref={pw} />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
-
-      <SmallText>or you can register with</SmallText>
-      <OtherLogin>
-        <a>
-          <Box
-            component="div"
-            sx={{
-              backgroundImage: `url(${kakao})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              width: '40px',
-              height: '40px',
-              color: 'black',
-              marginRight: '50px',
-            }}
-          ></Box>
-        </a>
-        <a>
-          <Box
-            component="div"
-            sx={{
-              backgroundImage: `url(${google})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              width: '40px',
-              height: '40px',
-              color: 'black',
-            }}
-          ></Box>
-        </a>
-      </OtherLogin>
       <Marginer direction="vertical" margin={20} />
       <SubmitButton
         type="submit"
