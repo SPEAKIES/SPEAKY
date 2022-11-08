@@ -266,15 +266,12 @@ export default function Tutordetail() {
           {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
 
           {reserve.map((el) => {
-            console.log(el);
             return (
               <Person>
-                <div>
-                  {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
-                    el.date.day
-                  }일,
+                {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
+                  el.date.day
+                }일
                 ${el.date.hour}시 ${el.date.minute}분`}
-                </div>
               </Person>
             );
           })}
@@ -313,7 +310,7 @@ export default function Tutordetail() {
           <List>
             <ListWord> 예약 하기 </ListWord>
             {/* 서버에서 데이터 받아서 map 돌려서 예약 내역 그려주기 */}
-            {console.log(state)}
+
             {!isNaN(value.$D) ? (
               state !== undefined ? (
                 <Person>

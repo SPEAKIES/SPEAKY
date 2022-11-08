@@ -39,7 +39,6 @@ export default function Header() {
   function logoutUser() {
     dispatch(logout());
     navigate('/login');
-    alert('로그아웃 되었습니다.');
   }
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
