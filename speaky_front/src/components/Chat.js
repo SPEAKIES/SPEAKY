@@ -29,8 +29,26 @@ export default function Chat() {
   const messageContent = useRef();
   console.log(location.state);
   useEffect(() => {
+        // async function fetchData() {
+    //   const freeBoardData = await fetch('http://localhost:3000/채팅창 내용 데이터', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       userId: location.state.data,
+    //     }),
+    //   });
+    //   if (freeBoardData.status === 200) {
+    //     const data = await freeBoardData.json();
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   } else {
+    //     throw new Error('통신 이상');
+    //   }
+    // }
+    // fetchData();
     //선택한 친구와의 대화창 데이터
-  });
+  },[dispatch]);
   const test = (e) => {
     if (e.key === 'Enter') {
       console.log(messageContent.current.value);

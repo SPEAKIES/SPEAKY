@@ -94,7 +94,7 @@ export function init(data) {
 }
 export function commentInit(data) {
   return {
-    type: INIT,
+    type: COMMENTINIT,
     payload: data,
   };
 }

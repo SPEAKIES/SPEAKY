@@ -15,6 +15,18 @@ export default function Community() {
   const checkListdata = useSelector((state) => state.community.checkListdata);
   const dispatch = useDispatch();
   useEffect(() => {
+        // async function fetchData() {
+    //   const freeBoardData = await fetch('http://localhost:3000/freeBoard');
+    //   if (freeBoardData.status === 200) {
+    //     const data = await freeBoardData.json();
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   } else {
+    //     throw new Error('통신 이상');
+    //   }
+    // }
+    // fetchData();
     //fetch get방식으로 데이터 가져오기.
     // dispatch('fetch로 가져온 데이터를 init 액션해서 데이터 store에 상태 저장.')
   });
