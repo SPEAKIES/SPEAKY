@@ -1,8 +1,7 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 export default function Comment(props) {
   const contentComment = useSelector((state) => state.freeBoard.contentComment);
   return (

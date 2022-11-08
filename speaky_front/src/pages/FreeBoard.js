@@ -8,26 +8,31 @@ import ListSubheader from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
-import { useSelector, useDispatch } from 'react-redux';
-import { init } from '../store/modules/freeBoard';
+import { useSelector } from 'react-redux';
 import Header from '../components/Header';
+import { curdate } from '../components/time';
 const drawerWidth = '15%';
 
-
 export default function FreeBoard() {
-  const state = useSelector((state)=>state.user);
+  const state = useSelector((state) => state.user);
   const [FBData, setFBData] = useState([]);
-  const CardData = useSelector((state) => state.freeBoard.CardData);
   const FollowListData = useSelector((state) => state.freeBoard.FollowListData);
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
-  const dispatch = useDispatch();
   const [update, setUpdate] = useState(false);
-  const updateHandler = (data)=>{
-    setUpdate(data);
-  }
-
-
+  const [checkdate, setCheckdate] = useState('1일');
+  const updateHandler = () => {
+    if (update === true) {
+      setUpdate(false);
+    } else {
+      setUpdate(true);
+    }
+  };
+  const dateHandler = (data) => {
+    setCheckdate(data);
+  };
   useEffect(() => {
+    console.log(checkdate);
+    console.log(curdate);
     async function fetchData() {
       const freeBoardData = await fetch('http://localhost:4000/freeBoard');
       if (freeBoardData.status === 200) {
@@ -41,9 +46,7 @@ export default function FreeBoard() {
       }
     }
     fetchData();
-    //fetch get방식으로 데이터 가져오기
-    // dispatch(init()); //이런식으로 redux 정보 dispatch 해서 처음에 get 요청 보내서 받은 데이터를 store에 저장
-  }, [dispatch, setUpdate]);
+  }, [update, checkdate]);
 
   return (
     <>
@@ -67,7 +70,7 @@ export default function FreeBoard() {
           <ListSubheader component="div" id="nested-list-subheader">
             날짜
           </ListSubheader>
-          <CheckboxList data={checkListdata} />
+          <CheckboxList data={checkListdata} check={dateHandler} />
           <Divider />
         </Drawer>
 
@@ -83,8 +86,8 @@ export default function FreeBoard() {
           }}
         >
           <Toolbar />
-          {FBData.map((value, index) => (
-            <BoardCard key={index} data={value} update={updateHandler}/>
+          {FBData.reverse().map((value, index) => (
+            <BoardCard key={index} data={value} update={updateHandler} />
           ))}
         </Box>
 
