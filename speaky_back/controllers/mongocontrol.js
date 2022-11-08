@@ -125,10 +125,11 @@ const mongoDB = {
 
   //메세지 id 받아오는 로직 구현 x
   Setmessage: async (data) => {
+    console.log(data);
     const user = await _user;
     const db = user.db('project').collection('message');
     const result = await db.insertOne({
-      message: data.message,
+      message: data,
     });
   },
 };
