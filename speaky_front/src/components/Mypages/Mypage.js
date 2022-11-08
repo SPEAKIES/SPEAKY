@@ -5,7 +5,7 @@ import './Study.css';
 import { useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { Link, redirect } from 'react-router-dom';
+import { Link, useNavigate, redirect } from 'react-router-dom';
 
 const formData = new FormData();
 
@@ -224,6 +224,7 @@ export default function Mypage() {
   const email = useRef();
   const text = useRef();
   const state = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const [lookimg, setLookimg] = useState('');
   const [lookid, setLookid] = useState('');
@@ -272,6 +273,7 @@ export default function Mypage() {
 
       if (result) {
         alert('수정 완료');
+        navigate('/');
       } else {
         alert('통신 오류');
       }

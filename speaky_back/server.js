@@ -27,6 +27,7 @@ const freeBoardRouter = require('./routes/freeBoard');
 const replyRouter = require('./routes/reply');
 const tutorRouter = require('./routes/tutor');
 const loginRouter = require('./routes/login');
+const chatRouter = require('./routes/chat');
 
 // ERROR 처리
 server.use((err, req, res, next) => {
@@ -38,6 +39,7 @@ server.use((err, req, res, next) => {
 server.use('/', router);
 server.use('/mypage', mypageRouter.router);
 server.use('/login', loginRouter);
+server.use('/chat', chatRouter);
 server.use('/freeBoard', freeBoardRouter);
 server.use('/tutor', tutorRouter);
 server.use('/reply', replyRouter);

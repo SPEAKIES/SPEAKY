@@ -56,16 +56,4 @@ router.post('/setdata', upload.single('img'), async (req, res) => {
   res.send(data);
 });
 
-//마이페이지2 데이터 가져오기
-router.post('/setdatastudy', async (req, res) => {
-  console.log(req.body);
-  const data = {
-    language: req.body.language,
-    level: req.body.level,
-    traget: req.body.traget,
-  };
-  const result = await mongoClient.SetDataStudy(data);
-  res.send(data);
-});
-
 module.exports = { router, multer };
