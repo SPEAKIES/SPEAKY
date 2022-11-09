@@ -33,8 +33,8 @@ export default function Chat({ tutor }) {
   const messageContent = useRef();
 
   console.log(location.state);
-  console.log(userdata);  
-  
+  console.log(userdata);
+
   useEffect(() => {
     async function fetchData() {
       const freeBoardData = await fetch(
@@ -59,6 +59,17 @@ export default function Chat({ tutor }) {
     fetchData();
     //선택한 친구와의 대화창 데이터
   }, [dispatch]);
+
+  const getTime = () => {
+    const now = new Date();
+
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    const dayNight = hours < 12 ? '오전' : '오후';
+
+    return `${dayNight} ${hours}:${minutes}`;
+  };
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
