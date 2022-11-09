@@ -101,7 +101,7 @@ export default function WirteModal(props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: content.current.value,
-          contentdate: curdate,
+          contentDate: curdate,
           imgSrc: imageName,
           userName: state.id,
         }),

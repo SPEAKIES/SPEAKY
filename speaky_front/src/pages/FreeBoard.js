@@ -53,7 +53,7 @@ export default function FreeBoard() {
     }
     async function fetchData2() {
       const commentdata = await fetch(
-        'http://localhost:4000/freeBoard/댓글데이터',
+        'http://localhost:4000/reply',
       );
       if (commentdata.status === 200) {
         const result = await commentdata.json();
