@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import ListSubheader from '@mui/material/ListSubheader';
 import FollowList from '../components/FollowList';
 import Chat from '../components/Chat';
+import { useParams } from 'react-router-dom';
 export default function ChatPage() {
   const drawerWidth = '15%';
   const FollowListData = [
@@ -14,11 +15,14 @@ export default function ChatPage() {
     { userName: '이민정', userImage: '경로' },
     { userName: '천해성', userImage: '경로' },
   ];
+
+  const tutor = useParams().tutor;
+
   return (
     <>
       <Header />
       <Box sx={{ display: 'flex' }}>
-        <Chat />
+        <Chat tutor={tutor} />
         <Drawer
           sx={{
             display: { xs: 'none', sm: 'none', md: 'block' },
