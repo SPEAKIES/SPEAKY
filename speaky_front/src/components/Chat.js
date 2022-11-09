@@ -8,7 +8,7 @@ import {
   MDBCardBody,
 } from 'mdb-react-ui-kit';
 import Avatar from '@mui/material/Avatar';
-import { red } from '@mui/material/colors';
+import { red, blue } from '@mui/material/colors';
 import { useLocation } from 'react-router';
 import TextField from '@mui/material/TextField';
 import { useEffect } from 'react';
@@ -17,7 +17,6 @@ import { messageInit, messageAdd } from '../store/modules/community';
 
 export default function Chat({ tutor }) {
   const chatdata = useSelector((state) => state.community.chatdata);
-  console.log(chatdata);
   const userdata = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const messageContent = useRef();
@@ -49,10 +48,18 @@ export default function Chat({ tutor }) {
   const getTime = () => {
     const now = new Date();
 
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let dayNight = '오전'
 
-    const dayNight = hours < 12 ? '오전' : '오후';
+    if (hours > 12) {
+      dayNight = '오후';
+      hours = hours - 12;
+    }
+
+    if (minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
 
     return `${dayNight} ${hours}:${minutes}`;
   };
@@ -69,10 +76,6 @@ export default function Chat({ tutor }) {
         createdAt: new Date(),
       }
 
-      if (userdata.id === tutor) {
-        newChat.tutorChat = true;
-      }
-
       const addChatRes = await fetch('http://localhost:4000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -80,20 +83,9 @@ export default function Chat({ tutor }) {
       });
 
       if (addChatRes.status === 200) {
-        const newChat = {
-          tutor,
-          id: userdata.id,
-          userEmail: userdata.userEmail,
-          message: messageContent.current.value,
-          messageDate: getTime(),
-          createdAt: new Date(),
-        };
         dispatch(messageAdd(newChat));
-        console.log(chatdata);
         messageContent.current.value = '';
       }
-
-
     }
   };
   return (
@@ -113,13 +105,13 @@ export default function Chat({ tutor }) {
             <MDBCardBody style={{ height: 350, overflowY: 'scroll' }}>
               {chatdata?.length >= 1 &&
                 chatdata.map((value, index) => {
-                  if (value.tutorChat === true) {
+                  if (value.tutorChat !== true) {
                     return (
                       <div
                         key={index}
                         className="d-flex flex-row justify-content-end mb-4"
                       >
-                        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-end', marginRight: '10px' }}>
                           {value.messageDate}
                         </div>
                         <div
@@ -128,18 +120,19 @@ export default function Chat({ tutor }) {
                             borderRadius: '15px',
                             backgroundColor: 'rgba(57, 192, 237,.2)',
                             width: '50%',
+                            height: '100%',
                           }}
                         >
                           <p className="middle mb-0">{value.message}</p>
                         </div>
                         <div>
                           <Avatar
-                            sx={{ bgcolor: red[500], margin: '10px' }}
+                            sx={{ bgcolor: blue[500], margin: '10px' }}
                             aria-label="recipe"
                             // 유저 이미지로 수정 필요
                             src={value.id}
                           />
-                          <div>{value.id}</div>
+                          <div style={{ textAlign: 'center' }}>{value.id}</div>
                         </div>
                       </div>
                     );
@@ -149,25 +142,26 @@ export default function Chat({ tutor }) {
                         key={index}
                         className="d-flex flex-row justify-content-start mb-4"
                       >
-                        <div>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                           <Avatar
-                            sx={{ bgcolor: red[500], margin: '10px' }}
+                            sx={{ bgcolor: red[300], margin: '10px' }}
                             aria-label="recipe"
                             src={value.id}
                           />
-                          <div style={{ width: 100 }}>{value.id}</div>
+                          <div style={{ width: 100, textAlign: 'center' }}>{value.tutor}</div>
                         </div>
                         <div
                           className="p-3 ms-3"
                           style={{
                             borderRadius: '15px',
-                            backgroundColor: '#fbfbfb',
+                            backgroundColor: red[100],
                             width: '50%',
+                            height: '100%',
                           }}
                         >
-                          <p className="middle mb-0">{value.message}</p>
+                          <span className="middle mb-0">{value.message}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-end', marginLeft: '10px' }}>
                           {value.messageDate}
                         </div>
                       </div>

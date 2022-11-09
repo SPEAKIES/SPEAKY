@@ -28,7 +28,7 @@ const mongoDB = {
     const passwordresult = verfiyPassword(pw, result.salt, result.pw);
     // 해시함수 맞추기
     if (passwordresult) {
-      return { result: true, id: result.id, email: result.email };
+      return { result: true, id: result.id, email: result.email, isTutor: result.isTutor };
     } else {
       return '로그인 실패';
     }
@@ -45,6 +45,7 @@ const mongoDB = {
         pw: passwordresult.hashedPassword,
         email,
         salt: passwordresult.salt,
+        isTutor: false,
       });
       if (result.acknowledged) {
         return '회원가입 완료';
@@ -136,6 +137,23 @@ const mongoDB = {
     const db = user.db('project').collection('message');
     const chatCursor = db.find(
       { tutor: data.tutor, id: data.id },
+      {
+        sort: {
+          createdAt: 1,
+        },
+      }
+    )
+    const allChats = await chatCursor.toArray();
+    return allChats;
+  },
+
+  // 여기! 전체 채팅 배열 만들기 부터 시작
+  // tutor 별로 메세지 기록 받기
+  GetAllmessage: async (data) => {
+    const user = await _user;
+    const db = user.db('project').collection('message');
+    const chatCursor = db.find(
+      { tutor: data.tutor },
       {
         sort: {
           createdAt: 1,

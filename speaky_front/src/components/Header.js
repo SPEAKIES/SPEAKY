@@ -48,7 +48,7 @@ export default function Header() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const isLogin = useSelector((state) => state.user.isLogin);
+  const userdata = useSelector((state) => state.user);
 
   // (반응형) 왼쪽 햄버거바 열고 닫기
   const handleOpenNavMenu = (event) => {
@@ -106,7 +106,7 @@ export default function Header() {
       </MenuItem>
       {/* 로그인 안했을 땐 안뜨고 했을 때만 로그아웃 구현하기 */}
       <MenuItem onClick={() => logoutUser()}>
-        {isLogin ? 'Logout' : 'Login'}
+        {userdata.isLogin ? 'Logout' : 'Login'}
       </MenuItem>
     </Menu>
   );
@@ -263,7 +263,6 @@ export default function Header() {
   );
 
   // 반응형 안됐을 때 보여지는 코드들
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={theme}></ThemeProvider>
@@ -375,6 +374,27 @@ export default function Header() {
               </Typography>
             </MenuItem>
           </Link>
+          {userdata.isTutor && (<Link
+            to={`/manage/${userdata.id}`}
+            style={{ textDecoration: 'none', color: 'white' }}
+          >
+            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Manage
+              </Typography>
+            </MenuItem>
+          </Link>)}
+
           {/* 오른쪽 메뉴들 오른쪽에 고정(없으면 왼쪽에 붙는다) */}
           <Box sx={{ flexGrow: 1 }} />
 
