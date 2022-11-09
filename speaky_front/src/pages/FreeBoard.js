@@ -16,6 +16,7 @@ const drawerWidth = '15%';
 export default function FreeBoard() {
   const state = useSelector((state) => state.user);
   const [FBData, setFBData] = useState([]);
+  const [commentdata, setCommentdata] = useState([]);
   const FollowListData = useSelector((state) => state.freeBoard.FollowListData);
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
   const [update, setUpdate] = useState(false);
@@ -32,9 +33,14 @@ export default function FreeBoard() {
   };
   useEffect(() => {
     console.log(checkdate);
-    console.log(curdate);
     async function fetchData() {
-      const freeBoardData = await fetch('http://localhost:4000/freeBoard');
+      const freeBoardData = await fetch('http://localhost:4000/freeBoard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          checkdate: checkdate 
+        }),
+      },);
       if (freeBoardData.status === 200) {
         const result = await freeBoardData.json();
         setFBData(result);
@@ -45,7 +51,22 @@ export default function FreeBoard() {
         throw new Error('통신 이상');
       }
     }
+    async function fetchData2() {
+      const commentdata = await fetch(
+        'http://localhost:4000/freeBoard/댓글데이터',
+      );
+      if (commentdata.status === 200) {
+        const result = await commentdata.json();
+        setCommentdata(result);
+        if (result) {
+          console.log(result);
+        }
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
     fetchData();
+    fetchData2();
   }, [update, checkdate]);
 
   return (
@@ -87,7 +108,12 @@ export default function FreeBoard() {
         >
           <Toolbar />
           {FBData.reverse().map((value, index) => (
-            <BoardCard key={index} data={value} update={updateHandler} />
+            <BoardCard
+              key={index}
+              data={value}
+              update={updateHandler}
+              comment={commentdata}
+            />
           ))}
         </Box>
 
