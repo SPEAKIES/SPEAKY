@@ -47,9 +47,9 @@ router.post('/setdata', upload.single('img'), async (req, res) => {
   const data = {
     id: req.body.id,
     email: req.body.email,
-    nickname: req.body.nickname,
+    userName: req.body.userName,
     nation: req.body.nation,
-    img: `http://localhost:4000/images/${req.body.img}`,
+    userImg: `http://localhost:4000/images/${req.body.userImg}`,
     text: req.body.text,
   };
   const result = await mongoClient.SetData(data);
