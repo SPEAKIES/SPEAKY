@@ -4,6 +4,10 @@ const LOGOUT = "user/LOGOUT";
 
 // 로그인, 로그아웃 액션 생성 함수
 export function login(loginInfo) {
+  const user = loginInfo;
+  const userString = JSON.stringify(user);
+  window.localStorage.setItem('user', userString);
+
   return {
     type: LOGIN,
     payload: loginInfo,
@@ -11,6 +15,7 @@ export function login(loginInfo) {
 }
 
 export function logout() {
+  window.localStorage.removeItem('user');
   return {
     type: LOGOUT,
   };
@@ -42,6 +47,20 @@ export default function users(state = initState, action) {
         isLogin: false,
       };
     default:
-      return state;
+      const user = JSON.parse(window.localStorage.getItem('user'));
+
+      if (state.userEmail !== '') {
+        return state;
+      } else if (user) {
+        return {
+          ...state,
+          isLogin: true,
+          userEmail: user.email,
+          id: user.id,
+        }
+      } else {
+        return state;
+      }
+
   }
 }
