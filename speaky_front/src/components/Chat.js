@@ -76,6 +76,7 @@ export default function Chat({ tutor }) {
         body: JSON.stringify({
           data: {
             userName: userdata.id,
+            userImage: userdata.userImg,
             message: messageContent.current.value,
             time: getTime(),
           },
@@ -87,7 +88,7 @@ export default function Chat({ tutor }) {
       const newChat = {
         userId: userdata.id,
         userName: userdata.id,
-        userImage: '유저이미지',
+        userImage: userdata.userImg,
         userMessage: messageContent.current.value,
         userMessageDate: getTime(),
       };
@@ -135,7 +136,7 @@ export default function Chat({ tutor }) {
                         <Avatar
                           sx={{ bgcolor: red[500], margin: '10px' }}
                           aria-label="recipe"
-                          src={value.userImage}
+                          src={value.userImg}
                         />
                         <div>{value.userName}</div>
                       </div>
