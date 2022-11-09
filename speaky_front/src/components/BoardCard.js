@@ -132,7 +132,7 @@ export default function BoardCard(props) {
             />
             <button onClick={commentCheck}>전송</button>
           </div>
-          <Comment index={props.data.contentIndex} />
+          <Comment index={props.data.contentIndex} comment={props.comment} />
         </CardContent>
       </Collapse>
     </Card>

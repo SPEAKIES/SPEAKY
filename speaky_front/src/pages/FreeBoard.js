@@ -34,7 +34,13 @@ export default function FreeBoard() {
   useEffect(() => {
     console.log(checkdate);
     async function fetchData() {
-      const freeBoardData = await fetch('http://localhost:4000/freeBoard');
+      const freeBoardData = await fetch('http://localhost:4000/freeBoard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          checkdate: checkdate 
+        }),
+      },);
       if (freeBoardData.status === 200) {
         const result = await freeBoardData.json();
         setFBData(result);
