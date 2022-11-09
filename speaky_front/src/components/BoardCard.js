@@ -31,22 +31,20 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BoardCard(props) {
-  const state = useSelector((state)=>state.user);
+  const state = useSelector((state) => state.user);
   const comment = useRef(); //댓글 남기기 내용.
 
   const commentCheck = async (e) => {
-    // if (e.keyCode === 13) {
-      const res = await fetch('http://localhost:4000/reply/write', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          comment: comment.current.value,
-          contentIndex: props.data.contentIndex,
-          userName: state.id,
-        }),
-      });
-      comment.current.value = '';
-    // }
+    const res = await fetch('http://localhost:4000/reply/write', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        comment: comment.current.value,
+        contentIndex: props.data.contentIndex,
+        userName: state.id,
+      }),
+    });
+    comment.current.value = '';
   };
 
   const [expanded, setExpanded] = useState(false);
@@ -58,7 +56,7 @@ export default function BoardCard(props) {
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: contentIndex}),
+      body: JSON.stringify({ data: contentIndex }),
     };
     const response = await fetch(
       `http://localhost:4000/freeBoard/delete/${contentIndex}`,
@@ -89,14 +87,17 @@ export default function BoardCard(props) {
           />
         }
         action={
-          <IconButton aria-label="settings" onClick={()=>deleteClick(props.data.contentIndex)}>
+          <IconButton
+            aria-label="settings"
+            onClick={() => deleteClick(props.data.contentIndex)}
+          >
             <HighlightOffIcon />
           </IconButton>
         }
         title={props.data.userName}
         subheader={props.data.contentDate}
       />
-      <div onClick={handleExpandClick}>        
+      <div onClick={handleExpandClick}>
         <CardMedia
           component="img"
           height="300"
@@ -133,11 +134,10 @@ export default function BoardCard(props) {
               placeholder="댓글을 입력해주세요..."
               multiline
               inputRef={comment}
-              // onKeyUp={commentCheck}
             />
-            <button inputRef={comment} onClick={commentCheck}>버튼</button>
+            <button onClick={commentCheck}>버튼</button>
           </div>
-          <Comment index={props.data.contentIndex} />
+          <Comment index={props.data.contentIndex} comment={props.comment} />
         </CardContent>
       </Collapse>
     </Card>

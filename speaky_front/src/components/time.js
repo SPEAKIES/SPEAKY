@@ -13,25 +13,27 @@ export const dateCheck = (data) => {
   let year = String(date.getFullYear());
   let month = ('0' + (date.getMonth() + 1)).slice(-2);
   let day = ('0' + date.getDate()).slice(-2);
-  let date1 = year + month + day;
-  if (Number(date1) - Number(data) <= 1) {
+  let date1 = new Date(data[0], data[1], data[2]);
+  let date2 = new Date(year, month, day);
+  let btMs = date2.getTime() - date1.getTime();
+  let btDay = btMs / (1000 * 60 * 60 * 24);
+  if (btDay <= 1) {
     return '1일';
   }
-  if (Number(date1) - Number(data) <= 7) {
+  if (btDay <= 7) {
     return '1주일';
   }
-  if (Number(date1) - Number(data) <= 31) {
+  if (btDay <= 31) {
     return '한달';
   }
-  if (Number(date1) - Number(data) <= 365) {
+  if (btDay <= 365) {
     return '1년';
   }
 };
 export const dateRevert = (data) => {
   let date = data;
   date = date.split(' ');
-  date = date[0].split('-');
-  let result = date[0] + date[1] + date[2];
+  let result = date[0].split('-');
   return result;
 };
 export const curdate = dateStr + ' ' + timeStr;
