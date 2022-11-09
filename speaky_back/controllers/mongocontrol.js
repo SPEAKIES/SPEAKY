@@ -129,7 +129,7 @@ const mongoDB = {
     const user = await _user;
     const db = user.db('project').collection('message');
     const result = await db.insertOne({
-      message: data,
+      data,
     });
   },
 };

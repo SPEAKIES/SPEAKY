@@ -37,16 +37,13 @@ export default function Chat({ tutor }) {
 
   useEffect(() => {
     async function fetchData() {
-      const freeBoardData = await fetch(
-        'http://localhost:4000/chat 내용 데이터',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: location.state.data,
-          }),
-        },
-      );
+      const freeBoardData = await fetch('http://localhost:4000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: location.state.data,
+        }),
+      });
       if (freeBoardData.status === 200) {
         const data = await freeBoardData.json();
         if (data) {
@@ -77,7 +74,11 @@ export default function Chat({ tutor }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: messageContent.current.value,
+          data: {
+            userName: userdata.id,
+            message: messageContent.current.value,
+            time: getTime(),
+          },
         }),
       });
       console.log(messageContent.current.value);
