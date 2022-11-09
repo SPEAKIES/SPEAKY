@@ -31,7 +31,7 @@ function App() {
         <Route path="/board" element={<FreeBoard />} />
         <Route path="/study" element={<Study />} />
         <Route path="/community" element={<Community />} />
-        <Route path="/chat/:tutor" element={<ChatPage />} />
+        <Route path="/chat" element={<ChatPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
         <Route path="/tutor" element={<Tutor />}></Route>
