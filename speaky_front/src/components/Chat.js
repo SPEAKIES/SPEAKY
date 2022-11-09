@@ -16,14 +16,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { messageInit } from '../store/modules/community';
 
 export default function Chat({ tutor }) {
-  const testdata = {
-    userId: 'A',
-    userName: '모승환',
-    userImage: '유저이미지',
-    userMessage: '쳇',
-    userMessageDate: '오전 12:35',
-  };
-
   const chatdata = useSelector((state) => state.community.chatdata);
 
   const userdata = useSelector((state) => state.user);
@@ -36,27 +28,31 @@ export default function Chat({ tutor }) {
   console.log(userdata);
 
   useEffect(() => {
-    async function fetchData() {
-      const freeBoardData = await fetch(
-        'http://localhost:4000/chat 내용 데이터',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: location.state.data,
-          }),
-        },
-      );
-      if (freeBoardData.status === 200) {
-        const data = await freeBoardData.json();
-        if (data) {
-          console.log(data);
-        }
-      } else {
-        throw new Error('통신 이상');
-      }
-    }
-    fetchData();
+    // async function fetchData() {
+    //   const sendChatRes = await fetch(
+    //     'http://localhost:4000/chat',
+    //     {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({
+    //         userEmail: userdata.userEmail,
+    //         id: userdata.id,
+    //         message: {
+
+    //         }
+    //       }),
+    //     },
+    //   );
+    //   if (sendChatRes.status === 200) {
+    //     const data = await sendChatRes.json();
+    //     if (data) {
+    //       console.log(data);
+    //     }
+    //   } else {
+    //     throw new Error('통신 이상');
+    //   }
+    // }
+    // fetchData();
     //선택한 친구와의 대화창 데이터
   }, [dispatch]);
 
@@ -77,10 +73,12 @@ export default function Chat({ tutor }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          id: userdata.id,
+          userEmail: userdata.userEmail,
           message: messageContent.current.value,
+          messageDate: getTime(),
         }),
       });
-      console.log(messageContent.current.value);
       // dispatch(messageInit(testdata));
 
       const newChat = {
