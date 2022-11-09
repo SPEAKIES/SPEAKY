@@ -174,7 +174,7 @@ export default function Tutor() {
                     프로필
                   </Button>
                 </Link>
-                <Link to="/chat">
+                <Link to={`/chat/${data.name}`}>
                   <Button
                     variant="contained"
                     size="small"

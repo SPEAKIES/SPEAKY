@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { messageInit } from '../store/modules/community';
 
-export default function Chat() {
+export default function Chat({ tutor }) {
   const testdata = {
     userId: 'A',
     userName: '모승환',
@@ -23,13 +23,20 @@ export default function Chat() {
     userMessage: '쳇',
     userMessageDate: '오전 12:35',
   };
+
   const chatdata = useSelector((state) => state.community.chatdata);
+  const userdata = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   const location = useLocation();
+
   const messageContent = useRef();
+
   console.log(location.state);
+  console.log(userdata);
+
   useEffect(() => {
-        // async function fetchData() {
+    // async function fetchData() {
     //   const freeBoardData = await fetch('http://localhost:3000/채팅창 내용 데이터', {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
@@ -48,12 +55,34 @@ export default function Chat() {
     // }
     // fetchData();
     //선택한 친구와의 대화창 데이터
-  },[dispatch]);
+  }, [dispatch]);
+
+  const getTime = () => {
+    const now = new Date();
+
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    const dayNight = hours < 12 ? '오전' : '오후';
+
+    return `${dayNight} ${hours}:${minutes}`;
+  };
+
   const test = (e) => {
     if (e.key === 'Enter') {
       console.log(messageContent.current.value);
-      dispatch(messageInit(testdata));
-      //메시지 입력하면 들어가는거 구현하면됨.
+      // dispatch(messageInit(testdata));
+
+      const newChat = {
+        userId: userdata.id,
+        userName: userdata.id,
+        userImage: '유저이미지',
+        userMessage: messageContent.current.value,
+        userMessageDate: getTime(),
+      };
+      dispatch(messageInit(newChat));
+      console.log(chatdata);
+      messageContent.current.value = '';
     }
   };
   return (
@@ -68,7 +97,7 @@ export default function Chat() {
                 borderTopRightRadius: '15px',
               }}
             >
-              <p className="mb-0 fw-bold">상대방 이름</p>
+              <p className="mb-0 fw-bold">{tutor} 선생님과의 채팅</p>
             </MDBCardHeader>
             <MDBCardBody style={{ height: 350, overflowY: 'scroll' }}>
               {chatdata.map((value, index) => {
