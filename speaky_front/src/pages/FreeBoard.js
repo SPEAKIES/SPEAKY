@@ -10,7 +10,7 @@ import CheckboxList from '../components/CheckboxList';
 import WirteModal from '../components/WirteModal';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header';
-import { curdate } from '../components/time';
+import { dateCheck, dateRevert } from '../components/time';
 const drawerWidth = '15%';
 
 export default function FreeBoard() {
@@ -21,6 +21,12 @@ export default function FreeBoard() {
   const checkListdata = useSelector((state) => state.freeBoard.checkListdata);
   const [update, setUpdate] = useState(false);
   const [checkdate, setCheckdate] = useState('1일');
+
+  const check = (data) => {
+    let date = dateRevert(data);
+    let result = dateCheck(date);
+    return result;
+  };
   const updateHandler = () => {
     if (update === true) {
       setUpdate(false);
@@ -34,13 +40,7 @@ export default function FreeBoard() {
   useEffect(() => {
     console.log(checkdate);
     async function fetchData() {
-      const freeBoardData = await fetch('http://localhost:4000/freeBoard', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          checkdate: checkdate 
-        }),
-      },);
+      const freeBoardData = await fetch('http://localhost:4000/freeBoard');
       if (freeBoardData.status === 200) {
         const result = await freeBoardData.json();
         setFBData(result);
@@ -51,10 +51,9 @@ export default function FreeBoard() {
         throw new Error('통신 이상');
       }
     }
+
     async function fetchData2() {
-      const commentdata = await fetch(
-        'http://localhost:4000/reply',
-      );
+      const commentdata = await fetch('http://localhost:4000/reply');
       if (commentdata.status === 200) {
         const result = await commentdata.json();
         setCommentdata(result);
@@ -107,14 +106,27 @@ export default function FreeBoard() {
           }}
         >
           <Toolbar />
-          {FBData.reverse().map((value, index) => (
-            <BoardCard
-              key={index}
-              data={value}
-              update={updateHandler}
-              comment={commentdata}
-            />
-          ))}
+          {FBData.reverse().map((value, index) => {
+            if (checkdate === 'all') {
+              return (
+                <BoardCard
+                  key={index}
+                  data={value}
+                  update={updateHandler}
+                  comment={commentdata}
+                />
+              );
+            } else if (check(value.contentDate) === checkdate) {
+              return (
+                <BoardCard
+                  key={index}
+                  data={value}
+                  update={updateHandler}
+                  comment={commentdata}
+                />
+              );
+            }
+          })}
         </Box>
 
         <Drawer
