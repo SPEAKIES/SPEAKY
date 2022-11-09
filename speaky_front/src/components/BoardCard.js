@@ -34,7 +34,7 @@ export default function BoardCard(props) {
   const state = useSelector((state) => state.user);
   const comment = useRef(); //댓글 남기기 내용.
 
-  const commentCheck = async (e) => {
+  const commentCheck = async () => {
     const res = await fetch('http://localhost:4000/reply/write', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -44,6 +44,7 @@ export default function BoardCard(props) {
         userName: state.id,
       }),
     });
+    props.update();
     comment.current.value = '';
   };
 
@@ -65,7 +66,7 @@ export default function BoardCard(props) {
     const data = await response.json();
     if (data) {
       console.log(`data : ${data}`);
-      props.update(true);
+      props.update();
     } else {
       throw new Error('통신 이상');
     }
