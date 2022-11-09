@@ -178,14 +178,15 @@ export default function Tutor() {
                     프로필
                   </Button>
                 </Link>
-                <Button
-                  onClick={chatClick}
-                  variant="contained"
-                  size="small"
-                  sx={{ marginLeft: '20px' }}
-                >
-                  채팅
-                </Button>
+                <Link to={`/chat/${data.name}`}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{ marginLeft: '20px' }}
+                  >
+                    채팅
+                  </Button>
+                </Link>
 
                 <Icon onClick={() => handleHeart(i, heart[i])}>
                   {heart[i] ? (
