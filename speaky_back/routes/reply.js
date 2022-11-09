@@ -22,28 +22,29 @@ router.post('/write', async (req, res) => {
   const fBcursor = client.db('speaky').collection('freeBoard');
   const _id = parseInt(req.body._id);
   const postId = client.db('speaky').collection('reply').findOne({contentIndex:req.body.contentIndex})
-  const commentArr = []
   const userImgCursor = await client.db('project').collection('user');
   const userImg = await userImgCursor.findOne({id: req.body.userName})
 
   if (req.body.comment) {
-    commentArr.push(req.body.comment);
     const newReply = {
       contentIndex: req.body.contentIndex,
-      comment: commentArr,
+      comment: req.body.comment,
       userName: req.body.userName,
       userImage: userImg.img,
     };
-    if(await postId){
-      await replyCursor.updateOne({contentIndex:req.body.contentIndex},{$push:{comment:req.body.comment}});
-      res.send(JSON.stringify('POST 등록 성공'));
-      console.log(newReply);
-    }else{
-      await replyCursor.insertOne(newReply);
-      res.send(JSON.stringify('POST 등록 성공'));
-      console.log(newReply);
-    }
 
+    await replyCursor.insertOne(newReply);
+    res.send(JSON.stringify('POST 등록 성공'));
+    console.log(newReply);
+    // if(await postId){
+    //   await replyCursor.updateOne({contentIndex:req.body.contentIndex},{$push:{comment:req.body.comment}});
+    //   res.send(JSON.stringify('POST 등록 성공'));
+    //   console.log(newReply);
+    // }else{
+    //   await replyCursor.insertOne(newReply);
+    //   res.send(JSON.stringify('POST 등록 성공'));
+    //   console.log(newReply);
+    // }
   }
 
   });
