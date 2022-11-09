@@ -123,12 +123,27 @@ const mongoDB = {
     return reserveData;
   },
 
-  //메세지 id 받아오는 로직 구현 x
+  // DB에 메세지 넣기
   Setmessage: async (data) => {
     const user = await _user;
     const db = user.db('project').collection('message');
     const result = await db.insertOne(data);
-    console.log(result);
+  },
+
+  // tutor 별로 메세지 기록 받기
+  Getmessage: async (data) => {
+    const user = await _user;
+    const db = user.db('project').collection('message');
+    const chatCursor = db.find(
+      { tutor: data.tutor, id: data.id },
+      {
+        sort: {
+          createdAt: 1,
+        },
+      }
+    )
+    const allChats = await chatCursor.toArray();
+    return allChats;
   },
 };
 

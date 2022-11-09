@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -13,47 +13,37 @@ import { useLocation } from 'react-router';
 import TextField from '@mui/material/TextField';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { messageInit } from '../store/modules/community';
+import { messageInit, messageAdd } from '../store/modules/community';
 
 export default function Chat({ tutor }) {
   const chatdata = useSelector((state) => state.community.chatdata);
-
+  console.log(chatdata);
   const userdata = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const location = useLocation();
-
   const messageContent = useRef();
 
-  console.log(location.state);
-  console.log(userdata);
 
   useEffect(() => {
-    // async function fetchData() {
-    //   const sendChatRes = await fetch(
-    //     'http://localhost:4000/chat',
-    //     {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify({
-    //         userEmail: userdata.userEmail,
-    //         id: userdata.id,
-    //         message: {
-
-    //         }
-    //       }),
-    //     },
-    //   );
-    //   if (sendChatRes.status === 200) {
-    //     const data = await sendChatRes.json();
-    //     if (data) {
-    //       console.log(data);
-    //     }
-    //   } else {
-    //     throw new Error('통신 이상');
-    //   }
-    // }
-    // fetchData();
-    //선택한 친구와의 대화창 데이터
+    async function fetchData() {
+      const getChatRes = await fetch(
+        'http://localhost:4000/chat/getAll/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tutor,
+          id: userdata.id,
+        }),
+      });
+      if (getChatRes.status === 200) {
+        const data = await getChatRes.json();
+        if (data) {
+          dispatch(messageInit(data));
+        }
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    fetchData();
   }, [dispatch]);
 
   const getTime = () => {
@@ -69,28 +59,41 @@ export default function Chat({ tutor }) {
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
-      await fetch('http://localhost:4000/chat', {
+      const newChat = {
+        tutor,
+        id: userdata.id,
+        userEmail: userdata.userEmail,
+        message: messageContent.current.value,
+        tutorChat: false,
+        messageDate: getTime(),
+        createdAt: new Date(),
+      }
+
+      if (userdata.id === tutor) {
+        newChat.tutorChat = true;
+      }
+
+      const addChatRes = await fetch('http://localhost:4000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(newChat),
+      });
+
+      if (addChatRes.status === 200) {
+        const newChat = {
+          tutor,
           id: userdata.id,
           userEmail: userdata.userEmail,
           message: messageContent.current.value,
           messageDate: getTime(),
-        }),
-      });
-      // dispatch(messageInit(testdata));
+          createdAt: new Date(),
+        };
+        dispatch(messageAdd(newChat));
+        console.log(chatdata);
+        messageContent.current.value = '';
+      }
 
-      const newChat = {
-        userId: userdata.id,
-        userName: userdata.id,
-        userImage: '유저이미지',
-        userMessage: messageContent.current.value,
-        userMessageDate: getTime(),
-      };
-      dispatch(messageInit(newChat));
-      console.log(chatdata);
-      messageContent.current.value = '';
+
     }
   };
   return (
@@ -108,67 +111,69 @@ export default function Chat({ tutor }) {
               <p className="mb-0 fw-bold">{tutor} 선생님과의 채팅</p>
             </MDBCardHeader>
             <MDBCardBody style={{ height: 350, overflowY: 'scroll' }}>
-              {chatdata.map((value, index) => {
-                if (value.userId === 'A') {
-                  return (
-                    <div
-                      key={index}
-                      className="d-flex flex-row justify-content-end mb-4"
-                    >
-                      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        {value.userMessageDate}
-                      </div>
+              {chatdata?.length >= 1 &&
+                chatdata.map((value, index) => {
+                  if (value.tutorChat === true) {
+                    return (
                       <div
-                        className="p-3 me-4 border"
-                        style={{
-                          borderRadius: '15px',
-                          backgroundColor: 'rgba(57, 192, 237,.2)',
-                          width: '50%',
-                        }}
+                        key={index}
+                        className="d-flex flex-row justify-content-end mb-4"
                       >
-                        <p className="middle mb-0">{value.userMessage}</p>
+                        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                          {value.messageDate}
+                        </div>
+                        <div
+                          className="p-3 me-4 border"
+                          style={{
+                            borderRadius: '15px',
+                            backgroundColor: 'rgba(57, 192, 237,.2)',
+                            width: '50%',
+                          }}
+                        >
+                          <p className="middle mb-0">{value.message}</p>
+                        </div>
+                        <div>
+                          <Avatar
+                            sx={{ bgcolor: red[500], margin: '10px' }}
+                            aria-label="recipe"
+                            // 유저 이미지로 수정 필요
+                            src={value.id}
+                          />
+                          <div>{value.id}</div>
+                        </div>
                       </div>
-                      <div>
-                        <Avatar
-                          sx={{ bgcolor: red[500], margin: '10px' }}
-                          aria-label="recipe"
-                          src={value.userImage}
-                        />
-                        <div>{value.userName}</div>
-                      </div>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div
-                      key={index}
-                      className="d-flex flex-row justify-content-start mb-4"
-                    >
-                      <div>
-                        <Avatar
-                          sx={{ bgcolor: red[500], margin: '10px' }}
-                          aria-label="recipe"
-                          src={value.userImage}
-                        />
-                        <div style={{ width: 100 }}>{value.userName}</div>
-                      </div>
+                    );
+                  } else {
+                    return (
                       <div
-                        className="p-3 ms-3"
-                        style={{
-                          borderRadius: '15px',
-                          backgroundColor: '#fbfbfb',
-                          width: '50%',
-                        }}
+                        key={index}
+                        className="d-flex flex-row justify-content-start mb-4"
                       >
-                        <p className="middle mb-0">{value.userMessage}</p>
+                        <div>
+                          <Avatar
+                            sx={{ bgcolor: red[500], margin: '10px' }}
+                            aria-label="recipe"
+                            src={value.id}
+                          />
+                          <div style={{ width: 100 }}>{value.id}</div>
+                        </div>
+                        <div
+                          className="p-3 ms-3"
+                          style={{
+                            borderRadius: '15px',
+                            backgroundColor: '#fbfbfb',
+                            width: '50%',
+                          }}
+                        >
+                          <p className="middle mb-0">{value.message}</p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                          {value.messageDate}
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        {value.userMessageDate}
-                      </div>
-                    </div>
-                  );
-                }
-              })}
+                    );
+                  }
+                })}
             </MDBCardBody>
             <TextField
               sx={{ width: '100%' }}
