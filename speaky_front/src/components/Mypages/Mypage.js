@@ -265,7 +265,7 @@ export default function Mypage() {
           userName: userName.current.value,
           text: text.current.value,
           nation: nation.current.value,
-          img: imgName,
+          userImg: imgName,
         }),
       });
 

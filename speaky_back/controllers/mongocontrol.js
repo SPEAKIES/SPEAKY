@@ -81,7 +81,7 @@ const mongoDB = {
             userName: data.userName,
             nation: data.nation,
             text: data.text,
-            img: data.img,
+            userImg: data.userImg,
           },
         }
       );
