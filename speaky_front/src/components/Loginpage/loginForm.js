@@ -59,6 +59,7 @@ export function LoginForm(props) {
 
       if (response.status === 200) {
         const result = await response.json();
+
         if (result.result) {
           dispatch(login(result));
           navigate('/');

@@ -1,6 +1,6 @@
 // 액션 타입(문자열)
-const LOGIN = "user/LOGIN";
-const LOGOUT = "user/LOGOUT";
+const LOGIN = 'user/LOGIN';
+const LOGOUT = 'user/LOGOUT';
 
 // 로그인, 로그아웃 액션 생성 함수
 export function login(loginInfo) {
@@ -23,8 +23,10 @@ export function logout() {
 
 // 초기 상태 설정
 const initState = {
-  userEmail: "",
-  id: "",
+  userEmail: '',
+  id: '',
+  userName: '',
+  userImg: '',
   isLogin: false,
 };
 
@@ -39,6 +41,9 @@ export default function users(state = initState, action) {
         ...state,
         userEmail: action.payload.email,
         id: action.payload.id,
+        userImg: action.payload.userImg,
+        userName: action.payload.userName,
+
         isLogin: true,
       };
     case LOGOUT:
@@ -57,10 +62,11 @@ export default function users(state = initState, action) {
           isLogin: true,
           userEmail: user.email,
           id: user.id,
-        }
+          userName: user.userName,
+          userImg: user.userImg,
+        };
       } else {
         return state;
       }
-
   }
 }
