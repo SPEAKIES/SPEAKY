@@ -30,17 +30,17 @@ export default function BoardCard(props) {
   const comment = useRef(); //댓글 남기기 내용.
 
   const commentCheck = async (e) => {
-    if (e.key === 'Enter') {
-      const res = await fetch('http://localhost:4000/댓글남기기', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          comment: comment.current.value,
-          contentIndex: props.data.contentIndex,
-        }),
-      });
-      comment.current.value = '';
-    }
+    const res = await fetch('http://localhost:4000/댓글남기기', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        아이디: '유저아이디',
+        comment: comment.current.value,
+        contentIndex: props.data.contentIndex,
+      }),
+    });
+    comment.current.value = '';
+    props.update();
   };
 
   const [expanded, setExpanded] = useState(false);
@@ -61,7 +61,7 @@ export default function BoardCard(props) {
     const data = await response.json();
     if (data) {
       console.log(`data : ${data}`);
-      props.update(true);
+      props.update();
     } else {
       throw new Error('통신 이상');
     }
@@ -129,8 +129,8 @@ export default function BoardCard(props) {
               placeholder="댓글을 입력해주세요..."
               multiline
               inputRef={comment}
-              onKeyPress={commentCheck}
             />
+            <button onClick={commentCheck}>전송</button>
           </div>
           <Comment index={props.data.contentIndex} />
         </CardContent>

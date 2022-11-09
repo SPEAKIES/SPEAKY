@@ -6,8 +6,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch, useSelector } from 'react-redux';
-import { NewContent } from '../store/modules/freeBoard';
+import { useSelector } from 'react-redux';
+import { curdate } from '../components/time';
 const Title = styled.div`
   display: flex;
   width: 100%;
@@ -43,16 +43,7 @@ const Buttonstyle = {
 };
 
 export default function WirteModal(props) {
-  const state = useSelector((state)=>state.user);
-  const dispatch = useDispatch();
-  const data = {
-    userId: 'F',
-    userName: '김철수',
-    contentDate: '20일',
-    contentHeart: 4,
-    userImage: '경로',
-    cardContent: '5번 글 내용입니다.',
-  };
+  const state = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -110,15 +101,14 @@ export default function WirteModal(props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: content.current.value,
+          contentdate: curdate,
           imgSrc: imageName,
           userName: state.id,
         }),
       });
       const resResult = await res.json();
-      console.log('!!!!!');
-      console.log(resResult);
 
-      if(resResult === 'POST 등록 성공'){
+      if (resResult === 'POST 등록 성공') {
         alert('서버에 등록이 완료되었습니다!');
       }
       setImage({
@@ -127,18 +117,6 @@ export default function WirteModal(props) {
       });
       handleClose();
       setCheckImg('none');
-    } else {
-      alert('사진없이 등록하는부분구현!');
-      // const res = await fetch('http://localhost:4000/mypage/글내용', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({
-      //     content: content.current.value,
-      //     imgSrc: image.preview_URL,
-      //   }),
-      // });
-      dispatch(NewContent(data));
-      handleClose();
     }
   };
 

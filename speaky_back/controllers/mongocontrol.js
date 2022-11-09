@@ -122,23 +122,15 @@ const mongoDB = {
     const reserveData = await reserveCursor.toArray();
     return reserveData;
   },
-  SetDataStudy: async (data) => {
+
+  //메세지 id 받아오는 로직 구현 x
+  Setmessage: async (data) => {
+    console.log(data);
     const user = await _user;
-    const db = user.db('project').collection('user');
-    const duplicated = await db.findOne({ id: data.id });
-    if (duplicated) {
-      const result = await db.updateOne(
-        { id: data.id },
-        {
-          $set: {
-            language: data.language,
-            level: data.level,
-            traget: data.traget,
-          },
-        }
-      );
-      return '내 정보 수정 완료';
-    }
+    const db = user.db('project').collection('message');
+    const result = await db.insertOne({
+      message: data,
+    });
   },
 };
 

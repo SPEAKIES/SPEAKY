@@ -25,51 +25,50 @@ export default function Chat({ tutor }) {
   };
 
   const chatdata = useSelector((state) => state.community.chatdata);
+
   const userdata = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   const location = useLocation();
 
   const messageContent = useRef();
 
   console.log(location.state);
-  console.log(userdata);
-
+  console.log(userdata);  
+  
   useEffect(() => {
-    // async function fetchData() {
-    //   const freeBoardData = await fetch('http://localhost:3000/채팅창 내용 데이터', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       userId: location.state.data,
-    //     }),
-    //   });
-    //   if (freeBoardData.status === 200) {
-    //     const data = await freeBoardData.json();
-    //     if (data) {
-    //       console.log(data);
-    //     }
-    //   } else {
-    //     throw new Error('통신 이상');
-    //   }
-    // }
-    // fetchData();
+    async function fetchData() {
+      const freeBoardData = await fetch(
+        'http://localhost:4000/chat 내용 데이터',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: location.state.data,
+          }),
+        },
+      );
+      if (freeBoardData.status === 200) {
+        const data = await freeBoardData.json();
+        if (data) {
+          console.log(data);
+        }
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    fetchData();
     //선택한 친구와의 대화창 데이터
   }, [dispatch]);
 
-  const getTime = () => {
-    const now = new Date();
-
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-
-    const dayNight = hours < 12 ? '오전' : '오후';
-
-    return `${dayNight} ${hours}:${minutes}`;
-  };
-
-  const test = (e) => {
+  const sendMessage = async (e) => {
     if (e.key === 'Enter') {
+      await fetch('http://localhost:4000/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: messageContent.current.value,
+        }),
+      });
       console.log(messageContent.current.value);
       // dispatch(messageInit(testdata));
 
@@ -167,7 +166,7 @@ export default function Chat({ tutor }) {
               placeholder="메시지를 입력해주세요..."
               multiline
               inputRef={messageContent}
-              onKeyPress={test}
+              onKeyPress={sendMessage}
             />
           </MDBCard>
         </MDBCol>

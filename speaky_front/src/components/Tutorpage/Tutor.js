@@ -6,7 +6,7 @@ import { TutorsData } from './TutorsData.js';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Footer from '../Footer/footer';
-
+import { useSelector } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -16,7 +16,7 @@ import {
   Button,
   CardMedia,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Box = styled.div`
   width: 390px;
@@ -82,6 +82,8 @@ const FlagImg = styled.img`
 const Icon = styled.div``;
 
 export default function Tutor() {
+  const state = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [heart, setHeart] = useState([
     false,
     false,
@@ -109,7 +111,9 @@ export default function Tutor() {
     like[i] = !like[i];
     setHeart(like);
   };
-
+  const chatClick = () => {
+    navigate('/chat', TutorsData.Img);
+  };
   return (
     <>
       <Header />

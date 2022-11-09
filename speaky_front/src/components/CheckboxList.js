@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -7,20 +7,20 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
 export default function CheckboxList(props) {
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = useState([0]);
 
   const handleToggle = (index, value) => () => {
     const currentIndex = checked.indexOf(index);
-    console.log(value);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
+      props.check(value);
       newChecked.splice(currentIndex, 1);
       newChecked.push(index);
     } else {
       newChecked.splice(currentIndex, 1);
+      props.check('all');
     }
-
     setChecked(newChecked);
   };
 
