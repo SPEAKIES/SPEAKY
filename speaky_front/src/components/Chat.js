@@ -133,7 +133,7 @@ export default function Chat({ tutor }) {
                             src={value.id}
                           />
                           <div style={{ textAlign: 'center' }}>{value.id}</div>
-                        </div>
+                        </div>                        
                       </div>
                     );
                   } else {

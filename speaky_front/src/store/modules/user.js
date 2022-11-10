@@ -1,6 +1,6 @@
 // 액션 타입(문자열)
-const LOGIN = "user/LOGIN";
-const LOGOUT = "user/LOGOUT";
+const LOGIN = 'user/LOGIN';
+const LOGOUT = 'user/LOGOUT';
 
 // 로그인, 로그아웃 액션 생성 함수
 export function login(loginInfo) {
@@ -23,8 +23,10 @@ export function logout() {
 
 // 초기 상태 설정
 const initState = {
-  userEmail: "",
-  id: "",
+  userEmail: '',
+  id: '',
+  userName: '',
+  userImg: '',
   isLogin: false,
   isTutor: false,
 };
@@ -36,14 +38,15 @@ export default function users(state = initState, action) {
     // 제일 중요한 isLogin 값을 true 로 변경, 해당 값은 Header 및 Item 페이지에서 로그인 여부를 판단하는
     // 값이 되어 해당 값에 따라 조건부 처리
     case LOGIN:
-      console.log(action.payload);
       if (action.payload.isTutor) {
         return {
           ...state,
           userEmail: action.payload.email,
+          userImg: action.payload.userImg,
+          userName: action.payload.userName,
           id: action.payload.id,
           isLogin: true,
-          isTutor: action.payload.isTutor
+          isTutor: action.payload.isTutor          
         };
       } else {
         return {
@@ -53,7 +56,6 @@ export default function users(state = initState, action) {
           isLogin: true,
         };
       }
-
     case LOGOUT:
       return {
         ...state,
@@ -69,12 +71,13 @@ export default function users(state = initState, action) {
           ...state,
           isLogin: true,
           userEmail: user.email,
+          userName: user.userName,
+          userImg: user.userImg,
           id: user.id,
           isTutor: user.isTutor,
         }
       } else {
         return state;
       }
-
   }
 }

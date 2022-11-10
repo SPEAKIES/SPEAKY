@@ -219,7 +219,7 @@ const PwInput = styled.input`
 export default function Mypage() {
   const img = useRef();
   const id = useRef();
-  const nickname = useRef();
+  const userName = useRef();
   const nation = useRef();
   const email = useRef();
   const text = useRef();
@@ -228,7 +228,7 @@ export default function Mypage() {
 
   const [lookimg, setLookimg] = useState('');
   const [lookid, setLookid] = useState('');
-  const [looknickname, setLookNickName] = useState('');
+  const [lookuserName, setLookUserName] = useState('');
   const [looknation, setLookNation] = useState('');
   const [lookemail, setLookEmail] = useState('');
   const [looktext, setLookText] = useState('');
@@ -242,7 +242,7 @@ export default function Mypage() {
   async function saveHandler() {
     if (
       id.current?.value &&
-      nickname.current?.value &&
+      userName.current?.value &&
       text.current?.value &&
       email.current?.value &&
       nation.current?.value &&
@@ -262,10 +262,10 @@ export default function Mypage() {
         body: JSON.stringify({
           id: id.current.value,
           email: email.current.value,
-          nickname: nickname.current.value,
+          userName: userName.current.value,
           text: text.current.value,
           nation: nation.current.value,
-          img: imgName,
+          userImg: imgName,
         }),
       });
 
@@ -292,7 +292,7 @@ export default function Mypage() {
       .then((res) => {
         setLookid(res.id);
         setLookEmail(res.email);
-        setLookNickName(res.nickname);
+        setLookUserName(res.userName);
         setLookNation(res.nation);
         setLookimg(res.img);
         setLookText(res.text);
@@ -330,7 +330,7 @@ export default function Mypage() {
             프로필 바꾸기
           </Button>
           <Profilename>
-            <Name>이름 : {looknickname} </Name>
+            <Name>이름 : {lookuserName} </Name>
             <Nation>국가 : {looknation} </Nation>
             <Introduction>자기소개 : {looktext} </Introduction>
           </Profilename>
@@ -353,7 +353,7 @@ export default function Mypage() {
 
         <Modify>
           <Word>이름</Word>
-          <Inputbox placeholder="Name" ref={nickname} />
+          <Inputbox placeholder="Name" ref={userName} />
         </Modify>
 
         <Modify>

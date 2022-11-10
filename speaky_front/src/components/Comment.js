@@ -1,9 +1,8 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import { red } from '@mui/material/colors';
-import { useSelector } from 'react-redux';
 export default function Comment(props) {
-  const contentComment = useSelector((state) => state.freeBoard.contentComment);
+  const contentComment = props.comment;
   return (
     <>
       {contentComment.map((value, index) => {
@@ -20,12 +19,13 @@ export default function Comment(props) {
               <Avatar
                 sx={{ bgcolor: red[500], margin: '10px' }}
                 aria-label="recipe"
+                src={value.userImage}
               >
                 사진
               </Avatar>
               <div>
                 <div style={{ fontSize: 13 }}>{value.userName}</div>
-                <div style={{ fontSize: 18 }}>{value.userComment}</div>
+                <div style={{ fontSize: 18 }}>{value.comment}</div>
               </div>
             </div>
           );

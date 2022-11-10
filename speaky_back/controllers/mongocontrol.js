@@ -33,13 +33,15 @@ const mongoDB = {
         id: result.id,
         email: result.email,
         isTutor: result.isTutor,
+        userName: result.userName,
+        userImg: result.userImg,
       };
     } else {
       return '로그인 실패';
     }
   },
   //회원가입
-  IncId: async (id, pw, email) => {
+  IncId: async (id, pw, email, userName, userImg) => {
     const user = await _user;
     const db = user.db('project').collection('user');
     const duplicated = await db.findOne({ id });
@@ -49,6 +51,8 @@ const mongoDB = {
         id,
         pw: passwordresult.hashedPassword,
         email,
+        userName,
+        userImg,
         salt: passwordresult.salt,
         isTutor: false,
       });
@@ -76,10 +80,10 @@ const mongoDB = {
         {
           $set: {
             email: data.email,
-            nickname: data.nickname,
+            userName: data.userName,
             nation: data.nation,
             text: data.text,
-            img: data.img,
+            userImg: data.userImg,
           },
         }
       );

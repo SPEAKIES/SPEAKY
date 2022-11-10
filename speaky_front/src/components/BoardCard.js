@@ -10,10 +10,14 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
+import { useSelector } from 'react-redux';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,35 +31,36 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function BoardCard(props) {
+  const state = useSelector((state) => state.user);
   const comment = useRef(); //댓글 남기기 내용.
 
-  const commentCheck = async (e) => {
-    const res = await fetch('http://localhost:4000/댓글남기기', {
+  const commentCheck = async () => {
+    const res = await fetch('http://localhost:4000/reply/write', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        아이디: '유저아이디',
         comment: comment.current.value,
         contentIndex: props.data.contentIndex,
+        userName: state.id,
       }),
     });
-    comment.current.value = '';
     props.update();
+    comment.current.value = '';
   };
 
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const deleteClick = async (_id) => {
-    console.log(_id);
+  const deleteClick = async (contentIndex) => {
+    console.log(contentIndex);
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: _id }),
+      body: JSON.stringify({ data: contentIndex }),
     };
     const response = await fetch(
-      `http://localhost:4000/freeBoard/delete/${_id}`,
+      `http://localhost:4000/freeBoard/delete/${contentIndex}`,
       requestOptions,
     );
     const data = await response.json();
@@ -85,7 +90,7 @@ export default function BoardCard(props) {
         action={
           <IconButton
             aria-label="settings"
-            onClick={() => deleteClick(props.data._id)}
+            onClick={() => deleteClick(props.data.contentIndex)}
           >
             <HighlightOffIcon />
           </IconButton>
@@ -103,6 +108,7 @@ export default function BoardCard(props) {
         <CardContent sx={{ fontSize: '20px' }}>
           {props.data.cardContent}
         </CardContent>
+        <p>{props.data.contentIndex}</p>
       </div>
       <CardActions disableSpacing>
         <ExpandMore
@@ -130,9 +136,9 @@ export default function BoardCard(props) {
               multiline
               inputRef={comment}
             />
-            <button onClick={commentCheck}>전송</button>
+            <button onClick={commentCheck}>버튼</button>
           </div>
-          <Comment index={props.data.contentIndex} />
+          <Comment index={props.data.contentIndex} comment={props.comment} />
         </CardContent>
       </Collapse>
     </Card>
