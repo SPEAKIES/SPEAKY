@@ -38,6 +38,8 @@ const initState = {
   id: '',
   userName: '',
   userImg: '',
+  nation: '',
+  text: '',
   isLogin: false,
   isTutor: false,
 };
@@ -78,6 +80,8 @@ export default function users(state = initState, action) {
         userEmail: action.payload.email,
         userImg: action.payload.userImg,
         userName: action.payload.userName,
+        text: action.payload.text,
+        nation: action.payload.nation,
       };
     default:
       const user = JSON.parse(window.localStorage.getItem('user'));
