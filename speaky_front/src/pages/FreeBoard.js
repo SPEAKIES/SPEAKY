@@ -149,7 +149,7 @@ export default function FreeBoard() {
           </ListSubheader>
           <FollowList data={FollowListData} />
           <Divider />
-          <WirteModal />
+          <WirteModal update={updateHandler} />
         </Drawer>
       </Box>
     </>

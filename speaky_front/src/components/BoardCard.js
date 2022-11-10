@@ -10,11 +10,8 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
 import { useSelector } from 'react-redux';
@@ -34,6 +31,20 @@ export default function BoardCard(props) {
   const state = useSelector((state) => state.user);
   const comment = useRef(); //댓글 남기기 내용.
 
+  const DeleteCard = () => {
+    if (props.data.userName === state.id) {
+      return (
+        <IconButton
+          aria-label="settings"
+          onClick={() => deleteClick(props.data.contentIndex)}
+        >
+          <HighlightOffIcon />
+        </IconButton>
+      );
+    } else {
+      return '';
+    }
+  };
   const commentCheck = async () => {
     const res = await fetch('http://localhost:4000/reply/write', {
       method: 'POST',
@@ -87,14 +98,7 @@ export default function BoardCard(props) {
             src={props.data.userImage}
           />
         }
-        action={
-          <IconButton
-            aria-label="settings"
-            onClick={() => deleteClick(props.data.contentIndex)}
-          >
-            <HighlightOffIcon />
-          </IconButton>
-        }
+        action={<DeleteCard />}
         title={props.data.userName}
         subheader={props.data.contentDate}
       />

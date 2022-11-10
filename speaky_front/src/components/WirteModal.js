@@ -117,6 +117,7 @@ export default function WirteModal(props) {
       });
       handleClose();
       setCheckImg('none');
+      props.update();
     }
   };
 
