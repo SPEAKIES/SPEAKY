@@ -13,6 +13,4 @@ router.get('/getreserve', async (req, res) => {
   res.send(JSON.stringify(result));
 });
 
-router.post('/:tutor', async (req, res) => {});
-
 module.exports = router;
