@@ -64,11 +64,14 @@ export default function Chat({ tutor }) {
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
+      console.log(userdata);
       const newChat = {
         tutor,
         id: userdata.id,
         userEmail: userdata.userEmail,
         message: messageContent.current.value,
+        userImg: userdata.userImg,
+        userName: userdata.userName,
         tutorChat: false,
         messageDate: getTime(),
         createdAt: new Date(),
@@ -134,7 +137,7 @@ export default function Chat({ tutor }) {
                             sx={{ bgcolor: blue[500], margin: '10px' }}
                             aria-label="recipe"
                             // 유저 이미지로 수정 필요
-                            src={value.id}
+                            src={`http://localhost:4000/images/${value.userImg}`}
                           />
                           <div style={{ textAlign: 'center' }}>{value.id}</div>
                         </div>

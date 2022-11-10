@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from '../Header.js';
 import './Study.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { Link, useNavigate, redirect } from 'react-router-dom';
+import { login, userUpdate } from '../../store/modules/user.js';
 
 const formData = new FormData();
 
@@ -116,7 +117,7 @@ const Modify = styled.div`
   border-bottom: 1px solid #c8c8c8;
 `;
 
-const Word = styled.p`
+const Word = styled.div`
   float: left;
   line-height: 60px;
 
@@ -217,7 +218,7 @@ const PwInput = styled.input`
   }
 `;
 export default function Mypage() {
-  const img = useRef();
+  const userImg = useRef();
   const id = useRef();
   const userName = useRef();
   const nation = useRef();
@@ -225,8 +226,9 @@ export default function Mypage() {
   const text = useRef();
   const state = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [lookimg, setLookimg] = useState('');
+  const [lookuserImg, setLookuserImg] = useState('');
   const [lookid, setLookid] = useState('');
   const [lookuserName, setLookUserName] = useState('');
   const [looknation, setLookNation] = useState('');
@@ -273,7 +275,14 @@ export default function Mypage() {
 
       if (result) {
         alert('수정 완료');
+        const userInfo = {
+          email: email.current.value,
+          id: id.current.value,
+          userName: userName.current.value,
+          userImg: imgName,
+        };
         navigate('/');
+        dispatch(userUpdate(userInfo));
       } else {
         alert('통신 오류');
       }
@@ -286,19 +295,16 @@ export default function Mypage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userEmail: state.userEmail }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setLookid(res.id);
-        setLookEmail(res.email);
-        setLookUserName(res.userName);
-        setLookNation(res.nation);
-        setLookimg(res.img);
-        setLookText(res.text);
-      });
+      body: JSON.stringify({
+        userEmail: state.userEmail,
+        id: state.id,
+        userName: state.userName,
+        userImg: state.userImg,
+      }),
+    });
   }, [state]);
 
+  console.log(state);
   return (
     <>
       <Header />
@@ -306,7 +312,7 @@ export default function Mypage() {
         <Profilebox>
           <Avatar
             alt="Remy Sharp"
-            src={lookimg}
+            src={`http://localhost:4000/images/${state.userImg}`}
             sx={{
               width: '150px',
               height: '150px',
@@ -314,7 +320,7 @@ export default function Mypage() {
               marginTop: '2vw',
             }}
           />
-          <Input type="file" ref={img} onChange={imgHandler} />
+          <Input type="file" ref={userImg} onChange={imgHandler} />
           <Button
             variant="contained"
             sx={{
@@ -330,7 +336,7 @@ export default function Mypage() {
             프로필 바꾸기
           </Button>
           <Profilename>
-            <Name>이름 : {lookuserName} </Name>
+            <Name>이름 : {state.userName} </Name>
             <Nation>국가 : {looknation} </Nation>
             <Introduction>자기소개 : {looktext} </Introduction>
           </Profilename>
@@ -343,17 +349,17 @@ export default function Mypage() {
       <MainProfile>
         <Modify>
           <Word>아이디</Word>
-          <EmailInput defaultValue={lookid} ref={id} />
+          <EmailInput defaultValue={state.id} ref={id} />
         </Modify>
 
         <Modify>
           <Word>이메일</Word>
-          <EmailInput defaultValue={lookemail} ref={email} />
+          <EmailInput defaultValue={state.userEmail} ref={email} />
         </Modify>
 
         <Modify>
           <Word>이름</Word>
-          <Inputbox placeholder="Name" ref={userName} />
+          <Inputbox placeholder="userName" ref={userName} />
         </Modify>
 
         <Modify>
@@ -367,6 +373,10 @@ export default function Mypage() {
           <Savebtn
             onClick={() => {
               saveHandler();
+            }}
+            onchange={() => {
+              state.userName = lookuserName;
+              state.userImg = lookuserImg;
             }}
           >
             저장

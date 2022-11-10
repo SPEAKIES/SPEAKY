@@ -151,7 +151,7 @@ export default function Tutordetail() {
     });
     if (res.status === 200) {
       const result = await res.json();
-      alert(result.result);
+      alert(result);
     } else {
       new Error('서버 이상');
     }

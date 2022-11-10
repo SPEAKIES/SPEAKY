@@ -1,6 +1,7 @@
 // 액션 타입(문자열)
 const LOGIN = 'user/LOGIN';
 const LOGOUT = 'user/LOGOUT';
+const UPDATE = 'user/UPDATE';
 
 // 로그인, 로그아웃 액션 생성 함수
 export function login(loginInfo) {
@@ -18,6 +19,16 @@ export function logout() {
   window.localStorage.removeItem('user');
   return {
     type: LOGOUT,
+  };
+}
+export function userUpdate(userInfo) {
+  const user = userInfo;
+  const userString = JSON.stringify(user);
+  window.localStorage.setItem('user', userString);
+
+  return {
+    type: UPDATE,
+    payload: userInfo,
   };
 }
 
@@ -46,7 +57,7 @@ export default function users(state = initState, action) {
           userName: action.payload.userName,
           id: action.payload.id,
           isLogin: true,
-          isTutor: action.payload.isTutor          
+          isTutor: action.payload.isTutor,
         };
       } else {
         return {
@@ -60,6 +71,13 @@ export default function users(state = initState, action) {
       return {
         ...state,
         isLogin: false,
+      };
+    case UPDATE:
+      return {
+        ...state,
+        userEmail: action.payload.email,
+        userImg: action.payload.userImg,
+        userName: action.payload.userName,
       };
     default:
       const user = JSON.parse(window.localStorage.getItem('user'));
@@ -75,7 +93,7 @@ export default function users(state = initState, action) {
           userImg: user.userImg,
           id: user.id,
           isTutor: user.isTutor,
-        }
+        };
       } else {
         return state;
       }
