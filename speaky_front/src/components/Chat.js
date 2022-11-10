@@ -21,11 +21,9 @@ export default function Chat({ tutor }) {
   const dispatch = useDispatch();
   const messageContent = useRef();
 
-
   useEffect(() => {
     async function fetchData() {
-      const getChatRes = await fetch(
-        'http://localhost:4000/chat/getAll/', {
+      const getChatRes = await fetch('http://localhost:4000/chat/getAll/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -50,7 +48,7 @@ export default function Chat({ tutor }) {
 
     let hours = now.getHours();
     let minutes = now.getMinutes();
-    let dayNight = '오전'
+    let dayNight = '오전';
 
     if (hours > 12) {
       dayNight = '오후';
@@ -66,15 +64,18 @@ export default function Chat({ tutor }) {
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
+      console.log(userdata);
       const newChat = {
         tutor,
         id: userdata.id,
         userEmail: userdata.userEmail,
         message: messageContent.current.value,
+        userImg: userdata.userImg,
+        userName: userdata.userName,
         tutorChat: false,
         messageDate: getTime(),
         createdAt: new Date(),
-      }
+      };
 
       const addChatRes = await fetch('http://localhost:4000/chat', {
         method: 'POST',
@@ -111,7 +112,13 @@ export default function Chat({ tutor }) {
                         key={index}
                         className="d-flex flex-row justify-content-end mb-4"
                       >
-                        <div style={{ display: 'flex', alignItems: 'flex-end', marginRight: '10px' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-end',
+                            marginRight: '10px',
+                          }}
+                        >
                           {value.messageDate}
                         </div>
                         <div
@@ -130,10 +137,10 @@ export default function Chat({ tutor }) {
                             sx={{ bgcolor: blue[500], margin: '10px' }}
                             aria-label="recipe"
                             // 유저 이미지로 수정 필요
-                            src={value.id}
+                            src={`http://localhost:4000/images/${value.userImg}`}
                           />
                           <div style={{ textAlign: 'center' }}>{value.id}</div>
-                        </div>                        
+                        </div>
                       </div>
                     );
                   } else {
@@ -142,13 +149,21 @@ export default function Chat({ tutor }) {
                         key={index}
                         className="d-flex flex-row justify-content-start mb-4"
                       >
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                          }}
+                        >
                           <Avatar
                             sx={{ bgcolor: red[300], margin: '10px' }}
                             aria-label="recipe"
                             src={value.id}
                           />
-                          <div style={{ width: 100, textAlign: 'center' }}>{value.tutor}</div>
+                          <div style={{ width: 100, textAlign: 'center' }}>
+                            {value.tutor}
+                          </div>
                         </div>
                         <div
                           className="p-3 ms-3"
@@ -161,7 +176,13 @@ export default function Chat({ tutor }) {
                         >
                           <span className="middle mb-0">{value.message}</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'flex-end', marginLeft: '10px' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-end',
+                            marginLeft: '10px',
+                          }}
+                        >
                           {value.messageDate}
                         </div>
                       </div>

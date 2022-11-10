@@ -37,7 +37,7 @@ const mongoDB = {
         userImg: result.userImg,
       };
     } else {
-      return '로그인 실패';
+      return { msg: '로그인 실패' };
     }
   },
   //회원가입
@@ -79,7 +79,6 @@ const mongoDB = {
         { id: data.id }, //session.id front쪽에서 redux처리를 통해서 해당 data에 user.id값이 들어오기 떄문에 로직 사용 가능
         {
           $set: {
-            email: data.email,
             userName: data.userName,
             nation: data.nation,
             text: data.text,
@@ -87,6 +86,7 @@ const mongoDB = {
           },
         }
       );
+      console.log(result);
       return '내 정보 수정 완료';
     }
   },
