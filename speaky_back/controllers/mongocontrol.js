@@ -35,6 +35,8 @@ const mongoDB = {
         isTutor: result.isTutor,
         userName: result.userName,
         userImg: result.userImg,
+        text: result.text,
+        nation: result.nation,
       };
     } else {
       return { msg: '로그인 실패' };

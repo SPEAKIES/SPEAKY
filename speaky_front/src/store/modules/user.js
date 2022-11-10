@@ -57,6 +57,8 @@ export default function users(state = initState, action) {
           userEmail: action.payload.email,
           userImg: action.payload.userImg,
           userName: action.payload.userName,
+          text: action.payload.text,
+          nation: action.payload.nation,
           id: action.payload.id,
           isLogin: true,
           isTutor: action.payload.isTutor,
@@ -67,6 +69,8 @@ export default function users(state = initState, action) {
           userEmail: action.payload.email,
           userImg: action.payload.userImg,
           userName: action.payload.userName,
+          text: action.payload.text,
+          nation: action.payload.nation,
           id: action.payload.id,
           isLogin: true,
         };
