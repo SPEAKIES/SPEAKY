@@ -34,7 +34,8 @@ const TutorProfile = styled.div`
 const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  margin: 0 auto;
+  margin-left: 5em;
+  margin-right: 1em;
 `;
 
 const Self = styled.div``;
@@ -42,10 +43,12 @@ const Self = styled.div``;
 const TutorName = styled.h4`
   margin-left: 1vw;
   margin-top: 1vw;
+  margin-bottom: 0.5em;
 `;
 
 const FlagImg = styled.img`
   width: 1.6vw;
+  margin-right: 1vw;
 `;
 
 const TutorNation = styled.h5`
@@ -59,10 +62,6 @@ const SelfIntro = styled.div`
   margin-bottom: 30px;
   border-bottom: 1px solid #c8c8c8;
   padding-bottom: 30px;
-`;
-
-const Name = styled.h4`
-  float: left;
 `;
 
 const Intro = styled.h5`
@@ -209,9 +208,6 @@ export default function Tutordetail() {
           <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
         </Video>
         <SelfIntro>
-          <Name>Jamie</Name>
-          <br />
-          <br />
           <Intro>
             Hi, my name is Valerie and I am from England in the United Kingdom.
             I have been teaching English for two years to children in the
