@@ -65,6 +65,8 @@ export default function users(state = initState, action) {
         return {
           ...state,
           userEmail: action.payload.email,
+          userImg: action.payload.userImg,
+          userName: action.payload.userName,
           id: action.payload.id,
           isLogin: true,
         };

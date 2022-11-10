@@ -306,9 +306,9 @@ export default function Mypage() {
         nation: nation.current.value,
       }),
     });
+    console.log(userImg);
   }, [state]);
 
-  console.log(state);
   return (
     <>
       <Header />
@@ -316,7 +316,7 @@ export default function Mypage() {
         <Profilebox>
           <Avatar
             alt="Remy Sharp"
-            src={`http://localhost:4000/images/${state.userImg}`}
+            src={state.userImg}
             sx={{
               width: '150px',
               height: '150px',
