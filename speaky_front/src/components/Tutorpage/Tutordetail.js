@@ -13,6 +13,8 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import { TutorsData } from './TutorsData.js';
+
 import { useSelector } from 'react-redux';
 
 // const Middle = styled.div`
@@ -127,7 +129,7 @@ const Person = styled.div`
   margin-left: 3vw;
 `;
 
-export default function Tutordetail() {
+export default function Tutordetail({ tutor }) {
   const [value, setValue] = React.useState(dayjs('2022-011-03T00:00:00.000Z'));
   const [reserve, setReserve] = useState([]);
 
@@ -140,6 +142,7 @@ export default function Tutordetail() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        tutor,
         id: state,
         year: value.$y,
         month: value.$M,
@@ -185,7 +188,7 @@ export default function Tutordetail() {
             </Stack>
           </ProfilePic>
           <Self>
-            <TutorName>Guillaume Patry</TutorName>
+            <TutorName></TutorName>
             <TutorNation>
               <FlagImg src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
               Canada

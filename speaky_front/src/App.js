@@ -37,7 +37,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
         <Route path="/tutor" element={<Tutor />}></Route>
-        <Route path="/tutor/profile" element={<Tutordetail />} />
+        <Route path="/tutor/:tutor" element={<Tutordetail />} />
         <Route path="/manage/:tutor" element={<ManagePage />}></Route>
         <Route path="/manage/chat/:tutor/:id" element={<ManageChat />}></Route>
         <Route path="*" element={<NotFound />} />

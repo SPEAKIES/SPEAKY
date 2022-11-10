@@ -169,7 +169,7 @@ export default function Tutor() {
               </CardActionArea>
 
               <CardActions>
-                <Link to="/tutor/profile">
+                <Link to={`/tutor/${data.name}`}>
                   <Button
                     variant="outlined"
                     size="small"
