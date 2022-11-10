@@ -14,6 +14,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TextField from '@mui/material/TextField';
 import Comment from './Comment';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
 
 const ExpandMore = styled((props) => {
@@ -112,7 +114,6 @@ export default function BoardCard(props) {
         <CardContent sx={{ fontSize: '20px' }}>
           {props.data.cardContent}
         </CardContent>
-        <p>{props.data.contentIndex}</p>
       </div>
       <CardActions disableSpacing>
         <ExpandMore
@@ -140,7 +141,14 @@ export default function BoardCard(props) {
               multiline
               inputRef={comment}
             />
-            <button onClick={commentCheck}>버튼</button>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={commentCheck}
+              endIcon={<SendIcon />}
+            >
+              Send
+            </Button>
           </div>
           <Comment index={props.data.contentIndex} comment={props.comment} />
         </CardContent>

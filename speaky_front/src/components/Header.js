@@ -241,24 +241,6 @@ export default function Header() {
           </Typography>
         </MenuItem>
       </Link>
-      <Link to="/community" style={{ textDecoration: 'none', color: 'black' }}>
-        <MenuItem>
-          <Typography
-            variant="h7"
-            noWrap
-            component="div"
-            sx={{
-              display: { xs: 'block', sm: 'block' },
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <PeopleIcon sx={{ marginRight: '3vw' }} />
-            Community
-          </Typography>
-        </MenuItem>
-      </Link>
     </Menu>
   );
 
@@ -354,46 +336,28 @@ export default function Header() {
               </Typography>
             </MenuItem>
           </Link>
-          <Link
-            to="/community"
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{
-                  display: { xs: 'none', sm: 'block' },
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                Community
-              </Typography>
-            </MenuItem>
-          </Link>
-          {userdata.isTutor && (<Link
-            to={`/manage/${userdata.id}`}
-            style={{ textDecoration: 'none', color: 'white' }}
-          >
-            <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{
-                  display: { xs: 'none', sm: 'block' },
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                Manage
-              </Typography>
-            </MenuItem>
-          </Link>)}
+          {userdata.isTutor && (
+            <Link
+              to={`/manage/${userdata.id}`}
+              style={{ textDecoration: 'none', color: 'white' }}
+            >
+              <MenuItem sx={{ transition: '0.3s', borderRadius: '40px' }}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{
+                    display: { xs: 'none', sm: 'block' },
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  Manage
+                </Typography>
+              </MenuItem>
+            </Link>
+          )}
 
           {/* 오른쪽 메뉴들 오른쪽에 고정(없으면 왼쪽에 붙는다) */}
           <Box sx={{ flexGrow: 1 }} />
