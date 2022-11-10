@@ -193,14 +193,14 @@ export default function Tutor() {
                     <FavoriteIcon
                       sx={{
                         color: 'red',
-                        marginLeft: '6.5vw',
+                        marginLeft: '4.5vw',
                         cursor: 'pointer',
                       }}
                     />
                   ) : (
                     <FavoriteBorderIcon
                       sx={{
-                        marginLeft: '6.5vw',
+                        marginLeft: '4.5vw',
                         cursor: 'pointer',
                       }}
                     />
