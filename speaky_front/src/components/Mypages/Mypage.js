@@ -279,6 +279,8 @@ export default function Mypage() {
           email: email.current.value,
           id: id.current.value,
           userName: userName.current.value,
+          text: text.current.value,
+          nation: nation.current.value,
           userImg: imgName,
         };
         navigate('/');
@@ -300,6 +302,8 @@ export default function Mypage() {
         id: state.id,
         userName: state.userName,
         userImg: state.userImg,
+        text: text.current.value,
+        nation: nation.current.value,
       }),
     });
   }, [state]);
@@ -337,8 +341,8 @@ export default function Mypage() {
           </Button>
           <Profilename>
             <Name>이름 : {state.userName} </Name>
-            <Nation>국가 : {looknation} </Nation>
-            <Introduction>자기소개 : {looktext} </Introduction>
+            <Nation>국가 : {state.nation} </Nation>
+            <Introduction>자기소개 : {state.text} </Introduction>
           </Profilename>
         </Profilebox>
       </Topbox>
@@ -373,10 +377,6 @@ export default function Mypage() {
           <Savebtn
             onClick={() => {
               saveHandler();
-            }}
-            onchange={() => {
-              state.userName = lookuserName;
-              state.userImg = lookuserImg;
             }}
           >
             저장
