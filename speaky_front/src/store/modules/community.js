@@ -42,20 +42,20 @@ const initState = {
     userImage: '이미지 경로',
   },
   chatdata: [
-    {
-      userId: 'A',
-      userName: '모승환',
-      userImage: '유저이미지',
-      userMessage: '일본 재밌으셨나요 부럽당...',
-      userMessageDate: '오전 12:31',
-    },
-    {
-      userId: 'B',
-      userName: '강한솔',
-      userImage: '유저이미지',
-      userMessage: '네 ㅎㅎ ',
-      userMessageDate: '오전 12:33',
-    },
+    // {
+    //   userId: 'A',
+    //   userName: '모승환',
+    //   userImage: '유저이미지',
+    //   userMessage: '일본 재밌으셨나요 부럽당...',
+    //   userMessageDate: '오전 12:31',
+    // },
+    // {
+    //   userId: 'B',
+    //   userName: '강한솔',
+    //   userImage: '유저이미지',
+    //   userMessage: '네 ㅎㅎ ',
+    //   userMessageDate: '오전 12:33',
+    // },
   ],
 };
 
@@ -63,6 +63,8 @@ const initState = {
 const INIT = 'community/INIT';
 const PROFILEINIT = 'community/PROFILEINIT';
 const MESSAGEINIT = 'community/MESSAGEINIT';
+const MESSAGEADD = 'community/MESSAGEADD';
+
 
 // 액션 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달 필요
@@ -81,6 +83,12 @@ export function profileInit(data) {
 export function messageInit(data) {
   return {
     type: MESSAGEINIT,
+    payload: data,
+  };
+}
+export function messageAdd(data) {
+  return {
+    type: MESSAGEADD,
     payload: data,
   };
 }
@@ -104,9 +112,13 @@ export default function community(state = initState, action) {
     case MESSAGEINIT:
       return {
         ...state,
+        chatdata: action.payload,
+      };
+    case MESSAGEADD:
+      return {
+        ...state,
         chatdata: [...state.chatdata, action.payload],
       };
-
     default:
       return state;
   }

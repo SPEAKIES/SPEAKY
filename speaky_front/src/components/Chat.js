@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   MDBContainer,
   MDBRow,
@@ -8,93 +8,84 @@ import {
   MDBCardBody,
 } from 'mdb-react-ui-kit';
 import Avatar from '@mui/material/Avatar';
-import { red } from '@mui/material/colors';
+import { red, blue } from '@mui/material/colors';
 import { useLocation } from 'react-router';
 import TextField from '@mui/material/TextField';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { messageInit } from '../store/modules/community';
+import { messageInit, messageAdd } from '../store/modules/community';
 
 export default function Chat({ tutor }) {
-  const testdata = {
-    userId: 'A',
-    userName: '모승환',
-    userImage: '유저이미지',
-    userMessage: '쳇',
-    userMessageDate: '오전 12:35',
-  };
-
   const chatdata = useSelector((state) => state.community.chatdata);
-
   const userdata = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const location = useLocation();
-
   const messageContent = useRef();
 
-  console.log(location.state);
-  console.log(userdata);
 
   useEffect(() => {
     async function fetchData() {
-      const freeBoardData = await fetch('http://localhost:4000/chat', {
+      const getChatRes = await fetch(
+        'http://localhost:4000/chat/getAll/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: location.state.data,
+          tutor,
+          id: userdata.id,
         }),
       });
-      if (freeBoardData.status === 200) {
-        const data = await freeBoardData.json();
+      if (getChatRes.status === 200) {
+        const data = await getChatRes.json();
         if (data) {
-          console.log(data);
+          dispatch(messageInit(data));
         }
       } else {
         throw new Error('통신 이상');
       }
     }
     fetchData();
-    //선택한 친구와의 대화창 데이터
   }, [dispatch]);
 
   const getTime = () => {
     const now = new Date();
 
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let dayNight = '오전'
 
-    const dayNight = hours < 12 ? '오전' : '오후';
+    if (hours > 12) {
+      dayNight = '오후';
+      hours = hours - 12;
+    }
+
+    if (minutes < 10) {
+      minutes = '0' + minutes.toString();
+    }
 
     return `${dayNight} ${hours}:${minutes}`;
   };
 
   const sendMessage = async (e) => {
     if (e.key === 'Enter') {
-      await fetch('http://localhost:4000/chat', {
+      const newChat = {
+        tutor,
+        id: userdata.id,
+        userEmail: userdata.userEmail,
+        message: messageContent.current.value,
+        tutorChat: false,
+        messageDate: getTime(),
+        createdAt: new Date(),
+      }
+
+      const addChatRes = await fetch('http://localhost:4000/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data: {
-            userName: userdata.id,
-            userImage: userdata.userImg,
-            message: messageContent.current.value,
-            time: getTime(),
-          },
-        }),
+        body: JSON.stringify(newChat),
       });
-      console.log(messageContent.current.value);
-      // dispatch(messageInit(testdata));
 
-      const newChat = {
-        userId: userdata.id,
-        userName: userdata.id,
-        userImage: userdata.userImg,
-        userMessage: messageContent.current.value,
-        userMessageDate: getTime(),
-      };
-      dispatch(messageInit(newChat));
-      console.log(chatdata);
-      messageContent.current.value = '';
+      if (addChatRes.status === 200) {
+        dispatch(messageAdd(newChat));
+        messageContent.current.value = '';
+      }
     }
   };
   return (
@@ -112,67 +103,71 @@ export default function Chat({ tutor }) {
               <p className="mb-0 fw-bold">{tutor} 선생님과의 채팅</p>
             </MDBCardHeader>
             <MDBCardBody style={{ height: 350, overflowY: 'scroll' }}>
-              {chatdata.map((value, index) => {
-                if (value.userId === 'A') {
-                  return (
-                    <div
-                      key={index}
-                      className="d-flex flex-row justify-content-end mb-4"
-                    >
-                      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        {value.userMessageDate}
-                      </div>
+              {chatdata?.length >= 1 &&
+                chatdata.map((value, index) => {
+                  if (value.tutorChat !== true) {
+                    return (
                       <div
-                        className="p-3 me-4 border"
-                        style={{
-                          borderRadius: '15px',
-                          backgroundColor: 'rgba(57, 192, 237,.2)',
-                          width: '50%',
-                        }}
+                        key={index}
+                        className="d-flex flex-row justify-content-end mb-4"
                       >
-                        <p className="middle mb-0">{value.userMessage}</p>
+                        <div style={{ display: 'flex', alignItems: 'flex-end', marginRight: '10px' }}>
+                          {value.messageDate}
+                        </div>
+                        <div
+                          className="p-3 me-4 border"
+                          style={{
+                            borderRadius: '15px',
+                            backgroundColor: 'rgba(57, 192, 237,.2)',
+                            width: '50%',
+                            height: '100%',
+                          }}
+                        >
+                          <p className="middle mb-0">{value.message}</p>
+                        </div>
+                        <div>
+                          <Avatar
+                            sx={{ bgcolor: blue[500], margin: '10px' }}
+                            aria-label="recipe"
+                            // 유저 이미지로 수정 필요
+                            src={value.id}
+                          />
+                          <div style={{ textAlign: 'center' }}>{value.id}</div>
+                        </div>                        
                       </div>
-                      <div>
-                        <Avatar
-                          sx={{ bgcolor: red[500], margin: '10px' }}
-                          aria-label="recipe"
-                          src={value.userImg}
-                        />
-                        <div>{value.userName}</div>
-                      </div>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div
-                      key={index}
-                      className="d-flex flex-row justify-content-start mb-4"
-                    >
-                      <div>
-                        <Avatar
-                          sx={{ bgcolor: red[500], margin: '10px' }}
-                          aria-label="recipe"
-                          src={value.userImage}
-                        />
-                        <div style={{ width: 100 }}>{value.userName}</div>
-                      </div>
+                    );
+                  } else {
+                    return (
                       <div
-                        className="p-3 ms-3"
-                        style={{
-                          borderRadius: '15px',
-                          backgroundColor: '#fbfbfb',
-                          width: '50%',
-                        }}
+                        key={index}
+                        className="d-flex flex-row justify-content-start mb-4"
                       >
-                        <p className="middle mb-0">{value.userMessage}</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                          <Avatar
+                            sx={{ bgcolor: red[300], margin: '10px' }}
+                            aria-label="recipe"
+                            src={value.id}
+                          />
+                          <div style={{ width: 100, textAlign: 'center' }}>{value.tutor}</div>
+                        </div>
+                        <div
+                          className="p-3 ms-3"
+                          style={{
+                            borderRadius: '15px',
+                            backgroundColor: red[100],
+                            width: '50%',
+                            height: '100%',
+                          }}
+                        >
+                          <span className="middle mb-0">{value.message}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'flex-end', marginLeft: '10px' }}>
+                          {value.messageDate}
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        {value.userMessageDate}
-                      </div>
-                    </div>
-                  );
-                }
-              })}
+                    );
+                  }
+                })}
             </MDBCardBody>
             <TextField
               sx={{ width: '100%' }}

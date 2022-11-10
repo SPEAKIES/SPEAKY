@@ -16,10 +16,12 @@ import ChatPage from './pages/ChatPage';
 import Login from './components/Login.js';
 import '../src/App.css';
 import Mypage from './components/Mypages/Mypage';
-
+import ManagePage from './pages/ManagePage';
 import { useSelector } from 'react-redux';
 import Tutor from './components/Tutorpage/Tutor.js';
 import Tutordetail from './components/Tutorpage/Tutordetail.js';
+import ManageChat from './components/ManageChat';
+
 function App() {
   const isLogin = useSelector((state) => state.user.isLogin);
 
@@ -36,6 +38,8 @@ function App() {
         <Route path="/mypage" element={isLogin ? <Mypage /> : <Login />} />
         <Route path="/tutor" element={<Tutor />}></Route>
         <Route path="/tutor/profile" element={<Tutordetail />} />
+        <Route path="/manage/:tutor" element={<ManagePage />}></Route>
+        <Route path="/manage/chat/:tutor/:id" element={<ManageChat />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

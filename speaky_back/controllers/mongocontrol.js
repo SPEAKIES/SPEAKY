@@ -32,6 +32,7 @@ const mongoDB = {
         result: true,
         id: result.id,
         email: result.email,
+        isTutor: result.isTutor,
         userName: result.userName,
         userImg: result.userImg,
       };
@@ -53,6 +54,7 @@ const mongoDB = {
         userName,
         userImg,
         salt: passwordresult.salt,
+        isTutor: false,
       });
       if (result.acknowledged) {
         return '회원가입 완료';
@@ -131,14 +133,43 @@ const mongoDB = {
     return reserveData;
   },
 
-  //메세지 id 받아오는 로직 구현 x
+  // DB에 메세지 넣기
   Setmessage: async (data) => {
-    console.log(data);
     const user = await _user;
     const db = user.db('project').collection('message');
-    const result = await db.insertOne({
-      data,
-    });
+    const result = await db.insertOne(data);
+  },
+
+  // tutor 별로 메세지 기록 받기
+  Getmessage: async (data) => {
+    const user = await _user;
+    const db = user.db('project').collection('message');
+    const chatCursor = db.find(
+      { tutor: data.tutor, id: data.id },
+      {
+        sort: {
+          createdAt: 1,
+        },
+      }
+    );
+    const allChats = await chatCursor.toArray();
+    return allChats;
+  },
+
+  // tutor 별로 메세지 기록 받기
+  GetAllmessage: async (data) => {
+    const user = await _user;
+    const db = user.db('project').collection('message');
+    const chatCursor = db.find(
+      { tutor: data.tutor },
+      {
+        sort: {
+          createdAt: 1,
+        },
+      }
+    );
+    const allChats = await chatCursor.toArray();
+    return allChats;
   },
 };
 

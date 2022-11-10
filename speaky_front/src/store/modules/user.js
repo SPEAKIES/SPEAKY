@@ -28,6 +28,7 @@ const initState = {
   userName: '',
   userImg: '',
   isLogin: false,
+  isTutor: false,
 };
 
 // 리듀서
@@ -37,15 +38,24 @@ export default function users(state = initState, action) {
     // 제일 중요한 isLogin 값을 true 로 변경, 해당 값은 Header 및 Item 페이지에서 로그인 여부를 판단하는
     // 값이 되어 해당 값에 따라 조건부 처리
     case LOGIN:
-      return {
-        ...state,
-        userEmail: action.payload.email,
-        id: action.payload.id,
-        userImg: action.payload.userImg,
-        userName: action.payload.userName,
-
-        isLogin: true,
-      };
+      if (action.payload.isTutor) {
+        return {
+          ...state,
+          userEmail: action.payload.email,
+          userImg: action.payload.userImg,
+          userName: action.payload.userName,
+          id: action.payload.id,
+          isLogin: true,
+          isTutor: action.payload.isTutor          
+        };
+      } else {
+        return {
+          ...state,
+          userEmail: action.payload.email,
+          id: action.payload.id,
+          isLogin: true,
+        };
+      }
     case LOGOUT:
       return {
         ...state,
@@ -61,10 +71,11 @@ export default function users(state = initState, action) {
           ...state,
           isLogin: true,
           userEmail: user.email,
-          id: user.id,
           userName: user.userName,
           userImg: user.userImg,
-        };
+          id: user.id,
+          isTutor: user.isTutor,
+        }
       } else {
         return state;
       }
