@@ -14,9 +14,8 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { TutorsData } from './TutorsData.js';
-
 import { useSelector } from 'react-redux';
-
+import { useParams } from 'react-router-dom';
 // const Middle = styled.div`
 //   height: 1000px;
 //   width: 50vw;
@@ -133,6 +132,13 @@ export default function Tutordetail({ tutor }) {
   const [value, setValue] = React.useState(dayjs('2022-011-03T00:00:00.000Z'));
   const [reserve, setReserve] = useState([]);
 
+  //주소로 넘어온 튜터 이름 가져오는 useParams()
+  const params = useParams();
+
+  //주소로 넘어온 튜터 이름으로 튜터의 정보를 찾는 부분
+  const tutorIndex = TutorsData.findIndex((el) => el.name === params.tutor);
+  const tutorInfo = TutorsData[tutorIndex];
+
   const state = useSelector((state) => state.user.id);
 
   async function reserveHandler() {
@@ -181,17 +187,19 @@ export default function Tutordetail({ tutor }) {
           <ProfilePic>
             <Stack direction="row" spacing={2}>
               <Avatar
-                alt="Remy Sharp"
-                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20150608_50%2Fsmile_0519_1433770397673NL9ud_JPEG%2F20140714_153748_5308.jpg.tn580.jpg&type=a340"
+                //찾은 튜터 정보 객체를 이용해서 필요한 정보 넣기
+                alt={tutorInfo.name}
+                src={tutorInfo.Img}
                 sx={{ width: '120px', height: '120px' }}
               />
             </Stack>
           </ProfilePic>
           <Self>
-            <TutorName></TutorName>
+            <TutorName>{tutorInfo.name}</TutorName>
             <TutorNation>
-              <FlagImg src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-              Canada
+              {/*찾은 튜터 정보 객체를 이용해서 필요한 정보 넣기 */}
+              <FlagImg src={tutorInfo.flagimg} />
+              {tutorInfo.nation}
             </TutorNation>
           </Self>
           <Button
@@ -212,12 +220,12 @@ export default function Tutordetail({ tutor }) {
         </Video>
         <SelfIntro>
           <Intro>
-            Hi, my name is Valerie and I am from England in the United Kingdom.
+            {`Hi, my name is ${tutorInfo.name} and I am from ${tutorInfo.nation}.
             I have been teaching English for two years to children in the
             classroom and privately on a one-to-one basis. I can help you with
             your grammar, reading, writing, business-related techniques or we
             can just have a relaxed and friendly chat. Book a session with me
-            and we can work together on boosting your confidence in English.
+            and we can work together on boosting your confidence in English.`}
           </Intro>
         </SelfIntro>
         <Word>튜터 소개</Word>
