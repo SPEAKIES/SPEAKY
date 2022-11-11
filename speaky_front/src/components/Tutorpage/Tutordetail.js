@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../Header.js';
 import styled from 'styled-components';
 import { Box } from '@mui/material';
-import { DefaultPlayer as Video } from 'react-html5video';
+import { DefaultPlayer as Video, P } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
 import TutorVideo from './TutorVideo/video.mp4';
 import dayjs from 'dayjs';
@@ -15,14 +15,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { TutorsData } from './TutorsData.js';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-// const Middle = styled.div`
-//   height: 1000px;
-//   width: 50vw;
-//   background-color: pink;
-//   margin: 0 auto;
-//   margin-top: 40px;
-// `;
+import { Link, useParams } from 'react-router-dom';
 
 const TutorProfile = styled.div`
   width: 100%;
@@ -30,13 +23,13 @@ const TutorProfile = styled.div`
   display: flex;
   margin-bottom: 1vw;
   margin-top: 6vw;
+  margin: 0 6vw 3vw 2vw;
 `;
 
 const ProfilePic = styled.div`
   width: 120px;
   height: 120px;
-  margin-left: 5em;
-  margin-right: 1em;
+  margin: 0 1em 1em 0;
 `;
 
 const Self = styled.div``;
@@ -165,12 +158,21 @@ export default function Tutordetail({ tutor }) {
       new Error('서버 이상');
     }
   }
+
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
   useEffect(() => {
     fetch('http://localhost:4000/tutor/getreserve')
       .then((res) => res.json())
       .then((res) => {
         setReserve(res);
       });
+    scrollTop();
   }, []);
 
   return (
@@ -178,9 +180,9 @@ export default function Tutordetail({ tutor }) {
       <Header />
       <Box
         sx={{
-          width: '1200px',
+          width: '80vw',
           margin: '0 auto',
-          marginTop: '30px',
+          marginTop: '150px',
         }}
       >
         <TutorProfile>
@@ -202,18 +204,19 @@ export default function Tutordetail({ tutor }) {
               {tutorInfo.nation}
             </TutorNation>
           </Self>
-          <Button
-            variant="contained"
-            disableElevation
-            sx={{
-              height: '3vw',
-              marginLeft: '18vw',
-              marginTop: '1.5vw',
-              width: '20vw',
-            }}
-          >
-            수업 듣기
-          </Button>
+          <Link to={`/chat/${params.tutor}`}>
+            <Button
+              variant="contained"
+              disableElevation
+              sx={{
+                marginLeft: '50px',
+                marginTop: '1.5vw',
+                minWidth: '100px',
+              }}
+            >
+              수업 듣기
+            </Button>
+          </Link>
         </TutorProfile>
         <Video loop>
           <source src={TutorVideo} type="video/webm" sx={{ height: '400px' }} />
@@ -275,9 +278,8 @@ export default function Tutordetail({ tutor }) {
           {reserve.map((el) => {
             return (
               <Person>
-                {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${
-                  el.date.day
-                }일
+                {`${el.id}: ${el.date.year}년 ${el.date.month + 1}월 ${el.date.day
+                  }일
                 ${el.date.hour}시 ${el.date.minute}분`}
               </Person>
             );
@@ -321,9 +323,8 @@ export default function Tutordetail({ tutor }) {
             {!isNaN(value.$D) ? (
               state !== undefined ? (
                 <Person>
-                  <div>{`${state} : ${value.$y}년 ${value.$M + 1}월 ${
-                    value.$D
-                  }일, ${value.$H}시 ${value.$m}분`}</div>
+                  <div>{`${state} : ${value.$y}년 ${value.$M + 1}월 ${value.$D
+                    }일, ${value.$H}시 ${value.$m}분`}</div>
                 </Person>
               ) : (
                 ''

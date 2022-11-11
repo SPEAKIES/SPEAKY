@@ -16,6 +16,7 @@ import ChildCareIcon from '@mui/icons-material/ChildCare';
 import PeopleIcon from '@mui/icons-material/People';
 import HomeIcon from '@mui/icons-material/Home';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import { blue } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -241,6 +242,25 @@ export default function Header() {
           </Typography>
         </MenuItem>
       </Link>
+      {userdata.isTutor && (
+        <Link to={`/manage/${userdata.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <MenuItem>
+            <Typography
+              variant="h7"
+              noWrap
+              component="div"
+              sx={{
+                display: { xs: 'block', sm: 'block' },
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <ConnectWithoutContactIcon sx={{ marginRight: '3vw' }} />
+              Manage
+            </Typography>
+          </MenuItem>
+        </Link>)}
     </Menu>
   );
 
@@ -336,6 +356,7 @@ export default function Header() {
               </Typography>
             </MenuItem>
           </Link>
+          {console.log(userdata)}
           {userdata.isTutor && (
             <Link
               to={`/manage/${userdata.id}`}
