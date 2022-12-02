@@ -131,28 +131,6 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       {/*  반응형 오른쪽 햄버거바 -> 메세지 아이콘 */}
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          {/* 메세지 수 */}
-          <Badge badgeContent={0} color="error"></Badge>
-        </IconButton>
-        <MailIcon sx={{ marginRight: '4vw' }} />
-        Messages
-      </MenuItem>
-
-      {/* 반응형 오른쪽 햄버거바 -> 알람 아이콘 */}
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          {/* 알람 수 */}
-          <Badge badgeContent={0} color="error"></Badge>
-        </IconButton>
-        <NotificationsIcon sx={{ marginRight: '4vw' }} />
-        Notifications
-      </MenuItem>
 
       {/* 반응형 오른쪽 햄버거바 -> 프로필 */}
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -243,7 +221,10 @@ export default function Header() {
         </MenuItem>
       </Link>
       {userdata.isTutor && (
-        <Link to={`/manage/${userdata.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+        <Link
+          to={`/manage/${userdata.id}`}
+          style={{ textDecoration: 'none', color: 'black' }}
+        >
           <MenuItem>
             <Typography
               variant="h7"
@@ -260,7 +241,8 @@ export default function Header() {
               Manage
             </Typography>
           </MenuItem>
-        </Link>)}
+        </Link>
+      )}
     </Menu>
   );
 
